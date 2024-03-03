@@ -42,16 +42,6 @@ const Portfolio = () => (
           </WorkGridItem>
         </Section>
 
-        <Section delay={0.1}>
-          <WorkGridItem
-              id="hollowscape"
-              title="Hollowscape"
-              thumbnail={thumbHollowscape}
-          >
-            A 2D platformer built with a scratch vanilla JavaScript game engine.
-          </WorkGridItem>
-        </Section>
-
         <Section delay={0.2}>
           <WorkGridItem
               id="cgi"
