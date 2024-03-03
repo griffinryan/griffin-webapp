@@ -22,9 +22,21 @@ import thumbnailTorpoiseSpotify from '../public/images/links/torpoisespotify.png
 import thumbnailTorpoiseKEXP from '../public/images/links/torpoisekexp.png'
 import Image from 'next/image'
 
+import path from 'node:path';
+import fs from 'node:fs';
+
+const pdfjsDistPath = path.dirname(require.resolve('pdfjs-dist/package.json'));
+const pdfWorkerPath = path.join(pdfjsDistPath, 'build', 'pdf.worker.js');
+
+fs.copyFileSync(pdfWorkerPath, './dist/pdf.worker.js');
+
 const ProfileImage = chakra(Image, {
   shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
 })
+
+const options = {
+  standardFontDataUrl: '/standard_fonts/',
+};
 
 const Home = () => (
   <Layout>

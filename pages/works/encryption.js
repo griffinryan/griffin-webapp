@@ -14,22 +14,23 @@ import { Title, WorkImage, Meta } from '../../components/work'
 import P from '../../components/paragraph'
 
 const Work = () => (
-    <Layout title="Hollowscape">
+    <Layout title="encryption-suite">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                encryption-suite <Badge>2023</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                An encryption suite in Java featuring SHA-256, CSHAKE-256, KMACXOF-256, and
+                more algorithms with unique salting for hashing utility and file-signing/file-verification.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
+                <Link href='https://github.com/griffinryan/encryption-suite' target='_blank'>
                     Hollowscape <ExternalLinkIcon mx='2px' />
                 </Link>
                 is open source and can be found on my GitHub!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_encryption.png' alt='Website' />
 
         </Container>
     </Layout>

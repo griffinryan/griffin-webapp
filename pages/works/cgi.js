@@ -13,22 +13,23 @@ import { Title, WorkImage, Meta } from '../../components/work'
 import P from '../../components/paragraph'
 
 const Work = () => (
-    <Layout title="Hollowscape">
+    <Layout title="cgi">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                A CGI Study <Badge>2021</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                A CGI Study is a 2021 mathematical analysis of modern 3D rendering mathematics
+                and modern computer generated imagery.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
+                <Link href='https://torpoisebucket.s3.us-west-2.amazonaws.com/A+CGI+Study+-+Griffin+Ryan.pdf' target='_blank'>
+                    A CGI Study <ExternalLinkIcon mx='2px' />
                 </Link>
-                is open source and can be found on my GitHub!
+                is open source and can be found on a random AWS S3 bucket!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_cgi.png' alt='Website' />
 
         </Container>
     </Layout>

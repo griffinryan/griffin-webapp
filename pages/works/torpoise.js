@@ -13,22 +13,22 @@ import { Title, WorkImage, Meta } from '../../components/work'
 import P from '../../components/paragraph'
 
 const Work = () => (
-    <Layout title="Hollowscape">
+    <Layout title="Torpoise">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                Torpoise <Badge>2022</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                Torpoise (A.K.A Griffin Ryan) is a Seattle-based electronic artist since 2013.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
+                <Link href='https://www.youtube.com/watch?v=1ZbsWzYA55Q' target='_blank'>
+                    Torpoise <ExternalLinkIcon mx='2px' />
                 </Link>
-                is open source and can be found on my GitHub!
+                can be found all over the web!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_torpoise.png' alt='Website' />
 
         </Container>
     </Layout>

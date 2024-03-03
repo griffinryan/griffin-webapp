@@ -13,22 +13,22 @@ import { Title, WorkImage, Meta } from '../../components/work'
 import P from '../../components/paragraph'
 
 const Work = () => (
-    <Layout title="Hollowscape">
+    <Layout title="Macdot">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                Macdot <Badge>2022</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                A dotfile CLI utility tool to manage new systems for macOS and Arch Linux.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
+                <Link href='https://github.com/Tgriffinryan/macdot' target='_blank'>
+                    Macdot <ExternalLinkIcon mx='2px' />
                 </Link>
                 is open source and can be found on my GitHub!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_macdot.png' alt='Website' />
 
         </Container>
     </Layout>
