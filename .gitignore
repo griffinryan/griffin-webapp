@@ -1,0 +1,11 @@
+node_modules
+.next
+dist
+.vercel
+.env
+*.lock
+.DS_Store
+*.DS_Store
+/**/.DS_Store
+.idea/
+
