@@ -24,5 +24,4 @@ Clone the repo and build with [yarn](https://yarnpkg.com//)!
     cd griffin-homepage/
     yarn install
     yarn dev
-
 ```
