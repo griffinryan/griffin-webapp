@@ -1,0 +1,22 @@
+//custom.scss
+
+//Enter custom SCSS to customize Bootstrap here
+
+@import "../../../../bootstrap/bootstrap";
+@import "../node_modules/@domchristie/turn/dist/turn";
+
+.logoImage {
+  transition: transform .7s ease-in-out;
+}
+.rotateOnHover:hover > .logoImage {
+  transform: rotate(270deg);
+}
+.spin {
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform:rotate(360deg);
+  }
+}

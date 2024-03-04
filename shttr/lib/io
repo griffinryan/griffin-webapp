@@ -1,0 +1,60 @@
+parse_input() {
+  if [ $input_parsed ]; then
+    return
+  else
+    envlist=$(printenv | cut -d= -f1)
+    export envlist
+
+    query_list=$(echo $QUERY_STRING | tr "&" " ")
+    for query_var in $query_list; do
+      verify_input "$query_var" &&\
+      eval $query_var
+      export $query_var
+    done
+
+    if [ $DEBUG_MODE -eq 0 ]; then
+      post_list=$(cat | tr "&" " ")
+      for post_var in $post_list; do
+        verify_input "$post_var" &&\
+        eval $post_var
+        export $post_var
+      done
+    fi
+    input_parsed=1
+  fi
+}
+
+parse_cookies() {
+  if [ $cookies_parsed ]; then
+    return
+  else
+    envlist=$(printenv | cut -d= -f1)
+    export envlist
+
+    cookies_list=$(echo $HTTP_COOKIE | sed 's/; / /g')
+    for cookie_var in $cookies_list; do
+      verify_input "$cookie_var"
+      eval $cookie_var
+      export $cookie_var
+    done
+    cookies_parsed=1
+  fi
+}
+
+url_string_decode() {
+  echo "$1" | sed "s/+/ /g;s/%2F/\//g;s/%3F/?/g;s/%27/'/g;s/%2C/,/g;s/%22/\"/g;s/%3A/:/g;s/%3B/;/g;s/%21/!/g;s/%40/@/;s/%0A/\n/g"
+}
+
+verify_input() {
+  if [ -z $(echo "$1" | grep "=") ]; then
+    echo "error"
+    exit 1
+  fi
+
+  for var in $envlist; do
+    if [ "$var" = "${1%=*}" ]; then
+      echo "error"
+      exit 1
+    fi
+  done
+}

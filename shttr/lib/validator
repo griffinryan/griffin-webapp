@@ -1,0 +1,62 @@
+validate() {
+  case $2 in
+    for_presence) presence;;
+    for_length) length $1 $3 $4;;
+    *) is_invalid;;
+  esac
+}
+
+presence() {
+  is_valid
+}
+
+length() {
+  data="$1"
+  length="$3"
+  
+  case $2 in
+    greater_than)
+      if [ $(echo -n ${data} | wc -m) -gt ${length} ]; then
+        is_valid
+      else
+        is_invalid
+      fi ;;
+    less_than)
+      if [ $(echo -n ${data} | wc -m) -lt ${length} ]; then
+        is_valid
+      else
+        is_invalid
+      fi ;;
+    equal_to)
+      if [ $(echo -n ${data} | wc -m) -eq ${length} ]; then
+        is_valid
+      else
+        is_invalid
+      fi ;;
+    *) is_invalid;;
+  esac
+}
+
+do_redirect() {
+  if [ "$1" = "to" ]; then
+    redirect_location="$2"
+  else
+    redirect_location="${SCRIPT_NAME}"
+  fi
+  printf "Status:303\nLocation: ${redirect_location}\n"
+
+  validated=1
+  export validated
+}
+
+do_error() {
+  printf "Status:422"
+}
+
+is_valid() {
+  true
+}
+
+is_invalid() {
+  false
+}

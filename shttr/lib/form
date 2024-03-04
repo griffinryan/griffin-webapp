@@ -1,0 +1,28 @@
+if [ "$REQUEST_METHOD" = "POST" ]; then
+  if [ $DEBUG_MODE -eq 0 ]; then
+    parse_input
+    parse_cookies
+
+    [ -z $auth_token ] && auth_token="no auth token provided"
+
+    if [ "$auth_token" != "$form_auth_token" ]; then
+      do_error
+      exit 1
+    fi
+  else
+    parse_input
+  fi
+else
+  new_form_auth_token=$(openssl rand -hex 32)
+  export new_form_auth_token
+  printf "Set-Cookie: form_auth_token=${new_form_auth_token}; Path=/; secure\n"
+fi
+
+vf() {
+  if [ "$(echo $1 | cut -d/ -f1)" = "$(echo $1 | cut -d/ -f2)" ]; then
+    view="${SHTTR_APP}/views/${CONTROLLER%.sh}/${1}"
+  else
+    view="${SHTTR_APP}/views/${1}"
+  fi
+  sed '/<form.*>/ a <input type="hidden" name="auth_token" value="${new_form_auth_token}">' ${view} | v
+}

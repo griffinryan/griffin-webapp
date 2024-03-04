@@ -1,0 +1,6 @@
+send_email() {
+  m_email=$(url_string_decode "$1")
+  m_subject=$(url_string_decode "$2")
+  m_message=$(url_string_decode "$3")
+  echo "${m_message}" | mail -s "${m_subject}" ${m_email}
+}

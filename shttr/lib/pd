@@ -1,0 +1,8 @@
+pd() {
+  if [ "$(echo $1 | cut -d/ -f1)" = "$(echo $1 | cut -d/ -f2)" ]; then
+    view="${SHTTR_APP}/views/${CONTROLLER%.sh}/${1}"
+  else
+    view="${SHTTR_APP}/views/${1}"
+  fi
+  pandoc -t html "$view" | v
+}
