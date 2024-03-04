@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+    <title>Portfolio - Griffin Ryan</title>
+    <link rel="stylesheet" href="/public/style-13f136c998d0ea893f1edaa2cf4dfe9aa3e782f89938df5ed0c9ec33f5dd1266.css">
+    <script src="/scripts/vendored/bootstrap.bundle.js"></script><script src="/scripts/vendored/turbo.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "turn": "/scripts/vendored/turn.min.js"
+        }
+      }
+    </script>
+    <script src="/scripts/dark-mode.js"></script>
+    <script type="module">
+      import Turn from 'turn';
+      Turn.start();
+    </script>
+  </head>
+  <body>
+    <main class="container-md">
+<nav class="navbar navbar-expand-md bg-body-tertiary border-body fixed-top text-center">
+    <div class="container-md" id="navContainer">
+        <div>
+            <a class="navbar-brand d-flex align-items-center gap-2 rotateOnHover" href="/">
+                <img height="64px" width="auto" src="/images/torpoise.png" class="logoImage">
+                Griffin Ryan
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navBar">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/portfolio.html">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/resume.html">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/griffinryan/" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div width="100%" height="480px" class="d-flex align-items-center justify-content-center" style="margin-top:120px" id="spinnerContainer" data-turbo-permanent>
+    <img class="spin" width="256px" height="auto" src="/images/torpoise.png" id="spinner" data-turbo-permanent>
+</div>
+<div class="container-fluid d-flex flex-column align-items-center" data-turn-enter data-turn-exit>
+    <div class="d-flex flex-column align-items-center gap-4" style="max-width:600px">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Viverra accumsan in nisl nisi scelerisque eu ultrices. Tempor commodo ullamcorper a lacus vestibulum sed arcu non. Erat imperdiet sed euismod nisi porta. Integer vitae justo eget magna fermentum. Sapien faucibus et molestie ac feugiat sed. Velit laoreet id donec ultrices tincidunt arcu. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend. Quis eleifend quam adipiscing vitae. Orci a scelerisque purus semper eget duis at. Sit amet facilisis magna etiam tempor orci.
+        </p>
+        <p>
+            Consequat id porta nibh venenatis cras sed felis eget velit. Cursus mattis molestie a iaculis. Adipiscing tristique risus nec feugiat in. Tempor orci dapibus ultrices in iaculis. Mauris cursus mattis molestie a iaculis at erat. Pellentesque eu tincidunt tortor aliquam. Rutrum quisque non tellus orci ac auctor augue. Mauris cursus mattis molestie a iaculis. Sit amet nisl suscipit adipiscing bibendum est ultricies integer. Iaculis eu non diam phasellus vestibulum lorem sed. Cursus euismod quis viverra nibh. Ut enim blandit volutpat maecenas volutpat blandit aliquam. Egestas erat imperdiet sed euismod nisi porta lorem. Vel risus commodo viverra maecenas accumsan lacus vel. Molestie at elementum eu facilisis sed odio morbi quis commodo. Sed id semper risus in.
+        </p>
+    </div>
+</div>
+      <p class="text-center text-secondary pt-4">© Copyright 2024 Griffin Ryan. All Rights Reserved.</p>
+      <button class="btn rounded-circle p-2 opacity-25" id="dark-mode-toggle" style="position:fixed;bottom:16px;right:16px" data-turbo-permanent></button>
+    </main>
+  </body>
+</html>

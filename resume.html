@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+    <title>Resume - Griffin Ryan</title>
+    <link rel="stylesheet" href="/public/style-13f136c998d0ea893f1edaa2cf4dfe9aa3e782f89938df5ed0c9ec33f5dd1266.css">
+    <script src="/scripts/vendored/bootstrap.bundle.js"></script><script src="/scripts/vendored/turbo.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "turn": "/scripts/vendored/turn.min.js"
+        }
+      }
+    </script>
+    <script src="/scripts/dark-mode.js"></script>
+    <script type="module">
+      import Turn from 'turn';
+      Turn.start();
+    </script>
+  </head>
+  <body>
+    <main class="container-md">
+<nav class="navbar navbar-expand-md bg-body-tertiary border-body fixed-top text-center">
+    <div class="container-md" id="navContainer">
+        <div>
+            <a class="navbar-brand d-flex align-items-center gap-2 rotateOnHover" href="/">
+                <img height="64px" width="auto" src="/images/torpoise.png" class="logoImage">
+                Griffin Ryan
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navBar">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/portfolio.html">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/resume.html">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/griffinryan/" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div width="100%" height="480px" class="d-flex align-items-center justify-content-center" style="margin-top:120px" id="spinnerContainer" data-turbo-permanent>
+    <img class="spin" width="256px" height="auto" src="/images/torpoise.png" id="spinner" data-turbo-permanent>
+</div>
+<div class="container-fluid d-flex flex-column align-items-center" data-turn-enter data-turn-exit>
+    <div class="d-flex flex-column align-items-center gap-4" style="max-width:600px">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt arcu non sodales neque sodales ut. Facilisis volutpat est velit egestas dui. Curabitur vitae nunc sed velit dignissim sodales ut. Elit ut aliquam purus sit amet luctus. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Morbi enim nunc faucibus a pellentesque sit amet. Eleifend donec pretium vulputate sapien. Ultrices neque ornare aenean euismod elementum nisi quis. Quis varius quam quisque id diam vel quam elementum. Consequat mauris nunc congue nisi. Porttitor leo a diam sollicitudin tempor id eu nisl. Lorem ipsum dolor sit amet consectetur adipiscing. Lacus sed viverra tellus in hac habitasse platea dictumst vestibulum. Mi proin sed libero enim sed. Aenean sed adipiscing diam donec adipiscing tristique risus nec feugiat. Diam in arcu cursus euismod quis viverra nibh cras pulvinar.
+        </p>
+        <p>
+            In eu mi bibendum neque. Laoreet sit amet cursus sit amet dictum sit. Nullam eget felis eget nunc. Non curabitur gravida arcu ac tortor dignissim convallis aenean. Sed velit dignissim sodales ut eu. Scelerisque viverra mauris in aliquam sem. Augue mauris augue neque gravida in. Varius morbi enim nunc faucibus. Sollicitudin aliquam ultrices sagittis orci. Gravida neque convallis a cras semper auctor neque vitae tempus. Feugiat vivamus at augue eget arcu dictum varius duis at.
+        </p>
+    </div>
+</div>
+      <p class="text-center text-secondary pt-4">© Copyright 2024 Griffin Ryan. All Rights Reserved.</p>
+      <button class="btn rounded-circle p-2 opacity-25" id="dark-mode-toggle" style="position:fixed;bottom:16px;right:16px" data-turbo-permanent></button>
+    </main>
+  </body>
+</html>
