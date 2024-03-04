@@ -1,0 +1,117 @@
+create_table_entry() {
+  if [ "$1" = "in" ]; then
+    target=$2
+  else
+    target=${CONTROLLER}
+  fi
+  mkdir -p /var/shttrdb/${target}
+
+  if [ -z $(find /var/shttrdb/${target} -mindepth 1 -type d) ]; then
+    id="1"
+  else
+    highest_current_id=$(find /var/shttrdb/${target} -mindepth 1 -type d -exec basename {} \; | sort -nr | head -n1 )
+    id=$(( ${highest_current_id} + 1 ))
+  fi
+  mkdir /var/shttrdb/${target}/${id}
+  echo $id
+}
+
+write_data() {
+  if [ "$4" = "to" ]; then
+    target=$5
+  else
+    target=${CONTROLLER}
+  fi
+
+  id="$1"
+  attr="$(url_string_decode $2)"
+  val="$(url_string_decode $3)"
+
+  echo "$val" > /var/shttrdb/${target}/${id}/${attr}
+}
+
+delete_id() {
+  if [ "$2" = "from" ]; then
+    target=$3
+  else
+    target=${CONTROLLER}
+  fi
+
+  if [ -d /var/shttrdb/${target}/${1} ]; then
+    rm -rf /var/shttrdb/${target}/${1}
+  fi
+}
+
+read_each() {
+  if [ "$1" = "from" ]; then
+    target=$2
+  else
+    target=${CONTROLLER}
+  fi
+
+  if [ -z $(find /var/shttrdb/${target} -mindepth 1 -type d) ]; then
+    return
+  fi
+
+  for id in $(find /var/shttrdb/${target} -mindepth 1 -type d -exec basename {} \; | sort -n); do
+    generate_method ${target} ${id}
+    id_list_var="${target}_id_list"
+    eval "${id_list_var}=\"${id} \$${id_list_var}\""
+  done
+  eval "export ${id_list_var}"
+}
+
+read_id() {
+  if [ "$2" = "from" ]; then
+    target=$3
+  else
+    target=${CONTROLLER}
+  fi
+
+  id=$1
+  generate_method ${target} ${id}
+}
+
+find_by() {
+  if [ "$3" = "from" ]; then
+    target=$4
+  else
+    target=${CONTROLLER}
+  fi
+
+  if [ "$5" = "with_params" ]; then
+    params="$6"
+  fi
+
+  attr="$1"
+  val="$2"
+  for entry in $(find /var/shttrdb/${target} -name "${attr}" ${params}); do
+    if [ "$val" = "$(cat ${entry})" ]; then
+      found_id=${entry%/*}
+      found_id=${found_id##*/}
+      echo ${found_id}
+      break
+    else
+      continue
+    fi
+  done
+}
+
+generate_method() {
+  target=$1
+  id=$2
+  command="
+    ${target}_${id}() {
+      case \$1 in
+      "
+      for attr in $(find /var/shttrdb/${target}/${id} -mindepth 1 -type f -exec basename {} \;); do
+        command="${command}
+          ${attr}) cat /var/shttrdb/${target}/${id}/${attr};;
+        "
+      done
+      command="${command}
+      esac
+    }
+  "
+  eval "${command}"
+}

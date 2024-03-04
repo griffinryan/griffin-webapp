@@ -1,0 +1,45 @@
+use() {
+  while [ $1 ]; do
+    if [ -f ${SHTTR_LIB}/${1%,} ]; then
+      . ${SHTTR_LIB}/${1%,}
+    elif [ -d ${SHTTR_APP}/assets/node_modules/${1%,} ]; then
+      npm_name=$(echo ${1} | tr "-" "_")
+      eval "node_$(echo ${npm_name%,} | cut -d/ -f2)=${SHTTR_ASSETS}/node_modules/${1%,}"
+      eval "export node_$(echo ${npm_name%,} | cut -d/ -f2)"
+    fi
+    shift
+  done
+}
+
+[ -z $DEBUG_MODE ] && DEBUG_MODE=0
+if [ $DEBUG_MODE -eq 1 ]; then
+  SERVER_TYPE="DEBUG"
+fi
+export DEBUG_MODE
+
+if [ -z "$SERVER_TYPE" ]; then
+  SERVER_TYPE="PRODUCTION"
+fi
+export SERVER_TYPE
+
+CONTROLLER=${SCRIPT_FILENAME##*/}
+export CONTROLLER
+
+STYLESHEET="${SHTTR_ASSETS}/public/$(find ${SHTTR_APP}/assets/public/*.css -printf %f)"
+export STYLESHEET
+
+VENDOR_SCRIPT_LIST="$(find ${SHTTR_APP}/assets/scripts/vendored/*.js -type f -exec basename {} \;)"
+for VENDOR_SCRIPT in $VENDOR_SCRIPT_LIST; do
+  VENDOR_SCRIPTS="${VENDOR_SCRIPTS}<script src=\"${SHTTR_ASSETS}/scripts/vendored/${VENDOR_SCRIPT}\"></script>"
+done
+export VENDOR_SCRIPTS
+
+validated=0
+export validated
+signed_in=0
+export signed_in
+
+alias npx="npx --prefix=${SHTTR_APP}/assets"
+
+. ${SHTTR_APP}/globals.sh
+. ${SHTTR_APP}/controllers/${CONTROLLER}

@@ -1,0 +1,17 @@
+set_notice() {
+  notice_msg="$(echo $1 | tr ' ' '+')"
+  printf "Set-Cookie: notice=${notice_msg}; Path=/; secure\n"
+}
+
+set_alert() {
+  alert_msg="$(echo $1 | tr ' ' '+')"
+  printf "Set-Cookie: alert=${alert_msg}; Path=/; secure\n"
+}
+
+read_flash() {
+  parse_cookies
+  notice="$(url_string_decode $notice)"
+  alert="$(url_string_decode $alert)"
+  printf "Set-Cookie: notice=; Path=/; secure\n"
+  printf "Set-Cookie: alert=; Path=/; secure\n"
+}

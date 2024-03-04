@@ -1,0 +1,15 @@
+printf 'Content-Type: text/html\n\n'
+
+v() {
+  if [ $1 ]; then
+    if [ "$(echo $1 | cut -d/ -f1)" = "$(echo $1 | cut -d/ -f2)" ]; then
+      view=$(cat ${SHTTR_APP}/views/${CONTROLLER%.sh}/${1})
+    else
+      view=$(cat ${SHTTR_APP}/views/${1})
+    fi
+  else
+    view="$(cat)"
+  fi
+
+  echo "${view}" | envsubst
+}

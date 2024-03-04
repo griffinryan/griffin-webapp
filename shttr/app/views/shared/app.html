@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="${SHTTR_ASSETS}/images/favicon.ico" type="image/x-icon"/>
+    <title>${TITLE}</title>
+    <link rel="stylesheet" href="${STYLESHEET}">
+    ${VENDOR_SCRIPTS}
+    <script type="importmap">
+      {
+        "imports": {
+          "turn": "${node_turn}/dist/turn.min.js"
+        }
+      }
+    </script>
+    <script src="${SHTTR_ASSETS}/scripts/dark-mode.js"></script>
+    <script type="module">
+      import Turn from 'turn';
+      Turn.start();
+    </script>
+  </head>
+  <body>
+    <main class="container-md">

@@ -1,0 +1,62 @@
+register() {
+  salt=$(openssl rand -hex 32)
+  username="$1"
+  if [ -z "$(find_by username $(url_string_decode ${username}) from users)" ]; then
+    do_redirect to "$3"
+  else
+    do_error && return 1
+  fi
+  password=$(hash_password "$2" "${salt}")
+  user_id=$(create_table_entry in users)
+  
+  write_data ${user_id} "username" "${username}" to users
+  write_data ${user_id} "password" "${password}" to users
+  write_data ${user_id} "salt" "${salt}" to users
+}
+
+hash_password() {
+  password="$1"
+  salt="$2"
+
+  echo "${password}" | openssl passwd -6 -stdin -salt "${salt}"
+}
+
+sign_in() {
+  username="$1"
+  password="$2"
+
+  user_id=$(find_by username $(url_string_decode ${username}) from users)
+  if [ -z $user_id ]; then
+    do_error && return 1
+  fi
+
+  read_id $user_id from users
+  salt=$(users_${user_id} salt)
+  password_hash=$(hash_password "${password}" "${salt}")
+
+  if [ "$password_hash" = "$(users_${user_id} password)" ]; then
+    auth=$(openssl rand -hex 32)
+    write_data ${user_id} "auth" "${auth}" to users
+    printf "Set-Cookie: auth=${auth}; Path=/; secure\n"
+    do_redirect to "$3"
+  else
+    do_error && return 1
+  fi
+}
+
+sign_out() {
+  printf "Set-Cookie: auth=; Path=/; secure\n"
+  do_redirect to "$1"
+}
+
+check_sign_in() {
+  parse_cookies
+
+  user_id=$(find_by auth ${auth} from users with_params "-mtime 0")
+  if [ $user_id ]; then
+    read_id $user_id from users
+    signed_in=1
+    export signed_in
+    alias signed_in_user=users_${user_id}
+  fi
+}
