@@ -52,7 +52,7 @@ const Voxel = () => {
 
       // 640 -> 240
       // 8   -> 6
-      const scale = scH * 0.005 + 4.8
+      const scale = scH * 0.04
       const camera = new THREE.OrthographicCamera(
         -scale,
         scale,
@@ -90,7 +90,7 @@ const Voxel = () => {
           const p = initialCameraPosition
           const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 10
 
-          camera.position.y = 10
+          camera.position.y = 20
           camera.position.x =
             p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
           camera.position.z =
