@@ -1,10 +1,10 @@
-bli# Griffin Ryan's Portfolio Webapp
+# Griffin Ryan's Portfolio Webapp
 
 [https://griffinryan.com/](https://griffinryan.com/)
 
-## Header 1
+## Pipeline
 
-And sample text.
+[https://griffinryan.com/](https://griffinryan.com/) uses the stack listed below and is deployed with [https://github.com/aws-amplify/amplify-js](AWS Amplify).
 
 ## [https://griffinryan.com/](https://griffinryan.com/) builds with:
 
