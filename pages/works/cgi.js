@@ -16,19 +16,20 @@ const Work = () => (
     <Layout title="Hollowscape">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                Computer Generated Imagery: CGI and the Mathematical Interpretation of 3D Objects in a 2D Space <Badge>2020</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                A CGI Study is a 2020 paper written for UW School of Engineering and Technology's MATH 308 course.
+                This paper details the complex matrix algebra behind rendering a 3D torus with a ray-traced illumination system.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
+                <Link href='https://torpoisebucket.s3.us-west-2.amazonaws.com/A+CGI+Study+-+Griffin+Ryan.pdf' target='_blank'>
+                    A CGI Study <ExternalLinkIcon mx='2px' />
                 </Link>
-                is open source and can be found on my GitHub!
+                can be found as a PDF here!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_cgi.png' alt='Website' />
 
         </Container>
     </Layout>

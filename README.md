@@ -4,7 +4,7 @@
 
 ## Pipeline
 
-[https://griffinryan.com/](https://griffinryan.com/) uses the stack listed below and is deployed with [https://github.com/aws-amplify/amplify-js](AWS Amplify).
+[https://griffinryan.com/](https://griffinryan.com/) uses the stack listed below and is deployed with [AWS Amplify](https://github.com/aws-amplify/amplify-js).
 
 ## [https://griffinryan.com/](https://griffinryan.com/) builds with:
 
@@ -24,4 +24,3 @@ Clone the repo and build with [yarn](https://yarnpkg.com//)!
     cd griffin-homepage/
     yarn install
     yarn dev
-```
