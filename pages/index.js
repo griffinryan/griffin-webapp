@@ -81,14 +81,20 @@ const Home = () => (
         <Paragraph>
           Griffin Ryan is a full-stack developer based in Seattle, Washington with a
           passion for building technologies. As a coder, his interests lie in artificial 
-          intelligence, 3D rendering mathematic, and{' '}
+          intelligence, {' '}
+          <Link as={NextLink} href="/works/cgi" passHref scroll={false}>
+            3D rendering mathematics
+          </Link>, and{' '}
           <Link as={NextLink} href="/works/doter" passHref scroll={false}>
             natural language processing
           </Link>.
         </Paragraph>
         <Paragraph>Having seen 
-          notable success in the Seattle music scene, electronic artist 'Torpoise' 
-          (A.K.A Griffin Ryan) has performed for recognized institutions 
+          notable success in the Seattle music scene, electronic artist {' '}
+          <Link as ={NextLink} href='/works/torpoise' passHref scroll={false}>
+            'Torpoise' (A.K.A Griffin Ryan)
+          </Link>
+          {' '} has performed for recognized institutions
           such as KEXP, Neumos, and the Musuem of Pop Culture. 
           While not playing music or programming, Griffin is an automotive enthusiast.</Paragraph>
         <Box align="center" my={4}>
@@ -163,12 +169,12 @@ const Home = () => (
           <GridItem
             href="https://www.youtube.com/watch?v=zt2uOQv7U94&ab_channel=KEXP"
             title="Torpoise Live on KEXP"
-            thumbnail={thumbnailTorpoiseSpotify}>
+            thumbnail={thumbnailTorpoiseKEXP}>
           </GridItem>
           <GridItem
             href="https://open.spotify.com/artist/1mrMGfjOuLEJP3YhW2Fhu3?si=RULxR971TJCjtDkjhrOVEA"
             title="Torpoise on Spotify"
-            thumbnail={thumbnailTorpoiseKEXP}>
+            thumbnail={thumbnailTorpoiseSpotify}>
           </GridItem>
         </SimpleGrid>
         

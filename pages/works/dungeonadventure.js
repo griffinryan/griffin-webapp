@@ -17,19 +17,19 @@ const Work = () => (
     <Layout title="Hollowscape">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                Dungeon Adventure <Badge>2020</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                Dungeon Adventure is a 2D rougelike dungeon crawler with a game engine built from JavaFX and JDK11.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
+                <Link href='https://github.com/HuskyDevClub/DungeonAdventure' target='_blank'>
+                    DungeonAdventure <ExternalLinkIcon mx='2px' />
                 </Link>
-                is open source and can be found on my GitHub!
+                is open source and can be found on mine/my team's GitHub!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_dungeon.png' alt='Website' />
 
         </Container>
     </Layout>
