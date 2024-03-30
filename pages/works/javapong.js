@@ -16,19 +16,19 @@ const Work = () => (
     <Layout title="Hollowscape">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                Javapong <Badge>2017</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
+                Javapong is a very simple Pong-styled game built in JDK 8 and Java's AWT graphics library.
             </P>
             <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
+                <Link href='https://github.com/griffinryan/javapong' target='_blank'>
+                    Javapong <ExternalLinkIcon mx='2px' />
                 </Link>
                 is open source and can be found on my GitHub!
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <WorkImage src='/images/works/thumb_javapong.png' alt='Website' />
 
         </Container>
     </Layout>

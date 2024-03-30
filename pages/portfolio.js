@@ -28,8 +28,7 @@ const Portfolio = () => (
               title="Doter Editor"
               thumbnail={thumbDoter}
           >
-            A code editor that supports 50+ languages including Python, C#, Java, and more.
-            <Badge>2024</Badge>
+            <Badge>2024</Badge> A code editor that supports 50+ languages including Python, C#, Java, and more.
           </WorkGridItem>
         </Section>
         <Section>
@@ -38,7 +37,7 @@ const Portfolio = () => (
               title="Hollowscape"
               thumbnail={thumbHollowscape}
           >
-            Vanilla Javascript game engine for 2D development.
+            <Badge>2022</Badge> Vanilla Javascript game engine for 2D development.
           </WorkGridItem>
         </Section>
 
@@ -48,7 +47,7 @@ const Portfolio = () => (
               title="A CGI Study"
               thumbnail={thumbCGI}
           >
-            A linear algebraic exploration of modern 3D rendering mathematics and
+            <Badge>2020</Badge> A linear algebraic exploration of modern 3D rendering mathematics and
             computer generated imagery.
           </WorkGridItem>
         </Section>
@@ -59,7 +58,7 @@ const Portfolio = () => (
               title="Dungeon Adventure"
               thumbnail={thumbDungeon}
           >
-            A rougelike dungeon crawler implemented in JDK 13, JavaFX, and SQLite.
+            <Badge>2021</Badge> A rougelike dungeon crawler implemented in JDK 13, JavaFX, and SQLite.
           </WorkGridItem>
         </Section>
 
@@ -69,7 +68,7 @@ const Portfolio = () => (
               title="encryption-suite"
               thumbnail={thumbEncryption}
           >
-            An encryption suite in Java featuring SHA-256, CSHAKE-256, KMACXOF-256, and
+            <Badge>2024</Badge> An encryption suite in Java featuring SHA-256, CSHAKE-256, KMACXOF-256, and
             more algorithms with unique salting for hashing utility and file-signing/file-verification.
           </WorkGridItem>
         </Section>
@@ -80,7 +79,7 @@ const Portfolio = () => (
               title="Macdot"
               thumbnail={thumbMacdot}
           >
-            A dotfile CLI utility tool to manage new systems for macOS and Arch Linux.
+            <Badge>2019</Badge> A dotfile CLI utility tool to manage new systems for macOS and Arch Linux.
           </WorkGridItem>
         </Section>
 
@@ -90,7 +89,7 @@ const Portfolio = () => (
               title="Torpoise"
               thumbnail={thumbTorpoise}
           >
-            Torpoise (A.K.A Griffin Ryan) is a Seattle-based electronic artist since 2013.
+            <Badge>2016</Badge> Torpoise (A.K.A Griffin Ryan) is a Seattle-based electronic artist since 2013.
           </WorkGridItem>
         </Section>
 
@@ -100,7 +99,7 @@ const Portfolio = () => (
               title="Javapong"
               thumbnail={thumbJavapong}
           >
-            A simple Pong-style game in Java using the Swing AWT graphics API.
+            <Badge>2017</Badge> A simple Pong-style game in Java using the Swing AWT graphics API.
           </WorkGridItem>
         </Section>
 

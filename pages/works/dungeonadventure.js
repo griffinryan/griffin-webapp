@@ -17,7 +17,7 @@ const Work = () => (
     <Layout title="Hollowscape">
         <Container>
             <Title>
-                Dungeon Adventure <Badge>2020</Badge>
+                Dungeon Adventure <Badge>2021</Badge>
             </Title>
             <P>
                 Dungeon Adventure is a 2D rougelike dungeon crawler with a game engine built from JavaFX and JDK11.

@@ -13,26 +13,31 @@ import { Title, WorkImage, Meta } from '../../components/work'
 import P from '../../components/paragraph'
 
 const Work = () => (
-    <Layout title="Hollowscape">
+    <Layout title="Torpoise">
         <Container>
             <Title>
-                Hollowscape <Badge>2022</Badge>
+                Torpoise <Badge>2016-2021</Badge>
             </Title>
             <P>
-                Hollowscape is a 2D adventure-platformer built in a scratch vanilla JavaScript engine.
-            </P>
-            <P>
-                <Link href='https://github.com/TCSS491Black1/Game' target='_blank'>
-                    Hollowscape <ExternalLinkIcon mx='2px' />
-                </Link>
-                is open source and can be found on my GitHub!
+                Torpoise is the pseudonym for Griffin Ryan's electronic music project based in Seattle, Washington.
+                Having seen notable success in the Seattle music scene after releasing the 2016 album `Rewind`,
+                electronic artist 'Torpoise' (A.K.A Griffin Ryan) has performed for recognized institutions
+                such as KEXP, Neumos, and the Musuem of Pop Culture.
             </P>
 
-            <WorkImage src='/images/works/thumb_hollowscape.png' alt='Website' />
+            <iframe width="500" height="157" src="https://www.youtube.com/embed/zt2uOQv7U94?si=a41ety7wFTIwbnHw"
+                    title="YouTube video player" frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+            <iframe width="500" height="157" src="https://www.youtube.com/embed/sf6axoyvaSE?si=8YpNoD0jDS95-QM7"
+                    title="YouTube video player" frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
+            <WorkImage src='/images/works/thumb_torpoise.png' alt='Website'/>
         </Container>
     </Layout>
 )
 
 export default Work
-export { getServerSideProps } from '../../components/chakra'
+export {getServerSideProps} from '../../components/chakra'
