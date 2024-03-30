@@ -8,13 +8,13 @@ class Raindrop {
         this.x = p5.random(p5.width);
         this.y = p5.random(-500, -50); // Start above the screen
         this.z = p5.random(0, 20);
-        this.len = p5.map(this.z, 0, 20, 10, 20);
-        this.yspeed = p5.map(this.z, 0, 20, 1, 20);
+        this.len = p5.map(this.z, 0, 20, 10, 10);
+        this.yspeed = p5.map(this.z, 0, 10, 1, 10);
     }
 
     fall(p5) {
         this.y = this.y + this.yspeed;
-        var grav = p5.map(this.z, 0, 20, 0, 0.2);
+        var grav = p5.map(this.z, 0, 20, 0, 0.01);
         this.yspeed = this.yspeed + grav;
 
         if (this.y > p5.height) {
@@ -34,7 +34,7 @@ class Raindrop {
 const RainAnimation = () => {
     const setup = (p5, canvasParentRef) => {
         p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 250; i++) {
             raindrops[i] = new Raindrop(p5);
         }
     };
