@@ -8,7 +8,11 @@ import VoxelLoader from '../voxel-loader'
 const LazyVoxel = dynamic(() => import('../voxel'), {
   ssr: false,
   loading: () => <VoxelLoader />
-})
+});
+
+const LazyRain = dynamic(() => import('../rainanimation'), {
+    ssr: false,
+});
 
 const Main = ({ children, router }) => {
   return (
@@ -27,6 +31,10 @@ const Main = ({ children, router }) => {
       </Head>
 
       <NavBar path={router.asPath} />
+
+      <Container maxW="container.md" pt={14}>
+        <LazyRain />
+      </Container>
 
       <Container maxW="container.md" pt={14}>
         <LazyVoxel />
