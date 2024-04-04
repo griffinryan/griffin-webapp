@@ -1,7 +1,8 @@
 import React from 'react';
 import Sketch from 'react-p5';
 
-let raindrops = [];
+const NUM_RAINDROPS = Math.min(window.innerWidth >> 2, 250);
+const raindrops = new Array(NUM_RAINDROPS);
 
 class Raindrop {
     constructor(p5) {
@@ -10,40 +11,41 @@ class Raindrop {
         this.z = p5.random(0, 20);
         this.len = p5.map(this.z, 0, 20, 10, 10);
         this.yspeed = p5.map(this.z, 0, 10, 1, 10);
+        this.grav = p5.map(this.z, 0, 20, 0, 0.01);
     }
 
     fall(p5) {
-        this.y = this.y + this.yspeed;
-        var grav = p5.map(this.z, 0, 20, 0, 0.01);
-        this.yspeed = this.yspeed + grav;
+        this.y += this.yspeed;
+        this.yspeed += this.grav;
 
         if (this.y > p5.height) {
             this.y = p5.random(-200, -100);
             this.yspeed = p5.map(this.z, 0, 20, 4, 10);
         }
+
+        p5.line(this.x, this.y, this.x, this.y + this.len);
     }
 
     show(p5) {
-        var thick = p5.map(this.z, 0, 20, 1, 3);
+        let thick = p5.map(this.z, 0, 20, 1, 3);
         p5.strokeWeight(thick);
         p5.stroke(138, 43, 226);
-        p5.line(this.x, this.y, this.x, this.y + this.len);
     }
 }
 
 const RainAnimation = () => {
     const setup = (p5, canvasParentRef) => {
         p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
-        for (let i = 0; i < 250; i++) {
+        for (let i = 0; i < NUM_RAINDROPS; i++) {
             raindrops[i] = new Raindrop(p5);
+            raindrops[i].show(p5);
         }
     };
 
     const draw = (p5) => {
         p5.clear();
-        for (let i = 0; i < raindrops.length; i++) {
+        for (let i = 0; i < NUM_RAINDROPS; i++) {
             raindrops[i].fall(p5);
-            raindrops[i].show(p5);
         }
     };
 
