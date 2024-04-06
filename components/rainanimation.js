@@ -4,33 +4,31 @@ import Sketch from 'react-p5';
 const NUM_RAINDROPS = Math.min(window.innerWidth >> 2, 250);
 const raindrops = new Array(NUM_RAINDROPS);
 
-class Raindrop {
-    constructor(p5) {
-        this.x = p5.random(p5.width);
-        this.y = p5.random(-500, -50); // Start above the screen
-        this.z = p5.random(0, 20);
-        this.len = p5.map(this.z, 0, 20, 10, 10);
-        this.yspeed = p5.map(this.z, 0, 10, 1, 10);
-        this.grav = p5.map(this.z, 0, 20, 0, 0.01);
+function Raindrop(p5) {
+    this.x = p5.random(p5.width);
+    this.y = p5.random(-500, -50); // Start above the screen
+    this.z = p5.random(0, 20);
+    this.len = p5.map(this.z, 0, 20, 10, 10);
+    this.yspeed = p5.map(this.z, 0, 10, 1, 10);
+    this.grav = p5.map(this.z, 0, 20, 0, 0.01);
+}
+
+Raindrop.prototype.fall = function (p5) {
+    this.y += this.yspeed;
+    this.yspeed += this.grav;
+
+    if (this.y > p5.height) {
+        this.y = p5.random(-200, -100);
+        this.yspeed = p5.map(this.z, 0, 20, 4, 10);
     }
 
-    fall(p5) {
-        this.y += this.yspeed;
-        this.yspeed += this.grav;
+    p5.line(this.x, this.y, this.x, this.y + this.len);
+}
 
-        if (this.y > p5.height) {
-            this.y = p5.random(-200, -100);
-            this.yspeed = p5.map(this.z, 0, 20, 4, 10);
-        }
-
-        p5.line(this.x, this.y, this.x, this.y + this.len);
-    }
-
-    show(p5) {
-        let thick = p5.map(this.z, 0, 20, 1, 3);
-        p5.strokeWeight(thick);
-        p5.stroke(138, 43, 226);
-    }
+Raindrop.prototype.show = function (p5) {
+    let thick = p5.map(this.z, 0, 20, 1, 3);
+    p5.strokeWeight(thick);
+    p5.stroke(138, 43, 226);
 }
 
 const RainAnimation = () => {
