@@ -13,7 +13,7 @@ import { Title, WorkImage, Meta } from '../../components/work'
 import P from '../../components/paragraph'
 
 const Work = () => (
-    <Layout title="Hollowscape">
+    <Layout title="CGI Study">
         <Container>
             <Title>
                 Computer Generated Imagery: CGI and the Mathematical Interpretation of 3D Objects in a 2D Space <Badge>2020</Badge>
