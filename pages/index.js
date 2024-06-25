@@ -115,6 +115,10 @@ const Home = () => (
           Experience
         </Heading>
         <BioSection>
+          <BioYear>2024</BioYear>
+          AI Software Engineer - Outlier AI
+        </BioSection>
+        <BioSection>
           <BioYear>2022-23</BioYear>
           CSS Mentor - UW School of Engineering and Technology.
         </BioSection>
