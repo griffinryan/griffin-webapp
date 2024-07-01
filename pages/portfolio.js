@@ -14,6 +14,7 @@ import thumbEncryption from '/public/images/works/thumb_encryption.png'
 import thumbMacdot from '/public/images/works/thumb_macdot.png'
 import thumbTorpoise from '/public/images/works/thumb_torpoise.png'
 import thumbJavapong from '/public/images/works/thumb_javapong.png'
+import thumbGreenlightgo from '/public/images/works/thumb_greenlightgo.png'
 
 const Portfolio = () => (
   <Layout title="Portfolio">
@@ -24,6 +25,15 @@ const Portfolio = () => (
       <SimpleGrid columns={[1, 1, 2]} gap={6}>
         <Section>
           <WorkGridItem
+              id="greenlightgo"
+              title="GreenLightGo"
+              thumbnail={thumbGreenlightgo}
+          >
+            <Badge>2024</Badge> A OpenGL game engine built with Golang and GLFW.
+          </WorkGridItem>
+        </Section>
+        <Section>
+          <WorkGridItem
               id="doter"
               title="Doter Editor"
               thumbnail={thumbDoter}
@@ -31,6 +41,18 @@ const Portfolio = () => (
             <Badge>2024</Badge> A code editor that supports 50+ languages including Python, C#, Java, and more.
           </WorkGridItem>
         </Section>
+
+        <Section delay={0.4}>
+          <WorkGridItem
+              id="encryption"
+              title="encryption-suite"
+              thumbnail={thumbEncryption}
+          >
+            <Badge>2024</Badge> An encryption suite in Java featuring SHA-256, CSHAKE-256, KMACXOF-256, and
+            more algorithms with unique salting for hashing utility and file-signing/file-verification.
+          </WorkGridItem>
+        </Section>
+
         <Section>
           <WorkGridItem
               id="hollowscape"
@@ -59,17 +81,6 @@ const Portfolio = () => (
               thumbnail={thumbDungeon}
           >
             <Badge>2021</Badge> A rougelike dungeon crawler implemented in JDK 13, JavaFX, and SQLite.
-          </WorkGridItem>
-        </Section>
-
-        <Section delay={0.4}>
-          <WorkGridItem
-              id="encryption"
-              title="encryption-suite"
-              thumbnail={thumbEncryption}
-          >
-            <Badge>2024</Badge> An encryption suite in Java featuring SHA-256, CSHAKE-256, KMACXOF-256, and
-            more algorithms with unique salting for hashing utility and file-signing/file-verification.
           </WorkGridItem>
         </Section>
 
