@@ -15,6 +15,7 @@ import thumbMacdot from '/public/images/works/thumb_macdot.png'
 import thumbTorpoise from '/public/images/works/thumb_torpoise.png'
 import thumbJavapong from '/public/images/works/thumb_javapong.png'
 import thumbGreenlightgo from '/public/images/works/thumb_greenlightgo.png'
+import thumbDreamRequiem from '/public/images/works/thumb_dreamrequiem.png'
 
 const Portfolio = () => (
   <Layout title="Portfolio">
@@ -23,6 +24,15 @@ const Portfolio = () => (
         Portfolio
       </Heading>
       <SimpleGrid columns={[1, 1, 2]} gap={6}>
+      <Section>
+          <WorkGridItem
+              id="dreamrequiem"
+              title="DreamRequiem"
+              thumbnail={thumbDreamRequiem}
+          >
+            <Badge>2024</Badge> An OpenGL game engine built with C# and MonoGame.
+          </WorkGridItem>
+        </Section>
         <Section>
           <WorkGridItem
               id="greenlightgo"
