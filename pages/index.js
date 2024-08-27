@@ -116,6 +116,10 @@ const Home = () => (
         </Heading>
         <BioSection>
           <BioYear>2024</BioYear>
+          Data Labeling Analyst II - Meta Platforms, Inc.
+        </BioSection>
+        <BioSection>
+          <BioYear>2024</BioYear>
           AI Software Engineer - Outlier AI
         </BioSection>
         <BioSection>
