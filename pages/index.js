@@ -123,13 +123,13 @@ const Home = () => (
           AI Software Engineer - Outlier AI
         </BioSection>
         <BioSection>
-          <BioYear>2022-23</BioYear>
-          CSS Mentor - UW School of Engineering and Technology.
-        </BioSection>
-        <BioSection>
           <BioYear>2024</BioYear>
           BS in Computer Science and Systems
           at the University of Washington
+        </BioSection>
+        <BioSection>
+          <BioYear>2022-23</BioYear>
+          CSS Mentor - UW School of Engineering and Technology.
         </BioSection>
       </Section>
 
