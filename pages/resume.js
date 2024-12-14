@@ -18,7 +18,7 @@ const Resume = () => (
                 <Box align ='center' my={4}>
                     <Button
                         as={NextLink}
-                        href="https://torpoisebucket.s3.us-west-2.amazonaws.com/Resume_GriffinRyan2024.pdf"
+                        href="https://torpoisebucket.s3.us-west-2.amazonaws.com/GriffinRyan-Resume.pdf"
                         scroll={false}
                         rightIcon={<ChevronRightIcon />}
                         colorScheme='teal'
