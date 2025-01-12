@@ -1,9 +1,18 @@
-import {Container, Heading, Divider, Badge, Box, Button} from "@chakra-ui/react";
+import {Container, Heading, Divider, Badge, Box, Button, Center} from "@chakra-ui/react";
 import Layout from "../components/layouts/article";
 import Section from "../components/section";
 import NextLink from "next/link";
 import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
 // maybe imports for tsParticles?????
+import dynamic from "next/dynamic";
+import SplashScreen from "../components/SplashScreen";
+
+const resumeUrl = "https://torpoisebucket.s3.us-west-2.amazonaws.com/GriffinRyan-Resume.pdf"
+
+const DocView = dynamic(() => import('../components/DocView'), {
+    ssr: false,
+    loading: () => <SplashScreen />, // Use the same splash screen or a placeholder
+});
 
 const Resume = () => (
     <Layout title='Resume'>
@@ -26,6 +35,10 @@ const Resume = () => (
                         Download Resume
                     </Button>
                 </Box>
+            </Section>
+
+            <Section delay={0.3}>
+                <DocView fileUrl={resumeUrl} />
             </Section>
 
         </Container>
