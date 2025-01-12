@@ -4,6 +4,7 @@ import NavBar from '../navbar'
 import { Box, Container } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelLoader from '../voxel-loader'
+import SplashScreen from '../SplashScreen'
 
 const LazyVoxel = dynamic(() => import('../voxel'), {
   ssr: false,
@@ -12,6 +13,7 @@ const LazyVoxel = dynamic(() => import('../voxel'), {
 
 const LazyRain = dynamic(() => import('../rainanimation'), {
     ssr: false,
+    loading: () => <SplashScreen />, // Use the same splash screen or a placeholder
 });
 
 const Main = ({ children, router }) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, useColorMode } from '@chakra-ui/react';
+import Refresh from './icons/refresh-cw';
 
 const SplashScreen = () => {
   const { colorMode } = useColorMode();
@@ -10,10 +11,8 @@ const SplashScreen = () => {
       alignItems="center"
       justifyContent="center"
       height="100vh"
-      bg={colorMode === 'light' ? 'gray.100' : 'gray.800'}
     >
-      <div className="loader"></div>
-      {/* CSS loader below */}
+      <div className="loader">
       <style jsx>{`
         .loader {
         width: 50px;
@@ -31,6 +30,9 @@ const SplashScreen = () => {
         }
         @keyframes l4 {to{transform: rotate(1turn)}}
       `}</style>
+      </div>
+      {/* CSS loader below */}
+      
     </Box>
   );
 };
