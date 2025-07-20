@@ -11,7 +11,7 @@ const LazyVoxel = dynamic(() => import('../voxel'), {
   loading: () => <VoxelLoader />
 });
 
-const LazyRain = dynamic(() => import('../rainanimation'), {
+const LazyFireflies = dynamic(() => import('../FireflySystem'), {
     ssr: false,
     loading: () => <SplashScreen />, // Use the same splash screen or a placeholder
 });
@@ -35,7 +35,7 @@ const Main = ({ children, router }) => {
       <NavBar path={router.asPath} />
 
       <Container maxW="container.md" pt={14}>
-        <LazyRain />
+        <LazyFireflies />
       </Container>
 
       <Container maxW="container.md" pt={14}>
