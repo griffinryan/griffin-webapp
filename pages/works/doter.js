@@ -1,35 +1,62 @@
-import {
-    Container,
-    Badge,
-    Link,
-    List,
-    ListItem,
-    AspectRatio
-} from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react"
 import Layout from '../../components/layouts/article'
-import { ExternalLinkIcon } from "@chakra-ui/icons"
-import { Title, WorkImage, Meta } from '../../components/work'
-import P from '../../components/paragraph'
+import { 
+  WorkTitle, 
+  WorkHero, 
+  WorkSection, 
+  WorkDescription,
+  FeatureList,
+  TechStack,
+  ProjectLinks 
+} from '../../components/work-enhanced'
 
 const Work = () => (
     <Layout title='Doter Editor'>
         <Container>
-            <Title>
-                Doter Editor <Badge>2022</Badge>
-            </Title>
-            <P>
-                Doter Editor is a code-editor that supports 50+ languages
-                including C#, C++, Java, Python, Rust, and more!
-            </P>
-            <P>
-                <Link href='https://github.com/griffinryan/DoterEditor' target='_blank'>
-                    Doter Editor <ExternalLinkIcon mx='2px' />
-                </Link>
-                is open source and can be found on my GitHub!
-            </P>
-
-            <WorkImage src='/images/works/thumb_doter.png' alt='Website' />
+            <WorkTitle badges={['2022', 'Open Source']}>
+                Doter Editor
+            </WorkTitle>
             
+            <WorkSection title="Overview" delay={0.3}>
+                <WorkDescription>
+                    Doter Editor is a modern, feature-rich code editor designed to support developers 
+                    across multiple programming languages. With support for over 50 languages including 
+                    C#, C++, Java, Python, Rust, and more, Doter Editor provides a seamless coding 
+                    experience with powerful features and customization options.
+                </WorkDescription>
+            </WorkSection>
+
+            <WorkHero src='/images/works/thumb_doter.png' alt='Doter Editor Screenshot' />
+
+            <WorkSection title="Key Features" delay={0.4}>
+                <FeatureList features={[
+                    'Support for 50+ programming languages with syntax highlighting',
+                    'Intelligent code completion and IntelliSense',
+                    'Customizable themes and color schemes',
+                    'Built-in terminal for seamless command execution',
+                    'Multi-cursor editing and powerful search/replace',
+                    'Git integration for version control',
+                    'Extension support for enhanced functionality',
+                    'Lightweight and fast performance'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Technologies" delay={0.5}>
+                <TechStack technologies={[
+                    'Electron',
+                    'JavaScript',
+                    'Node.js',
+                    'CodeMirror',
+                    'HTML/CSS'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Links & Resources" delay={0.6}>
+                <ProjectLinks links={[
+                    { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DoterEditor' },
+                    { label: 'Download Latest Release', url: 'https://github.com/griffinryan/DoterEditor/releases' }
+                ]} />
+            </WorkSection>
         </Container>
     </Layout>
 )
