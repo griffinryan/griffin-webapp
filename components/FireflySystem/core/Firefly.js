@@ -12,16 +12,16 @@ export class Firefly {
             floatSpeed: 0.5,
             floatRadius: 15,
             curiosity: 0.5,
-            color: new THREE.Color().setHSL(0.11 + Math.random() * 0.05, 0.8, 0.5),
+            color: new THREE.Color().setHSL(0.11 + Math.random() * 0.05, 0.8, 0.5), // Warm yellows to greens
             ...options
         };
         
         // State
         this.originalPosition = this.options.position.clone();
         this.velocity = new THREE.Vector3(
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 30
         );
         this.time = Math.random() * Math.PI * 2;
         this.blinkIntensity = 1;
@@ -34,7 +34,7 @@ export class Firefly {
                 time: { value: 0 },
                 color: { value: this.options.color },
                 intensity: { value: 1 },
-                glowStrength: { value: 2.5 },
+                glowStrength: { value: 3.0 },
                 coreSize: { value: 0.3 }
             },
             vertexShader: fireflyVertexShader,
@@ -57,7 +57,7 @@ export class Firefly {
         );
     }
     
-    update(deltaTime, mouseWorld, mouseRadius, mouseForce) {
+    update(deltaTime, mousePosition, mouseRadius, mouseForce) {
         this.time += deltaTime;
         
         // Update shader time
@@ -70,11 +70,9 @@ export class Firefly {
         this.updateBlinkingBehavior(deltaTime);
         
         // Mouse interaction
-        if (mouseWorld) {
-            this.updateMouseInteraction(deltaTime, mouseWorld, mouseRadius, mouseForce);
-        }
+        this.updateMouseInteraction(mousePosition, mouseRadius, mouseForce, deltaTime);
         
-        // Apply velocity with frame-independent movement
+        // Apply velocity with proper frame-independent movement
         this.mesh.position.add(this.velocity.clone().multiplyScalar(deltaTime));
         
         // Boundary wrapping
@@ -95,78 +93,85 @@ export class Firefly {
         this.velocity.y += (floatY - this.velocity.y) * deltaTime * 0.1;
         this.velocity.z += (floatZ - this.velocity.z) * deltaTime * 0.1;
         
-        // Apply subtle damping
-        this.velocity.multiplyScalar(0.99);
+        // Add small random perturbations
+        if (Math.random() < 0.01) {
+            this.velocity.add(new THREE.Vector3(
+                (Math.random() - 0.5) * 120,
+                (Math.random() - 0.5) * 120,
+                (Math.random() - 0.5) * 120
+            ));
+        }
+        
+        // Damping
+        this.velocity.multiplyScalar(0.98);
     }
     
     updateBlinkingBehavior(deltaTime) {
-        // Natural blinking pattern
+        // Realistic firefly blinking pattern
         const blinkPhase = this.time * this.options.blinkSpeed + this.options.blinkOffset;
         
-        // Create realistic blink pattern
+        // Create complex blinking pattern
         if (this.isBlinking) {
-            // Use sine wave for smooth blinking
-            this.targetIntensity = Math.sin(blinkPhase) * 0.4 + 0.6;
+            // Use sine wave for smooth transitions
+            const baseIntensity = Math.sin(blinkPhase) * 0.5 + 0.5;
             
-            // Occasional bright flashes
-            if (Math.sin(blinkPhase * 3.7) > 0.95) {
-                this.targetIntensity = 1.5;
-            }
-            
-            // Random dimming
+            // Add occasional bright flashes
             if (Math.random() < 0.002) {
-                this.isBlinking = false;
+                this.targetIntensity = 1.5;
+            } else if (Math.random() < 0.005) {
                 this.targetIntensity = 0.1;
+            } else {
+                this.targetIntensity = baseIntensity;
             }
-        } else {
-            // Random re-brightening
-            if (Math.random() < 0.01) {
-                this.isBlinking = true;
-                this.targetIntensity = 1;
-            }
+            
+            // Smooth transition to target intensity
+            this.blinkIntensity += (this.targetIntensity - this.blinkIntensity) * deltaTime * 5;
         }
         
-        // Smooth intensity transitions
-        this.blinkIntensity += (this.targetIntensity - this.blinkIntensity) * deltaTime * 3;
+        // Clamp intensity
+        this.blinkIntensity = Math.max(0.1, Math.min(1.5, this.blinkIntensity));
     }
     
-    updateMouseInteraction(deltaTime, mouseWorld, mouseRadius, mouseForce) {
-        const toMouse = new THREE.Vector3().subVectors(mouseWorld, this.mesh.position);
-        const distance = toMouse.length();
+    updateMouseInteraction(mousePosition, mouseRadius, mouseForce, deltaTime) {
+        if (!mousePosition || mousePosition.length() === 0) return;
         
-        if (distance < mouseRadius && distance > 0) {
-            // Calculate attraction/repulsion force
+        const distance = this.mesh.position.distanceTo(mousePosition);
+        
+        if (distance < mouseRadius) {
             const force = 1 - (distance / mouseRadius);
-            const attraction = toMouse.normalize().multiplyScalar(
-                force * mouseForce * this.options.curiosity * 100
-            );
+            const direction = new THREE.Vector3().subVectors(this.mesh.position, mousePosition).normalize();
             
-            // Apply force to velocity
-            this.velocity.add(attraction.multiplyScalar(deltaTime));
+            // Swirling motion around mouse
+            const tangent = new THREE.Vector3(-direction.y, direction.x, 0).normalize();
+            const swirlForce = force * mouseForce * this.options.curiosity;
+            
+            // Combine repulsion and swirl with frame-independent scaling
+            const repulsionForce = direction.multiplyScalar(force * mouseForce * 30);
+            const swirlVector = tangent.multiplyScalar(swirlForce * 60);
+            
+            this.velocity.add(repulsionForce);
+            this.velocity.add(swirlVector);
             
             // Increase brightness when near mouse
-            this.targetIntensity = Math.min(this.targetIntensity + force * 0.5, 2);
+            this.blinkIntensity = Math.min(this.blinkIntensity + force * 0.5, 1.5);
         }
     }
     
     wrapBoundaries() {
-        const boundary = 500;
+        const bounds = 500;
         
-        // Wrap around boundaries for infinite effect
-        if (this.mesh.position.x > boundary) this.mesh.position.x = -boundary;
-        if (this.mesh.position.x < -boundary) this.mesh.position.x = boundary;
-        if (this.mesh.position.y > boundary) this.mesh.position.y = -boundary;
-        if (this.mesh.position.y < -boundary) this.mesh.position.y = boundary;
-        if (this.mesh.position.z > boundary) this.mesh.position.z = -boundary;
-        if (this.mesh.position.z < -boundary) this.mesh.position.z = boundary;
+        if (this.mesh.position.x > bounds) this.mesh.position.x = -bounds;
+        if (this.mesh.position.x < -bounds) this.mesh.position.x = bounds;
+        if (this.mesh.position.y > bounds) this.mesh.position.y = -bounds;
+        if (this.mesh.position.y < -bounds) this.mesh.position.y = bounds;
+        if (this.mesh.position.z > bounds / 2) this.mesh.position.z = -bounds / 2;
+        if (this.mesh.position.z < -bounds / 2) this.mesh.position.z = bounds / 2;
     }
     
     destroy() {
-        if (this.material) {
-            this.material.dispose();
-        }
-        if (this.mesh.geometry && this.mesh.geometry !== this.geometry) {
-            this.mesh.geometry.dispose();
+        this.material.dispose();
+        if (this.mesh.parent) {
+            this.mesh.parent.remove(this.mesh);
         }
     }
 }

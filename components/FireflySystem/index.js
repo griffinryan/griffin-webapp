@@ -9,7 +9,9 @@ const FireflyAnimation = ({
     mouseForce = 0.3,
     fogColor = 0x0a0a2e,
     fogNear = 50,
-    fogFar = 800
+    fogFar = 800,
+    useSwirlingBackground = true,
+    backgroundIntensity = 1.0
 }) => {
     const containerRef = useRef(null);
     const systemRef = useRef(null);
@@ -31,7 +33,9 @@ const FireflyAnimation = ({
                 mouseForce,
                 fogColor,
                 fogNear,
-                fogFar
+                fogFar,
+                useSwirlingBackground,
+                backgroundIntensity
             });
             
             setIsLoading(false);
@@ -70,10 +74,12 @@ const FireflyAnimation = ({
                 mouseForce,
                 fogColor,
                 fogNear,
-                fogFar
+                fogFar,
+                useSwirlingBackground,
+                backgroundIntensity
             });
         }
-    }, [fireflyCount, usePurpleTheme, bloomStrength, mouseRadius, mouseForce, fogColor, fogNear, fogFar]);
+    }, [fireflyCount, usePurpleTheme, bloomStrength, mouseRadius, mouseForce, fogColor, fogNear, fogFar, useSwirlingBackground, backgroundIntensity]);
     
     return (
         <div 
