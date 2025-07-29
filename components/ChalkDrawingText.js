@@ -13,7 +13,7 @@ const MotionBox = motion(Box);
 const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay = 0 }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 120 });
+  const [dimensions, setDimensions] = useState({ width: 1000, height: 100 });
   
   // Animation state
   const animationState = useRef({
@@ -32,8 +32,8 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
       if (container) {
         const rect = container.getBoundingClientRect();
         setDimensions({
-          width: Math.min(rect.width - 40, 1200), // Max width with padding
-          height: 120
+          width: Math.min(rect.width, 1400), // Increased max width
+          height: 100
         });
       }
     };
@@ -45,9 +45,9 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
 
   // Initialize letter paths
   useEffect(() => {
-    const fontSize = Math.min(dimensions.width / 20, 50);
-    const spacing = fontSize * 0.2;
-    animationState.current.letterPaths = generateLetterPaths(text, fontSize, spacing);
+    const fontSize = Math.min(dimensions.width / 25, 40); // Smaller font for better fit
+    const spacing = fontSize * 0.15; // Tighter spacing
+    animationState.current.letterPaths = generateLetterPaths(text, fontSize, spacing, dimensions.width);
   }, [text, dimensions]);
 
   // Main animation loop
@@ -66,7 +66,7 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
     // Animation parameters
     const DRAWING_SPEED = 0.02;
     const ERASING_SPEED = 0.03;
-    const DISPLAY_DURATION = 2000; // 2 seconds
+    const DISPLAY_DURATION = 800; // 0.8 seconds for quicker restart
 
     const animate = (timestamp) => {
       const state = animationState.current;
@@ -94,7 +94,7 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5);
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
               });
               
               ctx.restore();
@@ -116,7 +116,7 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
                 ));
                 
                 if (strokeProgress > 0) {
-                  drawChalkStroke(ctx, stroke, strokeProgress, 5);
+                  drawChalkStroke(ctx, stroke, strokeProgress, 5, currentLetter.color || 'cream');
                   
                   // Add dust particles at stroke end
                   if (strokeProgress > 0.9 && Math.random() < 0.1) {
@@ -159,7 +159,7 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5);
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
               });
               
               ctx.restore();
@@ -199,7 +199,7 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
               }
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5);
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
               });
               
               ctx.restore();

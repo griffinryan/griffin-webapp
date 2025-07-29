@@ -38,13 +38,21 @@ export const createChalkTexture = (ctx, width, height) => {
 };
 
 // Draw a chalk stroke with texture
-export const drawChalkStroke = (ctx, points, progress, strokeWidth = 5) => {
+export const drawChalkStroke = (ctx, points, progress, strokeWidth = 5, colorVariant = 'cream') => {
   if (points.length < 2) return;
   
   ctx.save();
   
-  // Set chalk color (cream)
-  ctx.strokeStyle = '#fef3c7';
+  // Color variations with pink/purple highlights
+  const colors = {
+    cream: '#fef3c7',
+    pink: '#ff6b6b',
+    purple: '#c084fc',
+    coral: '#fca5a5',
+    lavender: '#e9d5ff'
+  };
+  
+  ctx.strokeStyle = colors[colorVariant] || colors.cream;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   
@@ -125,13 +133,11 @@ export class ChalkDust {
 }
 
 // Generate letter paths for text
-export const generateLetterPaths = (text, fontSize, spacing) => {
+export const generateLetterPaths = (text, fontSize, spacing, totalWidth) => {
   const letters = text.split('');
   const paths = [];
-  let currentX = 50; // Starting X position
-  const baseY = 60; // Base Y position
   
-  // Simple letter width approximations
+  // Calculate total text width first
   const letterWidths = {
     'S': fontSize * 0.7,
     'O': fontSize * 0.8,
@@ -150,9 +156,23 @@ export const generateLetterPaths = (text, fontSize, spacing) => {
     ' ': fontSize * 0.4
   };
   
+  const textWidth = letters.reduce((sum, letter) => 
+    sum + (letterWidths[letter] || fontSize * 0.7) + spacing, 0) - spacing;
+  
+  // Center the text
+  let currentX = (totalWidth - textWidth) / 2;
+  const baseY = 55; // Base Y position
+  
+  // Color pattern for visual interest
+  const colorPattern = ['cream', 'cream', 'pink', 'cream', 'purple', 'cream', 'coral', 'cream', 'lavender'];
+  
   letters.forEach((letter, index) => {
     const width = letterWidths[letter] || fontSize * 0.7;
     const rotation = (Math.random() - 0.5) * 0.15; // Slight rotation
+    
+    // Assign colors with pattern, some letters get highlights
+    const colorIndex = index % colorPattern.length;
+    const color = colorPattern[colorIndex];
     
     paths.push({
       letter,
@@ -160,6 +180,7 @@ export const generateLetterPaths = (text, fontSize, spacing) => {
       y: baseY + (Math.random() - 0.5) * 5, // Slight vertical variation
       width,
       rotation,
+      color,
       paths: generateLetterStrokes(letter, currentX, baseY, fontSize)
     });
     

@@ -44,9 +44,9 @@ const ProfileImage = chakra(Image, {
 const Home = () => (
   <Layout>
     <Container>
-      <GlassPanel variant="default" delay={0} mb={6}>
+      <Box mb={6}>
         <ChalkDrawingText delay={0.2} />
-      </GlassPanel>
+      </Box>
 
       <Box display={{ md: 'flex' }}>
         <Box flexGrow={1}>
