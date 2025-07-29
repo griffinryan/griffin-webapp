@@ -21,12 +21,9 @@ const FireflyAnimation = ({
     useEffect(() => {
         if (!containerRef.current) return;
         
-        // Initialize firefly system
+        // Initialize firefly system with initial configuration
         try {
-            systemRef.current = new FireflySystem(containerRef.current);
-            
-            // Apply initial configuration
-            systemRef.current.setConfig({
+            systemRef.current = new FireflySystem(containerRef.current, {
                 fireflyCount,
                 isLightMode,
                 bloomStrength,

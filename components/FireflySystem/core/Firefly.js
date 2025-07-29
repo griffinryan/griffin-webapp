@@ -47,20 +47,20 @@ export class Firefly {
                 time: { value: 0 },
                 color: { value: this.options.color },
                 intensity: { value: 1 },
-                glowStrength: { value: 2.5 },
-                coreSize: { value: 0.3 }
+                glowStrength: { value: this.options.isLightMode ? 3.5 : 2.5 },
+                coreSize: { value: this.options.isLightMode ? 0.4 : 0.3 }
             },
             vertexShader: fireflyVertexShader,
             fragmentShader: fireflyFragmentShader,
             transparent: true,
-            blending: THREE.AdditiveBlending,
+            blending: this.options.isLightMode ? THREE.NormalBlending : THREE.AdditiveBlending,
             depthWrite: false
         });
         
         // Create mesh
         this.mesh = new THREE.Mesh(geometry, this.material);
         this.mesh.position.copy(this.options.position);
-        this.mesh.scale.setScalar(this.options.scale * 2);
+        this.mesh.scale.setScalar(this.options.scale * (this.options.isLightMode ? 2.5 : 2));
         
         // Add subtle random rotation
         this.mesh.rotation.set(

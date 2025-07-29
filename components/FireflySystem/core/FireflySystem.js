@@ -5,7 +5,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { Firefly } from './Firefly.js';
 
 export class FireflySystem {
-    constructor(container = document.body) {
+    constructor(container = document.body, initialConfig = {}) {
         this.container = container;
         this.fireflies = [];
         this.mouse = new THREE.Vector2();
@@ -18,6 +18,7 @@ export class FireflySystem {
             fireflyScale: 1,
             mouseRadius: 150,
             mouseForce: 0.3,
+            isLightMode: false,
             environmentColor: new THREE.Color(0x0a0a2e),
             fogColor: new THREE.Color(0x0a0a2e),
             fogNear: 50,
@@ -26,7 +27,8 @@ export class FireflySystem {
             bloomRadius: 0.8,
             bloomThreshold: 0.1,
             // Option to use purple theme
-            usePurpleTheme: false
+            usePurpleTheme: false,
+            ...initialConfig  // Apply any initial configuration
         };
         
         this.init();
@@ -38,6 +40,8 @@ export class FireflySystem {
     init() {
         // Scene setup
         this.scene = new THREE.Scene();
+        // Set scene background based on theme
+        this.scene.background = new THREE.Color(this.config.isLightMode ? 0xf5e6d3 : 0x0a192f);
         this.scene.fog = new THREE.Fog(this.config.fogColor, this.config.fogNear, this.config.fogFar);
         
         // Camera setup
@@ -53,11 +57,13 @@ export class FireflySystem {
         // Renderer setup
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
-            alpha: true  // Enable transparency for overlay effect
+            alpha: true,  // Enable transparency for overlay effect
+            premultipliedAlpha: false,
+            preserveDrawingBuffer: true
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        this.renderer.setClearColor(0x000000, 0); // Transparent background
+        this.renderer.setClearColor(0x000000, 0); // Fully transparent background
         
         // Add canvas to container
         this.renderer.domElement.style.position = 'fixed';
@@ -82,9 +88,12 @@ export class FireflySystem {
         );
         this.composer.addPass(bloomPass);
         
-        // Subtle ambient light
-        const ambientLight = new THREE.AmbientLight(0x1a1a3e, 0.1);
-        this.scene.add(ambientLight);
+        // Theme-aware ambient light
+        this.ambientLight = new THREE.AmbientLight(
+            this.config.isLightMode ? 0xf5e6d3 : 0x1a1a3e, 
+            this.config.isLightMode ? 0.3 : 0.1
+        );
+        this.scene.add(this.ambientLight);
     }
     
     createFireflies() {
@@ -226,11 +235,22 @@ export class FireflySystem {
                 this.config.fogColor = newConfig.isLightMode ? 0xe8d5c4 : 0x0a192f;
             }
             
+            // Update scene background when theme changes
+            if (newConfig.isLightMode !== undefined) {
+                this.scene.background = new THREE.Color(newConfig.isLightMode ? 0xf5e6d3 : 0x0a192f);
+            }
+            
             this.scene.fog = new THREE.Fog(
                 this.config.fogColor,
                 this.config.fogNear,
                 this.config.fogFar
             );
+            
+            // Update ambient light for theme
+            if (this.ambientLight && newConfig.isLightMode !== undefined) {
+                this.ambientLight.color.set(newConfig.isLightMode ? 0xf5e6d3 : 0x1a1a3e);
+                this.ambientLight.intensity = newConfig.isLightMode ? 0.3 : 0.1;
+            }
         }
         
         // If theme or count changed, recreate fireflies
