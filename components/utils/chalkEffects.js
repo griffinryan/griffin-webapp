@@ -153,6 +153,9 @@ export const generateLetterPaths = (textLines, fontSize, spacing, totalWidth, to
     'B': fontSize * 0.7,
     'D': fontSize * 0.8,
     'L': fontSize * 0.6,
+    'P': fontSize * 0.7,
+    'H': fontSize * 0.8,
+    '!': fontSize * 0.3,
     ' ': fontSize * 0.4
   };
   
@@ -325,17 +328,39 @@ const generateLetterStrokes = (letter, x, y, size) => {
       strokes.push(generateChalkPath(x + s*0.1, y - s, x + s*0.1, y));
       strokes.push(generateChalkPath(x + s*0.1, y, x + s*0.6, y));
       break;
+    case 'P':
+      // Vertical stroke
+      strokes.push(generateChalkPath(x + s*0.1, y, x + s*0.1, y - s));
+      // Top horizontal
+      strokes.push(generateChalkPath(x + s*0.1, y - s, x + s*0.6, y - s));
+      // Right curve
+      strokes.push(generateChalkPath(x + s*0.6, y - s, x + s*0.7, y - s*0.85));
+      strokes.push(generateChalkPath(x + s*0.7, y - s*0.85, x + s*0.7, y - s*0.65));
+      strokes.push(generateChalkPath(x + s*0.7, y - s*0.65, x + s*0.6, y - s*0.5));
+      // Bottom horizontal of P
+      strokes.push(generateChalkPath(x + s*0.6, y - s*0.5, x + s*0.1, y - s*0.5));
+      break;
     case ' ':
       // No strokes for space
       break;
     case '!':
-      // Vertical line
-      strokes.push(generateChalkPath(x + s*0.15, y - s*0.3, x + s*0.15, y - s));
-      // Dot
-      strokes.push(generateChalkPath(x + s*0.13, y - s*0.1, x + s*0.17, y - s*0.1));
-      strokes.push(generateChalkPath(x + s*0.17, y - s*0.1, x + s*0.17, y - s*0.05));
-      strokes.push(generateChalkPath(x + s*0.17, y - s*0.05, x + s*0.13, y - s*0.05));
-      strokes.push(generateChalkPath(x + s*0.13, y - s*0.05, x + s*0.13, y - s*0.1));
+      // Vertical line (thicker at top, thinner at bottom)
+      strokes.push(generateChalkPath(x + s*0.15, y - s*0.35, x + s*0.15, y - s*0.95));
+      strokes.push(generateChalkPath(x + s*0.18, y - s*0.35, x + s*0.18, y - s*0.95));
+      // Circular dot
+      const dotCenterX = x + s*0.165;
+      const dotCenterY = y - s*0.15;
+      const dotRadius = s*0.06;
+      const dotSegments = 6;
+      for (let i = 0; i < dotSegments; i++) {
+        const angle1 = (i / dotSegments) * Math.PI * 2;
+        const angle2 = ((i + 1) / dotSegments) * Math.PI * 2;
+        const x1 = dotCenterX + Math.cos(angle1) * dotRadius;
+        const y1 = dotCenterY + Math.sin(angle1) * dotRadius;
+        const x2 = dotCenterX + Math.cos(angle2) * dotRadius;
+        const y2 = dotCenterY + Math.sin(angle2) * dotRadius;
+        strokes.push(generateChalkPath(x1, y1, x2, y2));
+      }
       break;
     default:
       // Default to a simple vertical line
