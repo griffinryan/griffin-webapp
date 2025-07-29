@@ -27,9 +27,9 @@ const Main = ({ children, router }) => {
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <meta property="og:site_name" content="Griffin Ryan" />
-        <meta name="og:title" content="Griffin Ryan - Concert Poster Portfolio" />
+        <meta name="og:title" content="Griffin Ryan" />
         <meta property="og:type" content="website" />
-        <title>Griffin Ryan - Concert Poster Portfolio</title>
+        <title>Griffin Ryan - Homepage</title>
       </Head>
 
       {/* Fireflies as background */}
@@ -37,9 +37,13 @@ const Main = ({ children, router }) => {
 
       <NavBar path={router.asPath} />
 
-      <Box position="relative" zIndex={1}>
+      <Container maxW="container.md" pt={14}>
+        <LazyVoxel />
+
         {children}
-      </Box>
+
+        <Footer />
+      </Container>
     </Box>
   )
 }
