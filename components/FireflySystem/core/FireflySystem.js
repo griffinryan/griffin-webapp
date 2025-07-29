@@ -40,8 +40,8 @@ export class FireflySystem {
     init() {
         // Scene setup
         this.scene = new THREE.Scene();
-        // Set scene background based on theme
-        this.scene.background = new THREE.Color(this.config.isLightMode ? 0xf5e6d3 : 0x0a192f);
+        // Keep scene transparent to show body background
+        this.scene.background = null;
         this.scene.fog = new THREE.Fog(this.config.fogColor, this.config.fogNear, this.config.fogFar);
         
         // Camera setup
@@ -80,13 +80,16 @@ export class FireflySystem {
         const renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(renderPass);
         
-        const bloomPass = new UnrealBloomPass(
-            new THREE.Vector2(window.innerWidth, window.innerHeight),
-            this.config.bloomStrength,
-            this.config.bloomRadius,
-            this.config.bloomThreshold
-        );
-        this.composer.addPass(bloomPass);
+        // Only add bloom for dark mode
+        if (!this.config.isLightMode) {
+            this.bloomPass = new UnrealBloomPass(
+                new THREE.Vector2(window.innerWidth, window.innerHeight),
+                this.config.bloomStrength,
+                this.config.bloomRadius,
+                this.config.bloomThreshold
+            );
+            this.composer.addPass(this.bloomPass);
+        }
         
         // Theme-aware ambient light
         this.ambientLight = new THREE.AmbientLight(
@@ -235,10 +238,7 @@ export class FireflySystem {
                 this.config.fogColor = newConfig.isLightMode ? 0xe8d5c4 : 0x0a192f;
             }
             
-            // Update scene background when theme changes
-            if (newConfig.isLightMode !== undefined) {
-                this.scene.background = new THREE.Color(newConfig.isLightMode ? 0xf5e6d3 : 0x0a192f);
-            }
+            // Scene background remains transparent
             
             this.scene.fog = new THREE.Fog(
                 this.config.fogColor,
@@ -250,6 +250,25 @@ export class FireflySystem {
             if (this.ambientLight && newConfig.isLightMode !== undefined) {
                 this.ambientLight.color.set(newConfig.isLightMode ? 0xf5e6d3 : 0x1a1a3e);
                 this.ambientLight.intensity = newConfig.isLightMode ? 0.3 : 0.1;
+            }
+        }
+        
+        // If theme changed, update bloom
+        if (newConfig.isLightMode !== undefined) {
+            // Remove all passes except render pass
+            this.composer.passes = this.composer.passes.slice(0, 1);
+            
+            // Add bloom only for dark mode
+            if (!newConfig.isLightMode) {
+                if (!this.bloomPass) {
+                    this.bloomPass = new UnrealBloomPass(
+                        new THREE.Vector2(window.innerWidth, window.innerHeight),
+                        this.config.bloomStrength,
+                        this.config.bloomRadius,
+                        this.config.bloomThreshold
+                    );
+                }
+                this.composer.addPass(this.bloomPass);
             }
         }
         
