@@ -125,10 +125,6 @@ const Home = () => (
           Bio
         </Heading>
         <BioSection>
-          <BioYear>2001</BioYear>
-          Born in Indiana, United States.
-        </BioSection>
-        <BioSection>
           <BioYear>2022</BioYear>
           Started Software Engineer role at Meta Platforms
         </BioSection>
@@ -142,24 +138,6 @@ const Home = () => (
           Working as a part-time AI Engineer with Outlier AI
         </BioSection>
       </Section>
-
-      <Section delay={0.3}>
-        <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
-          Interests
-        </Heading>
-        <Paragraph>
-          Art, Music,{' '}
-          <Link href="https://illust.odoushi.com/" target="_blank">
-            Drawing
-          </Link>
-          , Playing Piano,{' '}
-          <Link href="https://ristorante.com/" target="_blank">
-            Pizza
-          </Link>
-          , Photography, Leica, Machine Learning, AutoGPT
-        </Paragraph>
-      </Section>
-
 
       <Section delay={0.4}>
         <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
@@ -179,7 +157,7 @@ const Home = () => (
             </Link>
           </ListItem>
           <ListItem>
-            <Link href="https://www.linkedin.com/in/griffinsryan/" target="_blank">
+            <Link href="https://www.linkedin.com/in/griffinlryan/" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="teal"
@@ -191,7 +169,7 @@ const Home = () => (
             </Link>
           </ListItem>
           <ListItem>
-            <Link href="https://instagram.com/griffindotjs" target="_blank">
+            <Link href="https://instagram.com/griffinlryan" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="teal"
