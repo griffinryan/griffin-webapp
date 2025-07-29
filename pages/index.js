@@ -29,8 +29,12 @@ import { GlassPanel } from '../components/glass-panel'
 import { BioSection, BioYear } from '../components/bio'
 import dynamic from 'next/dynamic'
 
-// Dynamic import to avoid SSR issues with canvas
+// Dynamic imports to avoid SSR issues with canvas
 const ChalkDrawingText = dynamic(() => import('../components/ChalkDrawingText'), {
+  ssr: false
+})
+
+const ChalkDrawingFooter = dynamic(() => import('../components/ChalkDrawingFooter'), {
   ssr: false
 })
 
@@ -217,16 +221,7 @@ const Home = () => (
 
       {/* Footer - Concert Poster Style */}
       <Box as="footer" textAlign="center" py={16}>
-        <Text
-          fontSize="sm"
-          fontStyle="italic"
-          letterSpacing="0.05em"
-          color="textSecondary"
-          fontFamily="'Space Grotesk', sans-serif"
-          fontWeight="300"
-        >
-          A whole stable of show ponies!
-        </Text>
+        <ChalkDrawingFooter delay={0.5} />
       </Box>
     </Container>
   </Layout>
