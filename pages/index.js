@@ -158,7 +158,7 @@ const Home = () => (
             </Link>
           </ListItem>
           <ListItem>
-            <Link href="https://www.linkedin.com/in/griffinsryan/" target="_blank">
+            <Link href="https://www.linkedin.com/in/griffinlryan/" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="teal"
@@ -170,14 +170,14 @@ const Home = () => (
             </Link>
           </ListItem>
           <ListItem>
-            <Link href="https://instagram.com/griffindotjs" target="_blank">
+            <Link href="https://instagram.com/griffinlryan" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoInstagram />}
                 fontFamily="'M PLUS Rounded 1c', sans-serif"
               >
-                @griffindotjs
+                @griffinlryan
               </Button>
             </Link>
           </ListItem>
