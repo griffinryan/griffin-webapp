@@ -1,36 +1,64 @@
-// https://github.com/HuskyDevClub/DungeonAdventure
-import {
-    Container,
-    Badge,
-    Link,
-    List,
-    ListItem,
-    AspectRatio
-} from "@chakra-ui/react";
-
+import { Container } from "@chakra-ui/react"
 import Layout from '../../components/layouts/article'
-import { ExternalLinkIcon } from "@chakra-ui/icons"
-import { Title, WorkImage, Meta } from '../../components/work'
-import P from '../../components/paragraph'
+import { 
+  WorkTitle, 
+  WorkHero, 
+  WorkSection, 
+  WorkDescription,
+  FeatureList,
+  TechStack,
+  ProjectLinks 
+} from '../../components/work-enhanced'
 
 const Work = () => (
-    <Layout title="Dungeon Adventure">
+    <Layout title='Dungeon Adventure'>
         <Container>
-            <Title>
-                Dungeon Adventure <Badge>2021</Badge>
-            </Title>
-            <P>
-                Dungeon Adventure is a 2D rougelike dungeon crawler with a game engine built from JavaFX and JDK11.
-            </P>
-            <P>
-                <Link href='https://github.com/HuskyDevClub/DungeonAdventure' target='_blank'>
-                    DungeonAdventure <ExternalLinkIcon mx='2px' />
-                </Link>
-                is open source and can be found on mine/my team's GitHub!
-            </P>
+            <WorkTitle badges={['2021', 'Game Development', 'Team Project']}>
+                Dungeon Adventure
+            </WorkTitle>
+            
+            <WorkSection title="Overview" delay={0.3}>
+                <WorkDescription>
+                    Dungeon Adventure is a captivating 2D roguelike dungeon crawler that combines classic gameplay 
+                    mechanics with modern development practices. Built from the ground up using JavaFX and JDK11, 
+                    this game features procedurally generated dungeons, challenging enemies, and persistent progression 
+                    through an SQLite database system. A collaborative project showcasing advanced Java programming 
+                    and game design principles.
+                </WorkDescription>
+            </WorkSection>
 
-            <WorkImage src='/images/works/thumb_dungeon.png' alt='Website' />
+            <WorkHero src='/images/works/thumb_dungeon.png' alt='Dungeon Adventure gameplay' />
 
+            <WorkSection title="Key Features" delay={0.4}>
+                <FeatureList features={[
+                    'Procedurally generated dungeon layouts for infinite replayability',
+                    'SQLite database for saving game progress and high scores',
+                    'JavaFX-based UI with smooth animations',
+                    'Turn-based combat system with various enemy types',
+                    'Inventory management and item collection mechanics',
+                    'Multiple difficulty levels and character classes',
+                    'Collaborative development using Git and GitHub'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Technologies" delay={0.5}>
+                <TechStack technologies={[
+                    'Java',
+                    'JavaFX',
+                    'SQLite',
+                    'JDK 13',
+                    'Git',
+                    'Object-Oriented Design',
+                    'Game Engine Architecture'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Links & Resources" delay={0.6}>
+                <ProjectLinks links={[
+                    { label: 'View on GitHub', url: 'https://github.com/HuskyDevClub/DungeonAdventure' },
+                    { label: 'Personal Repository', url: 'https://github.com/griffinryan/dungeon-adventure' }
+                ]} />
+            </WorkSection>
         </Container>
     </Layout>
 )

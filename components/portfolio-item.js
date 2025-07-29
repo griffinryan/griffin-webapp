@@ -16,16 +16,39 @@ import {
 import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { GlassContainer, AnimatedSection } from './glass-container'
+import StylizedParagraph from './stylized-paragraph'
 
-const BulletPoint = ({ children }) => (
+const BulletPoint = ({ children, id }) => (
   <ListItem display="flex" alignItems="flex-start">
-    <ListIcon
-      as={ChevronRightIcon}
-      color={useColorModeValue('coral.500', 'coral.400')}
-      mt={1}
-      flexShrink={0}
-    />
-    <Text fontSize="md" lineHeight="tall">
+    <Link
+      as={NextLink}
+      href={`/works/${id}`}
+      _hover={{ textDecoration: 'none' }}
+    >
+      <ListIcon
+        as={ChevronRightIcon}
+        color={useColorModeValue('coral.500', 'coral.400')}
+        mt={1}
+        flexShrink={0}
+        cursor="pointer"
+        _hover={{
+          transform: 'translateX(4px)',
+          color: useColorModeValue('coral.600', 'coral.300')
+        }}
+        transition="all 0.3s ease"
+      />
+    </Link>
+    <Text 
+      fontSize="md" 
+      lineHeight="tall"
+      fontFamily="'Anton', 'Space Grotesk', sans-serif"
+      fontWeight="500"
+      letterSpacing="-0.02em"
+      transition="all 0.3s ease"
+      _hover={{
+        letterSpacing: '-0.03em'
+      }}
+    >
       {children}
     </Text>
   </ListItem>
@@ -108,12 +131,12 @@ export const PortfolioItem = ({
           {/* Thumbnail and Description */}
           <Flex gap={4} direction={{ base: 'column', md: 'row' }}>
             {thumbnail && (
-              <Box 
-                flexShrink={0} 
-                w={{ base: 'full', md: '200px' }}
-                cursor="pointer"
+              <Link
                 as={NextLink}
                 href={`/works/${id}`}
+                flexShrink={0} 
+                w={{ base: 'full', md: '200px' }}
+                _hover={{ textDecoration: 'none' }}
               >
                 <Image
                   src={thumbnail.src || thumbnail}
@@ -127,24 +150,42 @@ export const PortfolioItem = ({
                     transform: 'scale(1.05)',
                     boxShadow: 'lg'
                   }}
+                  cursor="pointer"
                 />
-              </Box>
+              </Link>
             )}
             
             <VStack align="stretch" spacing={3} flex={1}>
-              <Text
-                fontSize="md"
-                color={useColorModeValue('gray.600', 'gray.300')}
-                fontFamily="'Bebas Neue', sans-serif"
-                letterSpacing="0.02em"
+              <Link
+                as={NextLink}
+                href={`/works/${id}`}
+                _hover={{ textDecoration: 'none' }}
               >
-                {description}
-              </Text>
+                <Box
+                  cursor="pointer"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    transform: 'translateX(2px)'
+                  }}
+                >
+                  <StylizedParagraph
+                    variant="dynamic"
+                    fontSize="md"
+                    mb={0}
+                    color={useColorModeValue('gray.600', 'gray.300')}
+                    _hover={{
+                      color: useColorModeValue('gray.700', 'gray.200')
+                    }}
+                  >
+                    {description}
+                  </StylizedParagraph>
+                </Box>
+              </Link>
               
               {features.length > 0 && (
                 <List spacing={2}>
                   {features.map((feature, index) => (
-                    <BulletPoint key={index}>{feature}</BulletPoint>
+                    <BulletPoint key={index} id={id}>{feature}</BulletPoint>
                   ))}
                 </List>
               )}

@@ -9,7 +9,6 @@ import thumbDungeon from '/public/images/works/thumb_dungeon.png'
 import thumbEncryption from '/public/images/works/thumb_encryption.png'
 import thumbMacdot from '/public/images/works/thumb_macdot.png'
 import thumbTorpoise from '/public/images/works/thumb_torpoise.png'
-import thumbJavapong from '/public/images/works/thumb_javapong.png'
 import thumbGreenlightgo from '/public/images/works/thumb_greenlightgo.png'
 import thumbDreamRequiem from '/public/images/works/thumb_dreamrequiem.png'
 
@@ -199,25 +198,6 @@ const Portfolio = () => (
             { label: 'Listen on SoundCloud', url: 'https://soundcloud.com/torpoise' }
           ]}
           delay={0.9}
-        />
-
-        <PortfolioItem
-          id="javapong"
-          title="Javapong"
-          year="2017"
-          thumbnail={thumbJavapong}
-          technologies={['Java', 'Swing', 'AWT', 'Game Development']}
-          description="A classic Pong game implementation showcasing fundamental game programming concepts."
-          features={[
-            'Smooth paddle and ball physics',
-            'Score tracking and game state management',
-            'Customizable difficulty levels',
-            'Built with Java Swing for cross-platform compatibility'
-          ]}
-          links={[
-            { label: 'View Source', url: 'https://github.com/griffinryan/javapong' }
-          ]}
-          delay={1.0}
         />
       </VStack>
     </Container>

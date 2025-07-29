@@ -1,61 +1,66 @@
-// https://github.com/griffinryan/encryption-stuie
-import {
-    Container,
-    Badge,
-    Link,
-    List,
-    ListItem,
-    AspectRatio
-} from "@chakra-ui/react";
-
+import { Container } from "@chakra-ui/react"
 import Layout from '../../components/layouts/article'
-import { ExternalLinkIcon } from "@chakra-ui/icons"
-import { Title, WorkImage, Meta } from '../../components/work'
-import P from '../../components/paragraph'
+import { 
+  WorkTitle, 
+  WorkHero, 
+  WorkSection, 
+  WorkDescription,
+  FeatureList,
+  TechStack,
+  ProjectLinks 
+} from '../../components/work-enhanced'
 
 const Work = () => (
-    <Layout title="greenlightgo">
+    <Layout title='GreenLightGo'>
         <Container>
-            <Title>
-                GreenLightGo <Badge>2024</Badge>
-            </Title>
-            <P>
-            GreenLightGo Engine is a custom-built game engine developed using Go, 
-            leveraging the powerful go-gl and GLFW libraries. Designed to provide a 
-            robust and flexible foundation for 3D game development, this engine focuses on simplicity, 
-            performance, and ease of use.
-            </P>
-            <P>
-            Cross-Platform Compatibility: Built with GLFW, ensuring smooth performance across Windows, macOS, and Linux.
-            </P>
-            <P>
-            OpenGL Integration: Utilizing go-gl for efficient rendering and graphics processing.
-            </P>
-            <P>
-            Lightweight and Efficient: Optimized for high performance with minimal overhead, ideal for both small and large-scale projects.
-            </P>
-            <P>
-            Modular Design: Easy to extend and customize with a modular architecture, allowing developers to add or modify components as needed.
-            </P>
-            <P>
-            Early Development Stage: While in its early stages, the GreenLightGo Engine already supports basic 3D rendering, input handling, and window management.
-            </P>
-            <P>
-            Check out {' '}
-                <Link href='https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf' target='_blank'>
-                    go-gl
-                </Link>
-                {' '}to see the OpenGL bindings library for Golang!
-            </P>
-            <P>
-                <Link href='https://github.com/griffinryan/greenlightgo' target='_blank'>
-                    GreenLightGo <ExternalLinkIcon mx='2px' />
-                </Link>
-                is open source and can be found on my GitHub!
-            </P>
+            <WorkTitle badges={['2024', 'Game Engine', 'Open Source']}>
+                GreenLightGo
+            </WorkTitle>
+            
+            <WorkSection title="Overview" delay={0.3}>
+                <WorkDescription>
+                    GreenLightGo Engine is a custom-built game engine developed using Go, leveraging the powerful 
+                    go-gl and GLFW libraries. Designed to provide a robust and flexible foundation for 3D game 
+                    development, this engine focuses on simplicity, performance, and ease of use. Built with 
+                    modern Go programming practices, it showcases the potential of Go for high-performance 
+                    graphics applications.
+                </WorkDescription>
+            </WorkSection>
 
-            <WorkImage src='/images/works/thumb_greenlightgo.png' alt='Website' />
+            <WorkHero src='/images/works/thumb_greenlightgo.png' alt='GreenLightGo Engine' />
 
+            <WorkSection title="Engine Features" delay={0.4}>
+                <FeatureList features={[
+                    'Cross-platform compatibility across Windows, macOS, and Linux',
+                    'OpenGL integration using go-gl for efficient rendering',
+                    'Lightweight and efficient architecture ideal for small and large-scale projects',
+                    'Modular design allowing developers to add or modify components',
+                    'Basic 3D rendering capabilities with room for expansion',
+                    'Input handling system for keyboard and mouse events',
+                    'Window management with GLFW for smooth performance',
+                    'Optimized for high performance with minimal overhead'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Technologies" delay={0.5}>
+                <TechStack technologies={[
+                    'Go',
+                    'OpenGL',
+                    'GLFW',
+                    'go-gl',
+                    '3D Graphics',
+                    'Game Engine Architecture',
+                    'Cross-Platform Development'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Links & Resources" delay={0.6}>
+                <ProjectLinks links={[
+                    { label: 'View on GitHub', url: 'https://github.com/griffinryan/greenlightgo' },
+                    { label: 'go-gl OpenGL Bindings', url: 'https://github.com/go-gl/gl' },
+                    { label: 'GLFW Documentation', url: 'https://www.glfw.org/documentation.html' }
+                ]} />
+            </WorkSection>
         </Container>
     </Layout>
 )
