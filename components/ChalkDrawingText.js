@@ -17,6 +17,12 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
   
   // Get color mode
   const colorMode = useColorModeValue('light', 'dark');
+  const colorModeRef = useRef(colorMode);
+  
+  // Update color mode ref when it changes
+  useEffect(() => {
+    colorModeRef.current = colorMode;
+  }, [colorMode]);
   
   // Animation state
   const animationState = useRef({
@@ -97,7 +103,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream', colorMode);
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream', colorModeRef.current);
               });
               
               ctx.restore();
@@ -119,7 +125,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
                 ));
                 
                 if (strokeProgress > 0) {
-                  drawChalkStroke(ctx, stroke, strokeProgress, 5, currentLetter.color || 'cream', colorMode);
+                  drawChalkStroke(ctx, stroke, strokeProgress, 5, currentLetter.color || 'cream', colorModeRef.current);
                   
                   // Add dust particles at stroke end
                   if (strokeProgress > 0.9 && Math.random() < 0.1) {
@@ -128,7 +134,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
                       state.particles.push(new ChalkDust(
                         stroke[pointIndex].x,
                         stroke[pointIndex].y,
-                        colorMode
+                        colorModeRef.current
                       ));
                     }
                   }
@@ -163,7 +169,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream', colorMode);
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream', colorModeRef.current);
               });
               
               ctx.restore();
@@ -208,7 +214,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
                   if (strokeEraseProgress < 1) {
                     // Draw the remaining part of the stroke
                     const remainingProgress = 1 - strokeEraseProgress;
-                    drawChalkStroke(ctx, stroke, remainingProgress, 5, letter.color || 'cream', colorMode);
+                    drawChalkStroke(ctx, stroke, remainingProgress, 5, letter.color || 'cream', colorModeRef.current);
                     
                     // Add dust particles at erase point
                     if (strokeEraseProgress > 0 && Math.random() < 0.1) {
@@ -217,7 +223,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
                         state.particles.push(new ChalkDust(
                           stroke[erasePointIndex].x,
                           stroke[erasePointIndex].y,
-                          colorMode
+                          colorModeRef.current
                         ));
                       }
                     }
