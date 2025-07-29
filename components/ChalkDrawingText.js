@@ -45,7 +45,7 @@ const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
 
   // Initialize letter paths
   useEffect(() => {
-    const fontSize = Math.min(dimensions.width / 15, 60); // Larger font size
+    const fontSize = Math.min(dimensions.width / 12, 80); // Even larger font size
     const spacing = fontSize * 0.25; // More spacing between letters
     animationState.current.letterPaths = generateLetterPaths(text, fontSize, spacing, dimensions.width, dimensions.height);
   }, [text, dimensions]);

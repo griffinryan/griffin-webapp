@@ -214,11 +214,20 @@ const generateLetterStrokes = (letter, x, y, size) => {
   // Simplified letter constructions
   switch(letter) {
     case 'S':
-      strokes.push(generateChalkPath(x + s*0.7, y - s*0.2, x + s*0.2, y - s*0.3));
-      strokes.push(generateChalkPath(x + s*0.2, y - s*0.3, x + s*0.3, y - s*0.5));
-      strokes.push(generateChalkPath(x + s*0.3, y - s*0.5, x + s*0.6, y - s*0.6));
-      strokes.push(generateChalkPath(x + s*0.6, y - s*0.6, x + s*0.3, y - s*0.8));
-      strokes.push(generateChalkPath(x + s*0.3, y - s*0.8, x + s*0.1, y - s));
+      // Top curve
+      strokes.push(generateChalkPath(x + s*0.7, y - s*0.9, x + s*0.5, y - s));
+      strokes.push(generateChalkPath(x + s*0.5, y - s, x + s*0.2, y - s*0.95));
+      strokes.push(generateChalkPath(x + s*0.2, y - s*0.95, x + s*0.1, y - s*0.8));
+      strokes.push(generateChalkPath(x + s*0.1, y - s*0.8, x + s*0.15, y - s*0.65));
+      // Middle curve
+      strokes.push(generateChalkPath(x + s*0.15, y - s*0.65, x + s*0.3, y - s*0.55));
+      strokes.push(generateChalkPath(x + s*0.3, y - s*0.55, x + s*0.5, y - s*0.5));
+      strokes.push(generateChalkPath(x + s*0.5, y - s*0.5, x + s*0.65, y - s*0.4));
+      // Bottom curve
+      strokes.push(generateChalkPath(x + s*0.65, y - s*0.4, x + s*0.7, y - s*0.25));
+      strokes.push(generateChalkPath(x + s*0.7, y - s*0.25, x + s*0.6, y - s*0.1));
+      strokes.push(generateChalkPath(x + s*0.6, y - s*0.1, x + s*0.4, y));
+      strokes.push(generateChalkPath(x + s*0.4, y, x + s*0.1, y - s*0.1));
       break;
     case 'O':
       // Circle approximation with bezier curves
@@ -282,6 +291,14 @@ const generateLetterStrokes = (letter, x, y, size) => {
       strokes.push(generateChalkPath(x + s*0.7, y - s*0.2, x + s*0.7, y - s*0.4));
       strokes.push(generateChalkPath(x + s*0.7, y - s*0.4, x + s*0.4, y - s*0.4));
       break;
+    case 'H':
+      // Left vertical stroke
+      strokes.push(generateChalkPath(x + s*0.1, y, x + s*0.1, y - s));
+      // Right vertical stroke
+      strokes.push(generateChalkPath(x + s*0.7, y, x + s*0.7, y - s));
+      // Horizontal crossbar
+      strokes.push(generateChalkPath(x + s*0.1, y - s*0.5, x + s*0.7, y - s*0.5));
+      break;
     case 'I':
       strokes.push(generateChalkPath(x + s*0.15, y, x + s*0.15, y - s));
       break;
@@ -310,6 +327,15 @@ const generateLetterStrokes = (letter, x, y, size) => {
       break;
     case ' ':
       // No strokes for space
+      break;
+    case '!':
+      // Vertical line
+      strokes.push(generateChalkPath(x + s*0.15, y - s*0.3, x + s*0.15, y - s));
+      // Dot
+      strokes.push(generateChalkPath(x + s*0.13, y - s*0.1, x + s*0.17, y - s*0.1));
+      strokes.push(generateChalkPath(x + s*0.17, y - s*0.1, x + s*0.17, y - s*0.05));
+      strokes.push(generateChalkPath(x + s*0.17, y - s*0.05, x + s*0.13, y - s*0.05));
+      strokes.push(generateChalkPath(x + s*0.13, y - s*0.05, x + s*0.13, y - s*0.1));
       break;
     default:
       // Default to a simple vertical line

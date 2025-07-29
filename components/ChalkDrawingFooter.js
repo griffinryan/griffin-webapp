@@ -45,7 +45,7 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
 
   // Initialize letter paths
   useEffect(() => {
-    const fontSize = Math.min(dimensions.width / 20, 45); // Slightly smaller than header
+    const fontSize = Math.min(dimensions.width / 16, 60); // Bigger font size
     const spacing = fontSize * 0.25; // Good spacing between letters
     animationState.current.letterPaths = generateLetterPaths(text, fontSize, spacing, dimensions.width, dimensions.height);
   }, [text, dimensions]);
