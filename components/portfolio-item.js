@@ -56,29 +56,36 @@ export const PortfolioItem = ({
           boxShadow: 'lg'
         }}
       >
-        <VStack align="stretch" spacing={4}>
+        {/* Invisible clickable overlay */}
+        <Link
+          as={NextLink}
+          href={`/works/${id}`}
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          zIndex={1}
+          _hover={{ textDecoration: 'none' }}
+        />
+        
+        <VStack align="stretch" spacing={4} position="relative" zIndex={2}>
           {/* Header with Title and Year */}
           <Box>
-            <Link 
-              as={NextLink} 
-              href={`/works/${id}`}
-              _hover={{ textDecoration: 'none' }}
+            <Heading
+              as="h3"
+              size="lg"
+              fontFamily="'Black Ops One', sans-serif"
+              color={titleColor}
+              _hover={{
+                textShadow: '0 0 20px rgba(255, 107, 107, 0.6)',
+                transform: 'scale(1.02)'
+              }}
+              transition="all 0.3s ease"
+              cursor="pointer"
             >
-              <Heading
-                as="h3"
-                size="lg"
-                fontFamily="'Black Ops One', sans-serif"
-                color={titleColor}
-                _hover={{
-                  textShadow: '0 0 20px rgba(255, 107, 107, 0.6)',
-                  transform: 'scale(1.02)'
-                }}
-                transition="all 0.3s ease"
-                cursor="pointer"
-              >
-                {title}
-              </Heading>
-            </Link>
+              {title}
+            </Heading>
             
             <HStack spacing={2} mt={2} flexWrap="wrap">
               <Badge
@@ -111,9 +118,6 @@ export const PortfolioItem = ({
               <Box 
                 flexShrink={0} 
                 w={{ base: 'full', md: '200px' }}
-                cursor="pointer"
-                as={NextLink}
-                href={`/works/${id}`}
               >
                 <Image
                   src={thumbnail.src || thumbnail}
@@ -151,9 +155,9 @@ export const PortfolioItem = ({
             </VStack>
           </Flex>
 
-          {/* Links */}
+          {/* Links - Higher z-index to be clickable */}
           {links.length > 0 && (
-            <HStack spacing={4} pt={2}>
+            <HStack spacing={4} pt={2} position="relative" zIndex={3}>
               {links.map((link, index) => (
                 <Link
                   key={index}
