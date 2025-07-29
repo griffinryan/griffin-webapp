@@ -18,33 +18,28 @@ const LazyFireflies = dynamic(() => import('../FireflySystem'), {
 
 const Main = ({ children, router }) => {
   return (
-    <Box as="main" pb={8}>
+    <Box as="main" pb={8} position="relative">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Griffin Ryan's homepage" />
+        <meta name="description" content="Griffin Ryan - Software Engineer & Electronic Artist" />
         <meta name="author" content="Griffin Ryan" />
         <meta name="author" content="Torpoise" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <meta property="og:site_name" content="Griffin Ryan" />
-        <meta name="og:title" content="Griffin Ryan" />
+        <meta name="og:title" content="Griffin Ryan - Concert Poster Portfolio" />
         <meta property="og:type" content="website" />
-        <title>Griffin Ryan - Homepage</title>
+        <title>Griffin Ryan - Concert Poster Portfolio</title>
       </Head>
+
+      {/* Fireflies as background */}
+      <LazyFireflies />
 
       <NavBar path={router.asPath} />
 
-      <Container maxW="container.md" pt={14}>
-        <LazyFireflies />
-      </Container>
-
-      <Container maxW="container.md" pt={14}>
-        <LazyVoxel />
-
+      <Box position="relative" zIndex={1}>
         {children}
-
-        <Footer />
-      </Container>
+      </Box>
     </Box>
   )
 }

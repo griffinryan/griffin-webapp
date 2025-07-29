@@ -21,15 +21,25 @@ import { IoLogoGithub } from 'react-icons/io5'
 
 const LinkItem = ({ href, path, target, children, ...props }) => {
   const active = path === href
-  const inactiveColor = useColorModeValue('gray.800', 'whiteAlpha.900')
   return (
     <Link
       as={NextLink}
       href={href}
       scroll={false}
       p={2}
-      bg={active ? 'grassTeal' : undefined}
-      color={active ? '#202023' : inactiveColor}
+      fontFamily="'Bebas Neue', sans-serif"
+      fontSize="xl"
+      letterSpacing="0.05em"
+      textTransform="uppercase"
+      color={active ? 'coral.400' : 'cream'}
+      textShadow={active ? '0 0 20px rgba(255, 107, 107, 0.6)' : '0 0 10px rgba(254, 243, 199, 0.3)'}
+      position="relative"
+      _hover={{
+        color: 'sunset.400',
+        textShadow: '0 0 30px rgba(251, 191, 36, 0.8)',
+        transform: 'scale(1.1) rotate(-2deg)'
+      }}
+      transition="all 0.3s ease"
       target={target}
       {...props}
     >
@@ -50,8 +60,10 @@ const Navbar = props => {
       position="fixed"
       as="nav"
       w="100%"
-      bg={useColorModeValue('#ffffff40', '#20202380')}
-      css={{ backdropFilter: 'blur(10px)' }}
+      bg="rgba(10, 25, 47, 0.85)"
+      borderBottom="2px solid"
+      borderColor="coral.400"
+      css={{ backdropFilter: 'blur(15px)' }}
       zIndex={2}
       {...props}
     >

@@ -10,4 +10,5 @@ dist
 .idea/
 package-lock.json
 lakehouse
+CLAUDE.md
 

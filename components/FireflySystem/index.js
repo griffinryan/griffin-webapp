@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FireflySystem } from './core/FireflySystem.js';
 
 const FireflyAnimation = ({ 
-    fireflyCount = 80,
+    fireflyCount = 120,
     usePurpleTheme = false,
-    bloomStrength = 2.5,
-    mouseRadius = 150,
-    mouseForce = 0.3,
-    fogColor = 0x0a0a2e,
-    fogNear = 50,
-    fogFar = 800
+    bloomStrength = 4.0,
+    mouseRadius = 200,
+    mouseForce = 0.5,
+    fogColor = 0x0a192f,
+    fogNear = 10,
+    fogFar = 1000
 }) => {
     const containerRef = useRef(null);
     const systemRef = useRef(null);

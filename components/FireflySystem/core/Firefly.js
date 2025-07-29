@@ -12,7 +12,10 @@ export class Firefly {
             floatSpeed: 0.5,
             floatRadius: 15,
             curiosity: 0.5,
-            color: new THREE.Color().setHSL(0.11 + Math.random() * 0.05, 0.8, 0.5),
+            // Concert poster colors: coral pink and gold
+            color: Math.random() > 0.5 
+                ? new THREE.Color('#ff6b6b').multiplyScalar(0.8 + Math.random() * 0.4) // Coral pink variations
+                : new THREE.Color('#fbbf24').multiplyScalar(0.8 + Math.random() * 0.4), // Gold variations
             ...options
         };
         
