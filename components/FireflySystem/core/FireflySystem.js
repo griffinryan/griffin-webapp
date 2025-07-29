@@ -135,7 +135,7 @@ export class FireflySystem {
             const firefly = new Firefly(geometry, {
                 index: i,
                 position: position,
-                scale: Math.random() * 0.5 + 0.5,
+                scale: Math.random() * 0.75 + 0.75,
                 blinkOffset: Math.random() * Math.PI * 2,
                 blinkSpeed: Math.random() * 0.5 + 0.5,
                 floatSpeed: Math.random() * 0.3 + 0.2,

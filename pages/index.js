@@ -125,10 +125,6 @@ const Home = () => (
           Bio
         </Heading>
         <BioSection>
-          <BioYear>2001</BioYear>
-          Born in Indiana, United States.
-        </BioSection>
-        <BioSection>
           <BioYear>2022</BioYear>
           Started Software Engineer role at Meta Platforms
         </BioSection>
@@ -141,23 +137,6 @@ const Home = () => (
           <BioYear>2024</BioYear>
           Working as a part-time AI Engineer with Outlier AI
         </BioSection>
-      </Section>
-
-      <Section delay={0.3}>
-        <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
-          Interests
-        </Heading>
-        <Paragraph>
-          Art, Music,{' '}
-          <Link href="https://illust.odoushi.com/" target="_blank">
-            Drawing
-          </Link>
-          , Playing Piano,{' '}
-          <Link href="https://ristorante.com/" target="_blank">
-            Pizza
-          </Link>
-          , Photography, Leica, Machine Learning, AutoGPT
-        </Paragraph>
       </Section>
 
 

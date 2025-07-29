@@ -61,7 +61,7 @@ export class Firefly {
         // Create mesh
         this.mesh = new THREE.Mesh(geometry, this.material);
         this.mesh.position.copy(this.options.position);
-        this.mesh.scale.setScalar(this.options.scale * (this.options.isLightMode ? 2.5 : 2));
+        this.mesh.scale.setScalar(this.options.scale * (this.options.isLightMode ? 3.75 : 3));
         
         // Add subtle random rotation
         this.mesh.rotation.set(
