@@ -183,7 +183,7 @@ const Home = () => (
                 fontFamily="'Space Grotesk', sans-serif"
                 fontWeight="500"
               >
-                @griffinsryan
+                @griffinlryan
               </Button>
             </Link>
           </ListItem>
@@ -227,7 +227,7 @@ const Home = () => (
           fontFamily="'Space Grotesk', sans-serif"
           fontWeight="300"
         >
-          Where code meets creativity
+          Not a one trick pony, but a full circus of creativity and code.
         </Text>
       </Box>
     </Container>
