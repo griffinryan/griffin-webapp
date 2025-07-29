@@ -159,7 +159,8 @@ const Home = () => (
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoGithub />}
-                fontFamily="'M PLUS Rounded 1c', sans-serif"
+                fontFamily="'Space Grotesk', sans-serif"
+                fontWeight="500"
               >
                 @griffinryan
               </Button>
@@ -171,7 +172,8 @@ const Home = () => (
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoLinkedin />}
-                fontFamily="'M PLUS Rounded 1c', sans-serif"
+                fontFamily="'Space Grotesk', sans-serif"
+                fontWeight="500"
               >
                 @griffinsryan
               </Button>
@@ -183,7 +185,8 @@ const Home = () => (
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoInstagram />}
-                fontFamily="'M PLUS Rounded 1c', sans-serif"
+                fontFamily="'Space Grotesk', sans-serif"
+                fontWeight="500"
               >
                 @griffinlryan
               </Button>
@@ -212,7 +215,8 @@ const Home = () => (
           fontStyle="italic"
           letterSpacing="0.05em"
           color="textSecondary"
-          fontFamily="'M PLUS Rounded 1c', sans-serif"
+          fontFamily="'Space Grotesk', sans-serif"
+          fontWeight="300"
         >
           Where code meets creativity
         </Text>

@@ -37,7 +37,13 @@ const BulletPoint = ({ children, id }) => (
         transition="all 0.3s ease"
       />
     </Link>
-    <Text fontSize="md" lineHeight="tall">
+    <Text 
+      fontSize="md" 
+      lineHeight="tall"
+      fontFamily="'Space Grotesk', sans-serif"
+      fontWeight="400"
+      letterSpacing="0.01em"
+    >
       {children}
     </Text>
   </ListItem>
@@ -153,8 +159,10 @@ export const PortfolioItem = ({
                 <Text
                   fontSize="md"
                   color={useColorModeValue('gray.600', 'gray.300')}
-                  fontFamily="'Bebas Neue', sans-serif"
-                  letterSpacing="0.02em"
+                  fontFamily="'Space Grotesk', sans-serif"
+                  fontWeight="400"
+                  letterSpacing="0.015em"
+                  lineHeight="1.6"
                   cursor="pointer"
                   _hover={{
                     color: useColorModeValue('gray.700', 'gray.200')

@@ -197,7 +197,9 @@ export const WorkDescription = ({ children }) => (
     fontSize="lg"
     lineHeight="tall"
     color={useColorModeValue('gray.600', 'gray.300')}
-    fontFamily="'M PLUS Rounded 1c', sans-serif"
+    fontFamily="'Space Grotesk', sans-serif"
+    fontWeight="400"
+    letterSpacing="0.01em"
   >
     {children}
   </Text>

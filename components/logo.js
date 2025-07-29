@@ -31,8 +31,9 @@ const Logo = () => {
         <BorderedRainbowIcon/>
         <Text
           color={useColorModeValue('gray.800', 'whiteAlpha.900')}
-          fontFamily="'M PLUS Rounded 1c', sans-serif"
-          fontWeight="bold"
+          fontFamily="'Space Grotesk', sans-serif"
+          fontWeight="600"
+          letterSpacing="0.02em"
           ml={3}
         >
           Griffin Ryan

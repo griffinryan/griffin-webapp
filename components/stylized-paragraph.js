@@ -14,7 +14,7 @@ const StylizedParagraph = ({ children, ...props }) => {
     <MotionText
       fontSize={{ base: 'md', md: 'lg' }}
       lineHeight="tall"
-      fontFamily="'M PLUS Rounded 1c', sans-serif"
+      fontFamily="'Space Grotesk', sans-serif"
       fontWeight="500"
       letterSpacing="0.015em"
       color={textColor}
