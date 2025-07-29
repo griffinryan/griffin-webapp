@@ -17,14 +17,26 @@ import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { GlassContainer, AnimatedSection } from './glass-container'
 
-const BulletPoint = ({ children }) => (
+const BulletPoint = ({ children, id }) => (
   <ListItem display="flex" alignItems="flex-start">
-    <ListIcon
-      as={ChevronRightIcon}
-      color={useColorModeValue('coral.500', 'coral.400')}
-      mt={1}
-      flexShrink={0}
-    />
+    <Link
+      as={NextLink}
+      href={`/works/${id}`}
+      _hover={{ textDecoration: 'none' }}
+    >
+      <ListIcon
+        as={ChevronRightIcon}
+        color={useColorModeValue('coral.500', 'coral.400')}
+        mt={1}
+        flexShrink={0}
+        cursor="pointer"
+        _hover={{
+          transform: 'translateX(4px)',
+          color: useColorModeValue('coral.600', 'coral.300')
+        }}
+        transition="all 0.3s ease"
+      />
+    </Link>
     <Text fontSize="md" lineHeight="tall">
       {children}
     </Text>
@@ -56,36 +68,29 @@ export const PortfolioItem = ({
           boxShadow: 'lg'
         }}
       >
-        {/* Invisible clickable overlay */}
-        <Link
-          as={NextLink}
-          href={`/works/${id}`}
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          zIndex={1}
-          _hover={{ textDecoration: 'none' }}
-        />
-        
-        <VStack align="stretch" spacing={4} position="relative" zIndex={2}>
+        <VStack align="stretch" spacing={4}>
           {/* Header with Title and Year */}
           <Box>
-            <Heading
-              as="h3"
-              size="lg"
-              fontFamily="'Black Ops One', sans-serif"
-              color={titleColor}
-              _hover={{
-                textShadow: '0 0 20px rgba(255, 107, 107, 0.6)',
-                transform: 'scale(1.02)'
-              }}
-              transition="all 0.3s ease"
-              cursor="pointer"
+            <Link 
+              as={NextLink} 
+              href={`/works/${id}`}
+              _hover={{ textDecoration: 'none' }}
             >
-              {title}
-            </Heading>
+              <Heading
+                as="h3"
+                size="lg"
+                fontFamily="'Black Ops One', sans-serif"
+                color={titleColor}
+                _hover={{
+                  textShadow: '0 0 20px rgba(255, 107, 107, 0.6)',
+                  transform: 'scale(1.02)'
+                }}
+                transition="all 0.3s ease"
+                cursor="pointer"
+              >
+                {title}
+              </Heading>
+            </Link>
             
             <HStack spacing={2} mt={2} flexWrap="wrap">
               <Badge
@@ -115,9 +120,12 @@ export const PortfolioItem = ({
           {/* Thumbnail and Description */}
           <Flex gap={4} direction={{ base: 'column', md: 'row' }}>
             {thumbnail && (
-              <Box 
+              <Link
+                as={NextLink}
+                href={`/works/${id}`}
                 flexShrink={0} 
                 w={{ base: 'full', md: '200px' }}
+                _hover={{ textDecoration: 'none' }}
               >
                 <Image
                   src={thumbnail.src || thumbnail}
@@ -131,33 +139,45 @@ export const PortfolioItem = ({
                     transform: 'scale(1.05)',
                     boxShadow: 'lg'
                   }}
+                  cursor="pointer"
                 />
-              </Box>
+              </Link>
             )}
             
             <VStack align="stretch" spacing={3} flex={1}>
-              <Text
-                fontSize="md"
-                color={useColorModeValue('gray.600', 'gray.300')}
-                fontFamily="'Bebas Neue', sans-serif"
-                letterSpacing="0.02em"
+              <Link
+                as={NextLink}
+                href={`/works/${id}`}
+                _hover={{ textDecoration: 'none' }}
               >
-                {description}
-              </Text>
+                <Text
+                  fontSize="md"
+                  color={useColorModeValue('gray.600', 'gray.300')}
+                  fontFamily="'Bebas Neue', sans-serif"
+                  letterSpacing="0.02em"
+                  cursor="pointer"
+                  _hover={{
+                    color: useColorModeValue('gray.700', 'gray.200')
+                  }}
+                  transition="color 0.3s ease"
+                >
+                  {description}
+                </Text>
+              </Link>
               
               {features.length > 0 && (
                 <List spacing={2}>
                   {features.map((feature, index) => (
-                    <BulletPoint key={index}>{feature}</BulletPoint>
+                    <BulletPoint key={index} id={id}>{feature}</BulletPoint>
                   ))}
                 </List>
               )}
             </VStack>
           </Flex>
 
-          {/* Links - Higher z-index to be clickable */}
+          {/* Links */}
           {links.length > 0 && (
-            <HStack spacing={4} pt={2} position="relative" zIndex={3}>
+            <HStack spacing={4} pt={2}>
               {links.map((link, index) => (
                 <Link
                   key={index}
