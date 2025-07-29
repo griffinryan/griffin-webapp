@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import NavBar from '../navbar'
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container, useColorMode } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelLoader from '../voxel-loader'
 import SplashScreen from '../SplashScreen'
@@ -17,6 +17,8 @@ const LazyFireflies = dynamic(() => import('../FireflySystem'), {
 });
 
 const Main = ({ children, router }) => {
+  const { colorMode } = useColorMode()
+  
   return (
     <Box as="main" pb={8} position="relative">
       <Head>
@@ -33,7 +35,7 @@ const Main = ({ children, router }) => {
       </Head>
 
       {/* Fireflies as background */}
-      <LazyFireflies />
+      <LazyFireflies isLightMode={colorMode === 'light'} />
 
       <NavBar path={router.asPath} />
 

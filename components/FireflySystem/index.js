@@ -3,17 +3,20 @@ import { FireflySystem } from './core/FireflySystem.js';
 
 const FireflyAnimation = ({ 
     fireflyCount = 120,
-    usePurpleTheme = false,
+    isLightMode = false,
     bloomStrength = 4.0,
     mouseRadius = 200,
     mouseForce = 0.5,
-    fogColor = 0x0a192f,
+    fogColor,
     fogNear = 10,
     fogFar = 1000
 }) => {
     const containerRef = useRef(null);
     const systemRef = useRef(null);
     const [isLoading, setIsLoading] = useState(true);
+    
+    // Determine fog color based on theme
+    const computedFogColor = fogColor || (isLightMode ? 0xe8d5c4 : 0x0a192f);
     
     useEffect(() => {
         if (!containerRef.current) return;
@@ -25,11 +28,11 @@ const FireflyAnimation = ({
             // Apply initial configuration
             systemRef.current.setConfig({
                 fireflyCount,
-                usePurpleTheme,
+                isLightMode,
                 bloomStrength,
                 mouseRadius,
                 mouseForce,
-                fogColor,
+                fogColor: computedFogColor,
                 fogNear,
                 fogFar
             });
@@ -64,16 +67,16 @@ const FireflyAnimation = ({
         if (systemRef.current) {
             systemRef.current.setConfig({
                 fireflyCount,
-                usePurpleTheme,
+                isLightMode,
                 bloomStrength,
                 mouseRadius,
                 mouseForce,
-                fogColor,
+                fogColor: computedFogColor,
                 fogNear,
                 fogFar
             });
         }
-    }, [fireflyCount, usePurpleTheme, bloomStrength, mouseRadius, mouseForce, fogColor, fogNear, fogFar]);
+    }, [fireflyCount, isLightMode, bloomStrength, mouseRadius, mouseForce, computedFogColor, fogNear, fogFar]);
     
     return (
         <div 

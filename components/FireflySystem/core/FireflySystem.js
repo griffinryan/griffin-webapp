@@ -117,15 +117,8 @@ export class FireflySystem {
                 );
             }
             
-            // Color options based on theme
-            let color;
-            if (this.config.usePurpleTheme) {
-                // Purple theme matching the rain animation
-                color = new THREE.Color().setHSL(0.75 + Math.random() * 0.1, 0.8, 0.6);
-            } else {
-                // Warm firefly colors
-                color = new THREE.Color().setHSL(0.11 + Math.random() * 0.05, 0.8, 0.5);
-            }
+            // Pass theme information to firefly
+            const isLightMode = this.config.isLightMode;
             
             const firefly = new Firefly(geometry, {
                 index: i,
@@ -136,7 +129,7 @@ export class FireflySystem {
                 floatSpeed: Math.random() * 0.3 + 0.2,
                 floatRadius: Math.random() * 15 + 10,
                 curiosity: Math.random() * 0.5 + 0.3,
-                color: color
+                isLightMode: isLightMode
             });
             
             this.fireflies.push(firefly);
@@ -227,7 +220,12 @@ export class FireflySystem {
         Object.assign(this.config, newConfig);
         
         // Update scene settings
-        if (newConfig.fogColor || newConfig.fogNear || newConfig.fogFar) {
+        if (newConfig.fogColor !== undefined || newConfig.fogNear !== undefined || newConfig.fogFar !== undefined || newConfig.isLightMode !== undefined) {
+            // Update fog color if theme changed
+            if (newConfig.isLightMode !== undefined && !newConfig.fogColor) {
+                this.config.fogColor = newConfig.isLightMode ? 0xe8d5c4 : 0x0a192f;
+            }
+            
             this.scene.fog = new THREE.Fog(
                 this.config.fogColor,
                 this.config.fogNear,
@@ -236,7 +234,7 @@ export class FireflySystem {
         }
         
         // If theme or count changed, recreate fireflies
-        if (newConfig.usePurpleTheme !== undefined || newConfig.fireflyCount !== undefined) {
+        if (newConfig.isLightMode !== undefined || newConfig.fireflyCount !== undefined) {
             this.recreateFireflies();
         }
     }

@@ -12,12 +12,22 @@ export class Firefly {
             floatSpeed: 0.5,
             floatRadius: 15,
             curiosity: 0.5,
-            // Concert poster colors: coral pink and gold
-            color: Math.random() > 0.5 
-                ? new THREE.Color('#ff6b6b').multiplyScalar(0.8 + Math.random() * 0.4) // Coral pink variations
-                : new THREE.Color('#fbbf24').multiplyScalar(0.8 + Math.random() * 0.4), // Gold variations
+            isLightMode: false,
             ...options
         };
+        
+        // Set color based on theme
+        if (this.options.isLightMode) {
+            // Light mode: pink and purple fireflies
+            this.options.color = Math.random() > 0.5 
+                ? new THREE.Color('#ff69b4').multiplyScalar(0.8 + Math.random() * 0.4) // Pink variations
+                : new THREE.Color('#da70d6').multiplyScalar(0.8 + Math.random() * 0.4); // Purple variations
+        } else {
+            // Dark mode: coral pink and gold
+            this.options.color = Math.random() > 0.5 
+                ? new THREE.Color('#ff6b6b').multiplyScalar(0.8 + Math.random() * 0.4) // Coral pink variations
+                : new THREE.Color('#fbbf24').multiplyScalar(0.8 + Math.random() * 0.4); // Gold variations
+        }
         
         // State
         this.originalPosition = this.options.position.clone();
