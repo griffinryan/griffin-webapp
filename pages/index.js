@@ -107,7 +107,7 @@ const Home = () => (
         <Box align="center" my={4}>
           <Button
             as={NextLink}
-            href="/portfolio"
+            href="/experience"
             scroll={false}
             rightIcon={<ChevronRightIcon />}
             colorScheme="teal"
@@ -115,7 +115,7 @@ const Home = () => (
             fontSize="lg"
             letterSpacing="0.02em"
           >
-            My portfolio
+            Look at My Experience
           </Button>
         </Box>
       </Section>
