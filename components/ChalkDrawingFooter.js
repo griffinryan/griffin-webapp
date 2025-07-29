@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { 
   generateLetterPaths, 
@@ -14,6 +14,9 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 200 });
+  
+  // Get color mode
+  const colorMode = useColorModeValue('light', 'dark');
   
   // Animation state
   const animationState = useRef({
@@ -94,7 +97,7 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream', colorMode);
               });
               
               ctx.restore();
@@ -116,7 +119,7 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
                 ));
                 
                 if (strokeProgress > 0) {
-                  drawChalkStroke(ctx, stroke, strokeProgress, 5, currentLetter.color || 'cream');
+                  drawChalkStroke(ctx, stroke, strokeProgress, 5, currentLetter.color || 'cream', colorMode);
                   
                   // Add dust particles at stroke end
                   if (strokeProgress > 0.9 && Math.random() < 0.1) {
@@ -124,7 +127,8 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
                     if (pointIndex >= 0 && stroke[pointIndex]) {
                       state.particles.push(new ChalkDust(
                         stroke[pointIndex].x,
-                        stroke[pointIndex].y
+                        stroke[pointIndex].y,
+                        colorMode
                       ));
                     }
                   }
@@ -159,7 +163,7 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
               letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
+                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream', colorMode);
               });
               
               ctx.restore();
@@ -204,7 +208,7 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
                   if (strokeEraseProgress < 1) {
                     // Draw the remaining part of the stroke
                     const remainingProgress = 1 - strokeEraseProgress;
-                    drawChalkStroke(ctx, stroke, remainingProgress, 5, letter.color || 'cream');
+                    drawChalkStroke(ctx, stroke, remainingProgress, 5, letter.color || 'cream', colorMode);
                     
                     // Add dust particles at erase point
                     if (strokeEraseProgress > 0 && Math.random() < 0.1) {
@@ -212,7 +216,8 @@ const ChalkDrawingFooter = ({ text = ["A WHOLE STABLE", "OF", "SHOW PONIES!"], d
                       if (erasePointIndex >= 0 && erasePointIndex < stroke.length && stroke[erasePointIndex]) {
                         state.particles.push(new ChalkDust(
                           stroke[erasePointIndex].x,
-                          stroke[erasePointIndex].y
+                          stroke[erasePointIndex].y,
+                          colorMode
                         ));
                       }
                     }

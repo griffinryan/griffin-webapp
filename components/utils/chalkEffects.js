@@ -38,21 +38,31 @@ export const createChalkTexture = (ctx, width, height) => {
 };
 
 // Draw a chalk stroke with texture
-export const drawChalkStroke = (ctx, points, progress, strokeWidth = 5, colorVariant = 'cream') => {
+export const drawChalkStroke = (ctx, points, progress, strokeWidth = 5, colorVariant = 'cream', colorMode = 'dark') => {
   if (points.length < 2) return;
   
   ctx.save();
   
-  // Color variations with pink/purple highlights
+  // Color variations with theme support
   const colors = {
-    cream: '#fef3c7',
-    pink: '#ff6b6b',
-    purple: '#c084fc',
-    coral: '#fca5a5',
-    lavender: '#e9d5ff'
+    light: {
+      cream: '#1a1a1a',      // Dark gray/black for light mode
+      pink: '#dc2626',       // Darker red-pink for light mode
+      purple: '#7c3aed',     // Darker purple for light mode
+      coral: '#ef4444',      // Darker coral for light mode
+      lavender: '#8b5cf6'    // Darker lavender for light mode
+    },
+    dark: {
+      cream: '#fef3c7',      // Original cream for dark mode
+      pink: '#ff6b6b',       // Original pink
+      purple: '#c084fc',     // Original purple
+      coral: '#fca5a5',      // Original coral
+      lavender: '#e9d5ff'    // Original lavender
+    }
   };
   
-  ctx.strokeStyle = colors[colorVariant] || colors.cream;
+  const themeColors = colors[colorMode] || colors.dark;
+  ctx.strokeStyle = themeColors[colorVariant] || themeColors.cream;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   
@@ -102,7 +112,7 @@ export const drawChalkStroke = (ctx, points, progress, strokeWidth = 5, colorVar
 
 // Create chalk dust particles
 export class ChalkDust {
-  constructor(x, y) {
+  constructor(x, y, colorMode = 'dark') {
     this.x = x;
     this.y = y;
     this.vx = (Math.random() - 0.5) * 0.5;
@@ -110,6 +120,7 @@ export class ChalkDust {
     this.life = 1.0;
     this.decay = 0.01;
     this.size = Math.random() * 3 + 1;
+    this.colorMode = colorMode;
   }
   
   update() {
@@ -124,7 +135,8 @@ export class ChalkDust {
   draw(ctx) {
     ctx.save();
     ctx.globalAlpha = this.life * 0.3;
-    ctx.fillStyle = '#fef3c7';
+    // Use dark particles in light mode, light particles in dark mode
+    ctx.fillStyle = this.colorMode === 'light' ? '#1a1a1a' : '#fef3c7';
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();
