@@ -27,6 +27,12 @@ import Paragraph from '../components/paragraph'
 import StylizedParagraph from '../components/stylized-paragraph'
 import { GlassPanel } from '../components/glass-panel'
 import { BioSection, BioYear } from '../components/bio'
+import dynamic from 'next/dynamic'
+
+// Dynamic import to avoid SSR issues with canvas
+const ChalkDrawingText = dynamic(() => import('../components/ChalkDrawingText'), {
+  ssr: false
+})
 
 const MotionBox = motion(Box)
 const MotionText = motion(Text)
@@ -39,15 +45,7 @@ const Home = () => (
   <Layout>
     <Container>
       <GlassPanel variant="default" delay={0} mb={6}>
-        <Text 
-          textAlign="center"
-          fontFamily="'Bebas Neue', sans-serif"
-          fontSize="xl"
-          letterSpacing="-0.02em"
-          fontWeight="500"
-        >
-          I'm a software engineer based in Seattle, Washington!
-        </Text>
+        <ChalkDrawingText delay={0.2} />
       </GlassPanel>
 
       <Box display={{ md: 'flex' }}>
@@ -227,7 +225,7 @@ const Home = () => (
           fontFamily="'Space Grotesk', sans-serif"
           fontWeight="300"
         >
-          Not a one trick pony, but a full circus of creativity and code.
+          A whole stable of show ponies.
         </Text>
       </Box>
     </Container>
