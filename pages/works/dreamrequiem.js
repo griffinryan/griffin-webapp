@@ -1,61 +1,76 @@
-// https://github.com/griffinryan/encryption-stuie
-import {
-    Container,
-    Badge,
-    Link,
-    List,
-    ListItem,
-    AspectRatio
-} from "@chakra-ui/react";
-
+import { Container } from "@chakra-ui/react"
 import Layout from '../../components/layouts/article'
-import { ExternalLinkIcon } from "@chakra-ui/icons"
-import { Title, WorkImage, Meta } from '../../components/work'
-import P from '../../components/paragraph'
+import { 
+  WorkTitle, 
+  WorkHero, 
+  WorkSection, 
+  WorkDescription,
+  FeatureList,
+  TechStack,
+  ProjectLinks 
+} from '../../components/work-enhanced'
 
 const Work = () => (
-    <Layout title="dreamrequiem">
+    <Layout title="Dream Requiem">
         <Container>
-            <Title>
-                Dream Requiem <Badge>2024</Badge>
-            </Title>
-            <P>
-            Dream Requiem Engine is a custom-built game engine developed using C#, 
-            leveraging the powerful MonoGame framework. Designed to provide a 
-            robust and flexible foundation for psuedo-3D game development, this engine focuses on simplicity, 
-            performance, and ease of use.
-            </P>
-            <P>
-            Cross-Platform Compatibility: Built with GLFW, ensuring smooth performance across Windows, macOS, and Linux.
-            </P>
-            <P>
-            MonoGame Framework: Utilizing MonoGame for efficient rendering and graphics processing.
-            </P>
-            <P>
-            Lightweight and Efficient: Optimized for high performance with minimal overhead, ideal for both small and large-scale projects.
-            </P>
-            <P>
-            Modular Design: Easy to extend and customize with a modular architecture, allowing developers to add or modify components as needed.
-            </P>
-            <P>
-            Early Development Stage: While in its early stages, the GreenLightGo Engine already supports basic 3D rendering, input handling, and window management.
-            </P>
-            <P>
-            Check out {' '}
-                <Link href='https://github.com/MonoGame/MonoGame' target='_blank'>
-                    MonoGame
-                </Link>
-                {' '}to see the OpenGL bindings library for Golang!
-            </P>
-            <P>
-                <Link href='https://github.com/griffinryan/DreamRequiem' target='_blank'>
-                    DreamRequiem <ExternalLinkIcon mx='2px' />
-                </Link>
-                is open source and can be found on my GitHub!
-            </P>
+            <WorkTitle badges={['2024', 'Game Engine', 'Open Source']}>
+                Dream Requiem
+            </WorkTitle>
+            
+            <WorkSection title="Overview" delay={0.3}>
+                <WorkDescription>
+                    Dream Requiem Engine is a custom-built game engine developed using C#, 
+                    leveraging the powerful MonoGame framework. Designed to provide a robust 
+                    and flexible foundation for pseudo-3D game development, this engine focuses 
+                    on simplicity, performance, and ease of use. It empowers developers to create 
+                    immersive gaming experiences with minimal overhead.
+                </WorkDescription>
+            </WorkSection>
 
-            <WorkImage src='/images/works/thumb_dreamrequiem.png' alt='Website' />
+            <WorkHero src='/images/works/thumb_dreamrequiem.png' alt='Dream Requiem Engine' />
 
+            <WorkSection title="Core Features" delay={0.4}>
+                <FeatureList features={[
+                    'Cross-platform compatibility across Windows, macOS, and Linux',
+                    'Built on MonoGame framework for efficient rendering and graphics processing',
+                    'Lightweight and optimized for high performance with minimal overhead',
+                    'Modular architecture allowing easy extension and customization',
+                    'Support for basic 3D rendering, input handling, and window management',
+                    'Entity-component system for flexible game object management',
+                    'Built-in physics engine for realistic game mechanics',
+                    'Asset pipeline for easy content management'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Technical Architecture" delay={0.5}>
+                <WorkDescription>
+                    The engine utilizes a component-based architecture that allows developers 
+                    to build complex game systems through composition rather than inheritance. 
+                    This approach provides maximum flexibility while maintaining clean, 
+                    maintainable code. The rendering pipeline is optimized for both 2D and 
+                    pseudo-3D graphics, making it ideal for a wide range of game genres.
+                </WorkDescription>
+            </WorkSection>
+
+            <WorkSection title="Technology Stack" delay={0.6}>
+                <TechStack technologies={[
+                    'C#',
+                    'MonoGame',
+                    'OpenGL',
+                    'GLFW',
+                    '.NET Core',
+                    'Content Pipeline',
+                    'XNA Framework'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Resources & Links" delay={0.7}>
+                <ProjectLinks links={[
+                    { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DreamRequiem' },
+                    { label: 'MonoGame Framework', url: 'https://github.com/MonoGame/MonoGame' },
+                    { label: 'Documentation', url: 'https://github.com/griffinryan/DreamRequiem/wiki' }
+                ]} />
+            </WorkSection>
         </Container>
     </Layout>
 )

@@ -125,17 +125,25 @@ const Home = () => (
           Bio
         </Heading>
         <BioSection>
-          <BioYear>2022</BioYear>
-          Started Software Engineer role at Meta Platforms
+          <BioYear>2022-2023</BioYear>
+          Working as a Computer Science Tutor at the University of Washington
         </BioSection>
         <BioSection>
-          <BioYear>2023</BioYear>
+          <BioYear>2023-2024</BioYear>
           Completed the Bachelor's Program in Computer Science at
           the University of Washington
         </BioSection>
         <BioSection>
           <BioYear>2024</BioYear>
           Working as a part-time AI Engineer with Outlier AI
+        </BioSection>
+        <BioSection>
+          <BioYear>2024</BioYear>
+          Started working on LLaMa 4 at Meta Platforms
+        </BioSection>
+        <BioSection>
+          <BioYear>2025</BioYear>
+          Fulltime AI Agent Developer at ConsumerFi
         </BioSection>
       </Section>
 
