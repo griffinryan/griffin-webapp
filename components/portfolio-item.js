@@ -16,6 +16,7 @@ import {
 import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { GlassContainer, AnimatedSection } from './glass-container'
+import StylizedParagraph from './stylized-paragraph'
 
 const BulletPoint = ({ children, id }) => (
   <ListItem display="flex" alignItems="flex-start">
@@ -40,9 +41,13 @@ const BulletPoint = ({ children, id }) => (
     <Text 
       fontSize="md" 
       lineHeight="tall"
-      fontFamily="'Space Grotesk', sans-serif"
-      fontWeight="400"
-      letterSpacing="0.01em"
+      fontFamily="'Anton', 'Space Grotesk', sans-serif"
+      fontWeight="500"
+      letterSpacing="-0.02em"
+      transition="all 0.3s ease"
+      _hover={{
+        letterSpacing: '-0.03em'
+      }}
     >
       {children}
     </Text>
@@ -156,21 +161,25 @@ export const PortfolioItem = ({
                 href={`/works/${id}`}
                 _hover={{ textDecoration: 'none' }}
               >
-                <Text
-                  fontSize="md"
-                  color={useColorModeValue('gray.600', 'gray.300')}
-                  fontFamily="'Space Grotesk', sans-serif"
-                  fontWeight="400"
-                  letterSpacing="0.015em"
-                  lineHeight="1.6"
+                <Box
                   cursor="pointer"
+                  transition="all 0.3s ease"
                   _hover={{
-                    color: useColorModeValue('gray.700', 'gray.200')
+                    transform: 'translateX(2px)'
                   }}
-                  transition="color 0.3s ease"
                 >
-                  {description}
-                </Text>
+                  <StylizedParagraph
+                    variant="dynamic"
+                    fontSize="md"
+                    mb={0}
+                    color={useColorModeValue('gray.600', 'gray.300')}
+                    _hover={{
+                      color: useColorModeValue('gray.700', 'gray.200')
+                    }}
+                  >
+                    {description}
+                  </StylizedParagraph>
+                </Box>
               </Link>
               
               {features.length > 0 && (

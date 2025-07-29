@@ -17,6 +17,7 @@ import {
 import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import { GlassContainer, AnimatedSection } from './glass-container'
+import StylizedParagraph from './stylized-paragraph'
 
 const MotionBox = motion(Box)
 const MotionImage = motion(Image)
@@ -132,7 +133,17 @@ export const FeatureList = ({ features }) => (
           mt={1}
           flexShrink={0}
         />
-        <Text fontSize="md" lineHeight="tall">
+        <Text 
+          fontSize="md" 
+          lineHeight="tall"
+          fontFamily="'Anton', 'Space Grotesk', sans-serif"
+          fontWeight="500"
+          letterSpacing="-0.02em"
+          transition="all 0.3s ease"
+          _hover={{
+            letterSpacing: '-0.03em'
+          }}
+        >
           {feature}
         </Text>
       </ListItem>
@@ -193,16 +204,14 @@ export const ProjectLinks = ({ links }) => {
 }
 
 export const WorkDescription = ({ children }) => (
-  <Text
+  <StylizedParagraph
+    variant="dynamic"
     fontSize="lg"
-    lineHeight="tall"
+    mb={0}
     color={useColorModeValue('gray.600', 'gray.300')}
-    fontFamily="'Space Grotesk', sans-serif"
-    fontWeight="400"
-    letterSpacing="0.01em"
   >
     {children}
-  </Text>
+  </StylizedParagraph>
 )
 
 export const Meta = ({ children }) => (

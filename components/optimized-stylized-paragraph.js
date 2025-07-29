@@ -142,27 +142,6 @@ const OptimizedStylizedParagraph = ({ children, variant = 'dynamic', enableEffec
         textIndent: isShortText ? '0' : '1.5em',
         wordSpacing: isShortText ? '0.1em' : 'normal',
         transform: 'translateZ(0)', // GPU acceleration
-        '&::first-letter': {
-          fontSize: isShortText ? '2em' : '1.8em',
-          fontFamily: "'Black Ops One', sans-serif",
-          fontWeight: 'bold',
-          lineHeight: '1',
-          marginRight: '0.05em',
-          float: 'left',
-          color: useColorModeValue('coral.500', 'coral.400'),
-          textShadow: useColorModeValue(
-            '0 0 30px rgba(255, 107, 107, 0.4)',
-            '0 0 40px rgba(255, 107, 107, 0.5)'
-          ),
-          transform: 'rotate(-5deg)',
-          transition: 'transform 0.3s ease',
-          willChange: 'auto',
-          '&:hover': {
-            transform: 'rotate(-8deg) scale(1.1)',
-            filter: 'brightness(1.3)',
-            willChange: 'transform, filter'
-          }
-        },
         '&:hover': {
           letterSpacing: isShortText ? '-0.05em' : '-0.03em'
         }
