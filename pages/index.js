@@ -8,12 +8,14 @@ import {
   Button,
   List,
   ListItem,
-  useColorModeValue,
-  chakra
+  Text,
+  VStack,
+  HStack,
+  chakra,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import Paragraph from '../components/paragraph'
-import { BioSection, BioYear } from '../components/bio'
+import { motion } from 'framer-motion'
 import Layout from '../components/layouts/article'
 import Section from '../components/section'
 import { GridItem } from '../components/grid-item'
@@ -21,6 +23,11 @@ import { IoLogoLinkedin, IoLogoInstagram, IoLogoGithub } from 'react-icons/io5'
 import thumbnailTorpoiseSpotify from '../public/images/links/torpoisespotify.png'
 import thumbnailTorpoiseKEXP from '../public/images/links/torpoisekexp.png'
 import Image from 'next/image'
+import Paragraph from '../components/paragraph'
+import { BioSection, BioYear } from '../components/bio'
+
+const MotionBox = motion(Box)
+const MotionText = motion(Text)
 
 const ProfileImage = chakra(Image, {
   shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
@@ -37,15 +44,15 @@ const Home = () => (
         bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
         css={{ backdropFilter: 'blur(10px)' }}
       >
-        I&apos;m a software engineer based in Seattle, Washington!
+        I'm a software engineer based in Seattle, Washington!
       </Box>
 
       <Box display={{ md: 'flex' }}>
         <Box flexGrow={1}>
-          <Heading as="h2" variant="page-title">
+          <Heading as="h2" variant="page-title" fontFamily="'Bebas Neue', sans-serif" fontSize="4xl" letterSpacing="0.02em">
             Griffin Ryan
           </Heading>
-          <p>Software Engineer | Fullstack Developer | Artist</p>
+          <p>Software Engineer | Fullstack Developer | Electronic Artist</p>
         </Box>
         <Box
           flexShrink={0}
@@ -75,7 +82,7 @@ const Home = () => (
       </Box>
 
       <Section delay={0.1}>
-        <Heading as="h3" variant="section-title">
+        <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
           Work
         </Heading>
         <Paragraph>
@@ -95,7 +102,7 @@ const Home = () => (
             'Torpoise' (A.K.A Griffin Ryan)
           </Link>
           {' '} has performed for recognized institutions
-          such as KEXP, Neumos, and the Musuem of Pop Culture. 
+          such as KEXP, Neumos, and the Museum of Pop Culture. 
           While not playing music or programming, Griffin is an automotive enthusiast.</Paragraph>
         <Box align="center" my={4}>
           <Button
@@ -104,38 +111,59 @@ const Home = () => (
             scroll={false}
             rightIcon={<ChevronRightIcon />}
             colorScheme="teal"
+            fontFamily="'Bebas Neue', sans-serif"
+            fontSize="lg"
+            letterSpacing="0.02em"
           >
-            Portfolio
+            My portfolio
           </Button>
         </Box>
       </Section>
 
       <Section delay={0.2}>
-        <Heading as="h3" variant="section-title">
-          Experience
+        <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
+          Bio
         </Heading>
         <BioSection>
-          <BioYear>2024</BioYear>
-          Data Labeling Analyst II - Meta Platforms, Inc.
+          <BioYear>2001</BioYear>
+          Born in Indiana, United States.
+        </BioSection>
+        <BioSection>
+          <BioYear>2022</BioYear>
+          Started Software Engineer role at Meta Platforms
+        </BioSection>
+        <BioSection>
+          <BioYear>2023</BioYear>
+          Completed the Bachelor's Program in Computer Science at
+          the University of Washington
         </BioSection>
         <BioSection>
           <BioYear>2024</BioYear>
-          AI Software Engineer - Outlier AI
-        </BioSection>
-        <BioSection>
-          <BioYear>2024</BioYear>
-          BS in Computer Science and Systems
-          at the University of Washington
-        </BioSection>
-        <BioSection>
-          <BioYear>2022-23</BioYear>
-          CSS Mentor - UW School of Engineering and Technology.
+          Working as a part-time AI Engineer with Outlier AI
         </BioSection>
       </Section>
 
       <Section delay={0.3}>
-        <Heading as="h3" variant="section-title">
-          Check out my links
+        <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
+          Interests
+        </Heading>
+        <Paragraph>
+          Art, Music,{' '}
+          <Link href="https://illust.odoushi.com/" target="_blank">
+            Drawing
+          </Link>
+          , Playing Piano,{' '}
+          <Link href="https://ristorante.com/" target="_blank">
+            Pizza
+          </Link>
+          , Photography, Leica, Machine Learning, AutoGPT
+        </Paragraph>
+      </Section>
+
+
+      <Section delay={0.4}>
+        <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
+          On the web
         </Heading>
         <List>
           <ListItem>
@@ -144,30 +172,33 @@ const Home = () => (
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoGithub />}
+                fontFamily="'M PLUS Rounded 1c', sans-serif"
               >
                 @griffinryan
               </Button>
             </Link>
           </ListItem>
           <ListItem>
-            <Link href="https://instagram.com/griffinlryan" target="_blank">
-              <Button
-                variant="ghost"
-                colorScheme="teal"
-                leftIcon={<IoLogoInstagram />}
-              >
-                @griffinlryan
-              </Button>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="https://www.linkedin.com/in/griffinlryan/" target="_blank">
+            <Link href="https://www.linkedin.com/in/griffinsryan/" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoLinkedin />}
+                fontFamily="'M PLUS Rounded 1c', sans-serif"
               >
-                @griffinlryan
+                @griffinsryan
+              </Button>
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link href="https://instagram.com/griffindotjs" target="_blank">
+              <Button
+                variant="ghost"
+                colorScheme="teal"
+                leftIcon={<IoLogoInstagram />}
+                fontFamily="'M PLUS Rounded 1c', sans-serif"
+              >
+                @griffindotjs
               </Button>
             </Link>
           </ListItem>
@@ -177,16 +208,28 @@ const Home = () => (
           <GridItem
             href="https://www.youtube.com/watch?v=zt2uOQv7U94&ab_channel=KEXP"
             title="Torpoise Live on KEXP"
-            thumbnail={thumbnailTorpoiseKEXP}>
-          </GridItem>
+            thumbnail={thumbnailTorpoiseKEXP}
+          />
           <GridItem
             href="https://open.spotify.com/artist/1mrMGfjOuLEJP3YhW2Fhu3?si=RULxR971TJCjtDkjhrOVEA"
             title="Torpoise on Spotify"
-            thumbnail={thumbnailTorpoiseSpotify}>
-          </GridItem>
+            thumbnail={thumbnailTorpoiseSpotify}
+          />
         </SimpleGrid>
-        
       </Section>
+
+      {/* Footer - Concert Poster Style */}
+      <Box as="footer" textAlign="center" py={16}>
+        <Text
+          fontSize="sm"
+          fontStyle="italic"
+          letterSpacing="0.05em"
+          color="textSecondary"
+          fontFamily="'M PLUS Rounded 1c', sans-serif"
+        >
+          Where code meets creativity
+        </Text>
+      </Box>
     </Container>
   </Layout>
 )

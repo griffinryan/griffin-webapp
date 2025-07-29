@@ -28,8 +28,16 @@ const LinkItem = ({ href, path, target, children, ...props }) => {
       href={href}
       scroll={false}
       p={2}
+      fontFamily="'Bebas Neue', sans-serif"
+      fontSize="lg"
+      letterSpacing="0.02em"
       bg={active ? 'grassTeal' : undefined}
       color={active ? '#202023' : inactiveColor}
+      _hover={{
+        color: active ? '#202023' : 'coral.400',
+        transform: 'scale(1.05)'
+      }}
+      transition="all 0.2s ease"
       target={target}
       {...props}
     >

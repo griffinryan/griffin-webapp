@@ -12,9 +12,22 @@ export class Firefly {
             floatSpeed: 0.5,
             floatRadius: 15,
             curiosity: 0.5,
-            color: new THREE.Color().setHSL(0.11 + Math.random() * 0.05, 0.8, 0.5),
+            isLightMode: false,
             ...options
         };
+        
+        // Set color based on theme
+        if (this.options.isLightMode) {
+            // Light mode: vibrant, saturated colors
+            this.options.color = Math.random() > 0.5 
+                ? new THREE.Color('#E91E63').multiplyScalar(0.8 + Math.random() * 0.2) // Hot pink
+                : new THREE.Color('#7B2FBE').multiplyScalar(0.8 + Math.random() * 0.2); // Deep purple
+        } else {
+            // Dark mode: coral pink and gold
+            this.options.color = Math.random() > 0.5 
+                ? new THREE.Color('#ff6b6b').multiplyScalar(0.8 + Math.random() * 0.4) // Coral pink variations
+                : new THREE.Color('#fbbf24').multiplyScalar(0.8 + Math.random() * 0.4); // Gold variations
+        }
         
         // State
         this.originalPosition = this.options.position.clone();
@@ -34,20 +47,21 @@ export class Firefly {
                 time: { value: 0 },
                 color: { value: this.options.color },
                 intensity: { value: 1 },
-                glowStrength: { value: 2.5 },
-                coreSize: { value: 0.3 }
+                glowStrength: { value: this.options.isLightMode ? 1.0 : 2.5 },
+                coreSize: { value: this.options.isLightMode ? 0.3 : 0.3 },
+                isLightMode: { value: this.options.isLightMode ? 1.0 : 0.0 }
             },
             vertexShader: fireflyVertexShader,
             fragmentShader: fireflyFragmentShader,
             transparent: true,
-            blending: THREE.AdditiveBlending,
+            blending: this.options.isLightMode ? THREE.NormalBlending : THREE.AdditiveBlending,
             depthWrite: false
         });
         
         // Create mesh
         this.mesh = new THREE.Mesh(geometry, this.material);
         this.mesh.position.copy(this.options.position);
-        this.mesh.scale.setScalar(this.options.scale * 2);
+        this.mesh.scale.setScalar(this.options.scale * (this.options.isLightMode ? 2.5 : 2));
         
         // Add subtle random rotation
         this.mesh.rotation.set(

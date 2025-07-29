@@ -5,7 +5,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { Firefly } from './Firefly.js';
 
 export class FireflySystem {
-    constructor(container = document.body) {
+    constructor(container = document.body, initialConfig = {}) {
         this.container = container;
         this.fireflies = [];
         this.mouse = new THREE.Vector2();
@@ -18,6 +18,7 @@ export class FireflySystem {
             fireflyScale: 1,
             mouseRadius: 150,
             mouseForce: 0.3,
+            isLightMode: false,
             environmentColor: new THREE.Color(0x0a0a2e),
             fogColor: new THREE.Color(0x0a0a2e),
             fogNear: 50,
@@ -26,7 +27,8 @@ export class FireflySystem {
             bloomRadius: 0.8,
             bloomThreshold: 0.1,
             // Option to use purple theme
-            usePurpleTheme: false
+            usePurpleTheme: false,
+            ...initialConfig  // Apply any initial configuration
         };
         
         this.init();
@@ -38,6 +40,8 @@ export class FireflySystem {
     init() {
         // Scene setup
         this.scene = new THREE.Scene();
+        // Keep scene transparent to show body background
+        this.scene.background = null;
         this.scene.fog = new THREE.Fog(this.config.fogColor, this.config.fogNear, this.config.fogFar);
         
         // Camera setup
@@ -53,11 +57,13 @@ export class FireflySystem {
         // Renderer setup
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
-            alpha: true  // Enable transparency for overlay effect
+            alpha: true,  // Enable transparency for overlay effect
+            premultipliedAlpha: false,
+            preserveDrawingBuffer: true
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        this.renderer.setClearColor(0x000000, 0); // Transparent background
+        this.renderer.setClearColor(0x000000, 0); // Fully transparent background
         
         // Add canvas to container
         this.renderer.domElement.style.position = 'fixed';
@@ -74,17 +80,23 @@ export class FireflySystem {
         const renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(renderPass);
         
-        const bloomPass = new UnrealBloomPass(
-            new THREE.Vector2(window.innerWidth, window.innerHeight),
-            this.config.bloomStrength,
-            this.config.bloomRadius,
-            this.config.bloomThreshold
-        );
-        this.composer.addPass(bloomPass);
+        // Only add bloom for dark mode
+        if (!this.config.isLightMode) {
+            this.bloomPass = new UnrealBloomPass(
+                new THREE.Vector2(window.innerWidth, window.innerHeight),
+                this.config.bloomStrength,
+                this.config.bloomRadius,
+                this.config.bloomThreshold
+            );
+            this.composer.addPass(this.bloomPass);
+        }
         
-        // Subtle ambient light
-        const ambientLight = new THREE.AmbientLight(0x1a1a3e, 0.1);
-        this.scene.add(ambientLight);
+        // Theme-aware ambient light
+        this.ambientLight = new THREE.AmbientLight(
+            this.config.isLightMode ? 0xf5e6d3 : 0x1a1a3e, 
+            this.config.isLightMode ? 0.3 : 0.1
+        );
+        this.scene.add(this.ambientLight);
     }
     
     createFireflies() {
@@ -117,15 +129,8 @@ export class FireflySystem {
                 );
             }
             
-            // Color options based on theme
-            let color;
-            if (this.config.usePurpleTheme) {
-                // Purple theme matching the rain animation
-                color = new THREE.Color().setHSL(0.75 + Math.random() * 0.1, 0.8, 0.6);
-            } else {
-                // Warm firefly colors
-                color = new THREE.Color().setHSL(0.11 + Math.random() * 0.05, 0.8, 0.5);
-            }
+            // Pass theme information to firefly
+            const isLightMode = this.config.isLightMode;
             
             const firefly = new Firefly(geometry, {
                 index: i,
@@ -136,7 +141,7 @@ export class FireflySystem {
                 floatSpeed: Math.random() * 0.3 + 0.2,
                 floatRadius: Math.random() * 15 + 10,
                 curiosity: Math.random() * 0.5 + 0.3,
-                color: color
+                isLightMode: isLightMode
             });
             
             this.fireflies.push(firefly);
@@ -227,16 +232,48 @@ export class FireflySystem {
         Object.assign(this.config, newConfig);
         
         // Update scene settings
-        if (newConfig.fogColor || newConfig.fogNear || newConfig.fogFar) {
+        if (newConfig.fogColor !== undefined || newConfig.fogNear !== undefined || newConfig.fogFar !== undefined || newConfig.isLightMode !== undefined) {
+            // Update fog color if theme changed
+            if (newConfig.isLightMode !== undefined && !newConfig.fogColor) {
+                this.config.fogColor = newConfig.isLightMode ? 0xe8d5c4 : 0x0a192f;
+            }
+            
+            // Scene background remains transparent
+            
             this.scene.fog = new THREE.Fog(
                 this.config.fogColor,
                 this.config.fogNear,
                 this.config.fogFar
             );
+            
+            // Update ambient light for theme
+            if (this.ambientLight && newConfig.isLightMode !== undefined) {
+                this.ambientLight.color.set(newConfig.isLightMode ? 0xf5e6d3 : 0x1a1a3e);
+                this.ambientLight.intensity = newConfig.isLightMode ? 0.3 : 0.1;
+            }
+        }
+        
+        // If theme changed, update bloom
+        if (newConfig.isLightMode !== undefined) {
+            // Remove all passes except render pass
+            this.composer.passes = this.composer.passes.slice(0, 1);
+            
+            // Add bloom only for dark mode
+            if (!newConfig.isLightMode) {
+                if (!this.bloomPass) {
+                    this.bloomPass = new UnrealBloomPass(
+                        new THREE.Vector2(window.innerWidth, window.innerHeight),
+                        this.config.bloomStrength,
+                        this.config.bloomRadius,
+                        this.config.bloomThreshold
+                    );
+                }
+                this.composer.addPass(this.bloomPass);
+            }
         }
         
         // If theme or count changed, recreate fireflies
-        if (newConfig.usePurpleTheme !== undefined || newConfig.fireflyCount !== undefined) {
+        if (newConfig.isLightMode !== undefined || newConfig.fireflyCount !== undefined) {
             this.recreateFireflies();
         }
     }

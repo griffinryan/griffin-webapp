@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import NavBar from '../navbar'
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container, useColorMode } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelLoader from '../voxel-loader'
 import SplashScreen from '../SplashScreen'
@@ -17,11 +17,13 @@ const LazyFireflies = dynamic(() => import('../FireflySystem'), {
 });
 
 const Main = ({ children, router }) => {
+  const { colorMode } = useColorMode()
+  
   return (
-    <Box as="main" pb={8}>
+    <Box as="main" pb={8} position="relative">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Griffin Ryan's homepage" />
+        <meta name="description" content="Griffin Ryan - Software Engineer & Electronic Artist" />
         <meta name="author" content="Griffin Ryan" />
         <meta name="author" content="Torpoise" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -32,11 +34,10 @@ const Main = ({ children, router }) => {
         <title>Griffin Ryan - Homepage</title>
       </Head>
 
-      <NavBar path={router.asPath} />
+      {/* Fireflies as background */}
+      <LazyFireflies isLightMode={colorMode === 'light'} />
 
-      <Container maxW="container.md" pt={14}>
-        <LazyFireflies />
-      </Container>
+      <NavBar path={router.asPath} />
 
       <Container maxW="container.md" pt={14}>
         <LazyVoxel />

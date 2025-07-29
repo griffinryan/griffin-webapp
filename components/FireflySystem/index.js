@@ -2,34 +2,34 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FireflySystem } from './core/FireflySystem.js';
 
 const FireflyAnimation = ({ 
-    fireflyCount = 80,
-    usePurpleTheme = false,
-    bloomStrength = 2.5,
-    mouseRadius = 150,
-    mouseForce = 0.3,
-    fogColor = 0x0a0a2e,
-    fogNear = 50,
-    fogFar = 800
+    fireflyCount = 120,
+    isLightMode = false,
+    bloomStrength = 4.0,
+    mouseRadius = 200,
+    mouseForce = 0.5,
+    fogColor,
+    fogNear = 10,
+    fogFar = 1000
 }) => {
     const containerRef = useRef(null);
     const systemRef = useRef(null);
     const [isLoading, setIsLoading] = useState(true);
     
+    // Determine fog color based on theme
+    const computedFogColor = fogColor || (isLightMode ? 0xe8d5c4 : 0x0a192f);
+    
     useEffect(() => {
         if (!containerRef.current) return;
         
-        // Initialize firefly system
+        // Initialize firefly system with initial configuration
         try {
-            systemRef.current = new FireflySystem(containerRef.current);
-            
-            // Apply initial configuration
-            systemRef.current.setConfig({
+            systemRef.current = new FireflySystem(containerRef.current, {
                 fireflyCount,
-                usePurpleTheme,
+                isLightMode,
                 bloomStrength,
                 mouseRadius,
                 mouseForce,
-                fogColor,
+                fogColor: computedFogColor,
                 fogNear,
                 fogFar
             });
@@ -64,16 +64,16 @@ const FireflyAnimation = ({
         if (systemRef.current) {
             systemRef.current.setConfig({
                 fireflyCount,
-                usePurpleTheme,
+                isLightMode,
                 bloomStrength,
                 mouseRadius,
                 mouseForce,
-                fogColor,
+                fogColor: computedFogColor,
                 fogNear,
                 fogFar
             });
         }
-    }, [fireflyCount, usePurpleTheme, bloomStrength, mouseRadius, mouseForce, fogColor, fogNear, fogFar]);
+    }, [fireflyCount, isLightMode, bloomStrength, mouseRadius, mouseForce, computedFogColor, fogNear, fogFar]);
     
     return (
         <div 
@@ -84,7 +84,7 @@ const FireflyAnimation = ({
                 left: 0,
                 width: '100%',
                 height: '100%',
-                zIndex: -1,
+                zIndex: 0,
                 pointerEvents: 'none'
             }}
         >

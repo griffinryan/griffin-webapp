@@ -9,4 +9,6 @@ dist
 /**/.DS_Store
 .idea/
 package-lock.json
+lakehouse
+CLAUDE.md
 
