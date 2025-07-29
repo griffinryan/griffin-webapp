@@ -132,12 +132,12 @@ export class ChalkDust {
   }
 }
 
-// Generate letter paths for text
-export const generateLetterPaths = (text, fontSize, spacing, totalWidth) => {
-  const letters = text.split('');
-  const paths = [];
+// Generate letter paths for text (supports multi-line)
+export const generateLetterPaths = (textLines, fontSize, spacing, totalWidth, totalHeight) => {
+  // Handle both string and array inputs
+  const lines = Array.isArray(textLines) ? textLines : [textLines];
+  const allPaths = [];
   
-  // Calculate total text width first
   const letterWidths = {
     'S': fontSize * 0.7,
     'O': fontSize * 0.8,
@@ -156,38 +156,54 @@ export const generateLetterPaths = (text, fontSize, spacing, totalWidth) => {
     ' ': fontSize * 0.4
   };
   
-  const textWidth = letters.reduce((sum, letter) => 
-    sum + (letterWidths[letter] || fontSize * 0.7) + spacing, 0) - spacing;
-  
-  // Center the text
-  let currentX = (totalWidth - textWidth) / 2;
-  const baseY = 55; // Base Y position
-  
   // Color pattern for visual interest
-  const colorPattern = ['cream', 'cream', 'pink', 'cream', 'purple', 'cream', 'coral', 'cream', 'lavender'];
+  const colorPattern = ['cream', 'pink', 'cream', 'purple', 'cream', 'coral', 'cream', 'lavender'];
+  let colorIndex = 0;
   
-  letters.forEach((letter, index) => {
-    const width = letterWidths[letter] || fontSize * 0.7;
-    const rotation = (Math.random() - 0.5) * 0.15; // Slight rotation
+  // Calculate line positions
+  const lineHeight = fontSize * 1.8;
+  const totalTextHeight = lines.length * lineHeight;
+  const startY = (totalHeight - totalTextHeight) / 2 + fontSize;
+  
+  lines.forEach((line, lineIndex) => {
+    const letters = line.split('');
+    const linePaths = [];
     
-    // Assign colors with pattern, some letters get highlights
-    const colorIndex = index % colorPattern.length;
-    const color = colorPattern[colorIndex];
+    // Calculate line width
+    const lineWidth = letters.reduce((sum, letter) => 
+      sum + (letterWidths[letter] || fontSize * 0.7) + spacing, 0) - spacing;
     
-    paths.push({
-      letter,
-      x: currentX,
-      y: baseY + (Math.random() - 0.5) * 5, // Slight vertical variation
-      width,
-      rotation,
-      color,
-      paths: generateLetterStrokes(letter, currentX, baseY, fontSize)
+    // Center the line
+    let currentX = (totalWidth - lineWidth) / 2;
+    const baseY = startY + (lineIndex * lineHeight);
+    
+    letters.forEach((letter, index) => {
+      const width = letterWidths[letter] || fontSize * 0.7;
+      const rotation = (Math.random() - 0.5) * 0.12; // Slight rotation
+      
+      // Assign colors with pattern
+      const color = colorPattern[colorIndex % colorPattern.length];
+      colorIndex++;
+      
+      const letterPath = {
+        letter,
+        x: currentX,
+        y: baseY + (Math.random() - 0.5) * 3, // Slight vertical variation
+        width,
+        rotation,
+        color,
+        lineIndex,
+        paths: generateLetterStrokes(letter, currentX, baseY, fontSize)
+      };
+      
+      linePaths.push(letterPath);
+      currentX += width + spacing;
     });
     
-    currentX += width + spacing;
+    allPaths.push(...linePaths);
   });
   
-  return paths;
+  return allPaths;
 };
 
 // Generate individual strokes for each letter

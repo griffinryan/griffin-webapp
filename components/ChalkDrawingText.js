@@ -10,10 +10,10 @@ import {
 
 const MotionBox = motion(Box);
 
-const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay = 0 }) => {
+const ChalkDrawingText = ({ text = ["SOFTWARE", "ENGINEER"], delay = 0 }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 1000, height: 100 });
+  const [dimensions, setDimensions] = useState({ width: 1000, height: 200 });
   
   // Animation state
   const animationState = useRef({
@@ -33,7 +33,7 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
         const rect = container.getBoundingClientRect();
         setDimensions({
           width: Math.min(rect.width, 1400), // Increased max width
-          height: 100
+          height: 200
         });
       }
     };
@@ -45,9 +45,9 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
 
   // Initialize letter paths
   useEffect(() => {
-    const fontSize = Math.min(dimensions.width / 25, 40); // Smaller font for better fit
-    const spacing = fontSize * 0.15; // Tighter spacing
-    animationState.current.letterPaths = generateLetterPaths(text, fontSize, spacing, dimensions.width);
+    const fontSize = Math.min(dimensions.width / 15, 60); // Larger font size
+    const spacing = fontSize * 0.25; // More spacing between letters
+    animationState.current.letterPaths = generateLetterPaths(text, fontSize, spacing, dimensions.width, dimensions.height);
   }, [text, dimensions]);
 
   // Main animation loop
@@ -64,9 +64,9 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
     ctx.scale(dpr, dpr);
 
     // Animation parameters
-    const DRAWING_SPEED = 0.02;
-    const ERASING_SPEED = 0.03;
-    const DISPLAY_DURATION = 800; // 0.8 seconds for quicker restart
+    const DRAWING_SPEED = 0.04; // Faster drawing
+    const ERASING_SPEED = 0.05; // Faster erasing
+    const DISPLAY_DURATION = 500; // 0.5 seconds for quicker restart
 
     const animate = (timestamp) => {
       const state = animationState.current;
@@ -175,8 +175,8 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
           break;
 
         case 'erasing':
-          // Draw letters that haven't been erased yet
-          for (let i = state.letterIndex; i < state.letterPaths.length; i++) {
+          // Draw all completed letters
+          for (let i = 0; i < state.letterPaths.length; i++) {
             const letter = state.letterPaths[i];
             if (letter && letter.paths) {
               ctx.save();
@@ -184,23 +184,42 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
               ctx.rotate(letter.rotation);
               ctx.translate(-letter.x - letter.width/2, -letter.y);
               
-              // Apply erasing effect to current letter
-              if (i === state.letterIndex) {
-                const opacity = 1 - state.progress;
-                ctx.globalAlpha = opacity;
-                
-                // Add more dust when erasing
-                if (Math.random() < 0.2) {
-                  state.particles.push(new ChalkDust(
-                    letter.x + Math.random() * letter.width,
-                    letter.y - Math.random() * 40
-                  ));
-                }
-              }
+              // Check if this letter is being erased
+              const letterStartTime = i / state.letterPaths.length;
+              const letterEndTime = (i + 1) / state.letterPaths.length;
+              const letterProgress = (state.progress - letterStartTime) / (letterEndTime - letterStartTime);
               
-              letter.paths.forEach(stroke => {
-                drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
-              });
+              if (letterProgress <= 0) {
+                // Letter not yet being erased - draw normally
+                letter.paths.forEach(stroke => {
+                  drawChalkStroke(ctx, stroke, 1, 5, letter.color || 'cream');
+                });
+              } else if (letterProgress < 1) {
+                // Letter is being erased - draw in reverse
+                letter.paths.forEach((stroke, strokeIndex) => {
+                  const strokeEraseProgress = Math.max(0, Math.min(1, 
+                    (letterProgress - strokeIndex * (1 / letter.paths.length)) * letter.paths.length
+                  ));
+                  
+                  if (strokeEraseProgress < 1) {
+                    // Draw the remaining part of the stroke
+                    const remainingProgress = 1 - strokeEraseProgress;
+                    drawChalkStroke(ctx, stroke, remainingProgress, 5, letter.color || 'cream');
+                    
+                    // Add dust particles at erase point
+                    if (strokeEraseProgress > 0 && Math.random() < 0.1) {
+                      const erasePointIndex = Math.floor(stroke.length * remainingProgress);
+                      if (erasePointIndex >= 0 && erasePointIndex < stroke.length && stroke[erasePointIndex]) {
+                        state.particles.push(new ChalkDust(
+                          stroke[erasePointIndex].x,
+                          stroke[erasePointIndex].y
+                        ));
+                      }
+                    }
+                  }
+                });
+              }
+              // If letterProgress >= 1, letter is fully erased, don't draw
               
               ctx.restore();
             }
@@ -210,15 +229,10 @@ const ChalkDrawingText = ({ text = "SOFTWARE ENGINEER BASED IN SEATTLE", delay =
           state.progress += ERASING_SPEED;
           
           if (state.progress >= 1) {
+            // Reset animation
+            state.phase = 'drawing';
+            state.letterIndex = 0;
             state.progress = 0;
-            state.letterIndex++;
-            
-            if (state.letterIndex >= state.letterPaths.length) {
-              // Reset animation
-              state.phase = 'drawing';
-              state.letterIndex = 0;
-              state.progress = 0;
-            }
           }
           break;
       }

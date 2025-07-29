@@ -225,7 +225,7 @@ const Home = () => (
           fontFamily="'Space Grotesk', sans-serif"
           fontWeight="300"
         >
-          A whole stable of show ponies.
+          A whole stable of show ponies!
         </Text>
       </Box>
     </Container>
