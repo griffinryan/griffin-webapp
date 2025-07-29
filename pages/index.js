@@ -23,7 +23,7 @@ import { IoLogoLinkedin, IoLogoInstagram, IoLogoGithub } from 'react-icons/io5'
 import thumbnailTorpoiseSpotify from '../public/images/links/torpoisespotify.png'
 import thumbnailTorpoiseKEXP from '../public/images/links/torpoisekexp.png'
 import Image from 'next/image'
-import Paragraph from '../components/paragraph'
+import StylizedParagraph from '../components/stylized-paragraph'
 import { BioSection, BioYear } from '../components/bio'
 
 const MotionBox = motion(Box)
@@ -85,7 +85,7 @@ const Home = () => (
         <Heading as="h3" variant="section-title" fontFamily="'Black Ops One', sans-serif" fontSize="xl">
           Work
         </Heading>
-        <Paragraph>
+        <StylizedParagraph>
           Griffin Ryan is a full-stack developer based in Seattle, Washington with a
           passion for building technologies. As a coder, his interests lie in artificial 
           intelligence, {' '}
@@ -95,15 +95,15 @@ const Home = () => (
           <Link as={NextLink} href="/works/doter" passHref scroll={false}>
             natural language processing
           </Link>.
-        </Paragraph>
-        <Paragraph>Having seen 
+        </StylizedParagraph>
+        <StylizedParagraph>Having seen 
           notable success in the Seattle music scene, electronic artist {' '}
           <Link as ={NextLink} href='/works/torpoise' passHref scroll={false}>
             'Torpoise' (A.K.A Griffin Ryan)
           </Link>
           {' '} has performed for recognized institutions
           such as KEXP, Neumos, and the Museum of Pop Culture. 
-          While not playing music or programming, Griffin is an automotive enthusiast.</Paragraph>
+          While not playing music or programming, Griffin is an automotive enthusiast.</StylizedParagraph>
         <Box align="center" my={4}>
           <Button
             as={NextLink}

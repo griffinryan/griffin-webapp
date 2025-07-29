@@ -1,36 +1,61 @@
-import {
-    Container,
-    Badge,
-    Link,
-    List,
-    ListItem,
-    AspectRatio
-} from "@chakra-ui/react";
-
+import { Container } from "@chakra-ui/react"
 import Layout from '../../components/layouts/article'
-import { ExternalLinkIcon } from "@chakra-ui/icons"
-import { Title, WorkImage, Meta } from '../../components/work'
-import P from '../../components/paragraph'
+import { 
+  WorkTitle, 
+  WorkHero, 
+  WorkSection, 
+  WorkDescription,
+  FeatureList,
+  TechStack,
+  ProjectLinks 
+} from '../../components/work-enhanced'
 
 const Work = () => (
-    <Layout title="CGI Study">
+    <Layout title='A CGI Study'>
         <Container>
-            <Title>
-                Computer Generated Imagery: CGI and the Mathematical Interpretation of 3D Objects in a 2D Space <Badge>2020</Badge>
-            </Title>
-            <P>
-                A CGI Study is a 2020 paper written for UW School of Engineering and Technology's MATH 308 course.
-                This paper details the complex matrix algebra behind rendering a 3D torus with a ray-traced illumination system.
-            </P>
-            <P>
-                <Link href='https://torpoisebucket.s3.us-west-2.amazonaws.com/A+CGI+Study+-+Griffin+Ryan.pdf' target='_blank'>
-                    A CGI Study <ExternalLinkIcon mx='2px' />
-                </Link>
-                can be found as a PDF here!
-            </P>
+            <WorkTitle badges={['2020', 'Academic Research']}>
+                A CGI Study
+            </WorkTitle>
+            
+            <WorkSection title="Overview" delay={0.3}>
+                <WorkDescription>
+                    Computer Generated Imagery: CGI and the Mathematical Interpretation of 3D Objects in a 2D Space 
+                    is a comprehensive academic paper written for UW School of Engineering and Technology's MATH 308 course. 
+                    This research details the complex matrix algebra behind rendering a 3D torus with a ray-traced 
+                    illumination system, exploring the fundamental mathematics that power modern computer graphics.
+                </WorkDescription>
+            </WorkSection>
 
-            <WorkImage src='/images/works/thumb_cgi.png' alt='Website' />
+            <WorkHero src='/images/works/thumb_cgi.png' alt='CGI Study visualization' />
 
+            <WorkSection title="Research Topics" delay={0.4}>
+                <FeatureList features={[
+                    'Deep dive into transformation matrices and vector mathematics',
+                    'Implementation of rendering pipeline concepts',
+                    'Study of lighting models and shading techniques',
+                    'Exploration of texture mapping and rasterization',
+                    'Ray tracing algorithms for realistic illumination',
+                    '3D torus rendering with mathematical precision'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Mathematical Concepts" delay={0.5}>
+                <TechStack technologies={[
+                    'Linear Algebra',
+                    '3D Graphics',
+                    'Matrix Transformations',
+                    'Ray Tracing',
+                    'Vector Mathematics',
+                    'Computational Geometry'
+                ]} />
+            </WorkSection>
+
+            <WorkSection title="Resources" delay={0.6}>
+                <ProjectLinks links={[
+                    { label: 'Read the Full Paper (PDF)', url: 'https://torpoisebucket.s3.us-west-2.amazonaws.com/A+CGI+Study+-+Griffin+Ryan.pdf' },
+                    { label: 'View Study Materials', url: 'https://github.com/griffinryan/cgi-study' }
+                ]} />
+            </WorkSection>
         </Container>
     </Layout>
 )
