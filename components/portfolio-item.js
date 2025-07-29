@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { GlassContainer, AnimatedSection } from './glass-container'
+import { DynamicGlassContainer, AnimatedSection } from './dynamic-glass-container'
 import StylizedParagraph from './stylized-paragraph'
 
 const BulletPoint = ({ children, id }) => (
@@ -63,14 +63,16 @@ export const PortfolioItem = ({
   description,
   features = [],
   links = [],
-  delay = 0 
+  delay = 0,
+  colorVariant = 'coral'
 }) => {
   const titleColor = useColorModeValue('coral.500', 'coral.400')
   const techBadgeScheme = useColorModeValue('purple', 'teal')
   
   return (
     <AnimatedSection delay={delay}>
-      <GlassContainer
+      <DynamicGlassContainer
+        colorVariant={colorVariant}
         position="relative"
         overflow="hidden"
         transition="all 0.3s ease"
@@ -217,7 +219,7 @@ export const PortfolioItem = ({
             </HStack>
           )}
         </VStack>
-      </GlassContainer>
+      </DynamicGlassContainer>
     </AnimatedSection>
   )
 }

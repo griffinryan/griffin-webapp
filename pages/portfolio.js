@@ -46,6 +46,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/lakehouse' }
           ]}
           delay={0.1}
+          colorVariant="firefly"
         />
 
         <PortfolioItem
@@ -66,6 +67,7 @@ const Portfolio = () => (
             { label: 'MonoGame Framework', url: 'https://github.com/MonoGame/MonoGame' }
           ]}
           delay={0.2}
+          colorVariant="violet"
         />
 
         <PortfolioItem
@@ -85,6 +87,7 @@ const Portfolio = () => (
             { label: 'View Project', url: 'https://github.com/griffinryan/greenlightgo' }
           ]}
           delay={0.3}
+          colorVariant="emerald"
         />
 
         <PortfolioItem
@@ -104,6 +107,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DoterEditor' }
           ]}
           delay={0.4}
+          colorVariant="ocean"
         />
 
         <PortfolioItem
@@ -124,6 +128,7 @@ const Portfolio = () => (
             { label: 'NIST Documentation', url: 'https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf' }
           ]}
           delay={0.5}
+          colorVariant="rose"
         />
 
         <PortfolioItem
@@ -143,6 +148,7 @@ const Portfolio = () => (
             { label: 'View Project', url: 'https://github.com/griffinryan/hollowscape' }
           ]}
           delay={0.6}
+          colorVariant="sunset"
         />
 
         <PortfolioItem
@@ -162,6 +168,7 @@ const Portfolio = () => (
             { label: 'View Study', url: 'https://github.com/griffinryan/cgi-study' }
           ]}
           delay={0.7}
+          colorVariant="indigo"
         />
 
         <PortfolioItem
@@ -181,6 +188,7 @@ const Portfolio = () => (
             { label: 'View Project', url: 'https://github.com/griffinryan/dungeon-adventure' }
           ]}
           delay={0.8}
+          colorVariant="teal"
         />
 
         <PortfolioItem
@@ -200,6 +208,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/macdot' }
           ]}
           delay={0.9}
+          colorVariant="amber"
         />
 
         <PortfolioItem
@@ -219,6 +228,7 @@ const Portfolio = () => (
             { label: 'Listen on SoundCloud', url: 'https://soundcloud.com/torpoise' }
           ]}
           delay={1.0}
+          colorVariant="coral"
         />
       </VStack>
     </Container>
