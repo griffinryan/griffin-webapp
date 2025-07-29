@@ -22,7 +22,7 @@ const MotionBox = motion(Box)
 
 const ExperienceItem = ({ company, role, date, link, children, delay = 0 }) => {
   const bgColor = useColorModeValue('whiteAlpha.500', 'whiteAlpha.100')
-  const hoverBg = useColorModeValue('whiteAlpha.700', 'whiteAlpha.200')
+  const hoverBgColor = useColorModeValue('rgba(255, 255, 255, 0.7)', 'rgba(255, 255, 255, 0.2)')
   
   return (
     <Section delay={delay}>
@@ -32,7 +32,7 @@ const ExperienceItem = ({ company, role, date, link, children, delay = 0 }) => {
         bg={bgColor}
         css={{ backdropFilter: 'blur(10px)' }}
         whileHover={{
-          backgroundColor: hoverBg,
+          backgroundColor: hoverBgColor,
         }}
         transition={{ duration: 0.3 }}
       >
