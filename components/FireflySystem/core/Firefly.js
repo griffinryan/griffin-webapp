@@ -18,10 +18,10 @@ export class Firefly {
         
         // Set color based on theme
         if (this.options.isLightMode) {
-            // Light mode: pink and purple fireflies
+            // Light mode: deeper colors for better visibility
             this.options.color = Math.random() > 0.5 
-                ? new THREE.Color('#ff69b4').multiplyScalar(0.8 + Math.random() * 0.4) // Pink variations
-                : new THREE.Color('#da70d6').multiplyScalar(0.8 + Math.random() * 0.4); // Purple variations
+                ? new THREE.Color('#9932cc').multiplyScalar(0.9 + Math.random() * 0.3) // Deep purple
+                : new THREE.Color('#db1876').multiplyScalar(0.9 + Math.random() * 0.3); // Deep pink
         } else {
             // Dark mode: coral pink and gold
             this.options.color = Math.random() > 0.5 
@@ -47,8 +47,8 @@ export class Firefly {
                 time: { value: 0 },
                 color: { value: this.options.color },
                 intensity: { value: 1 },
-                glowStrength: { value: 2.5 },
-                coreSize: { value: 0.3 }
+                glowStrength: { value: this.options.isLightMode ? 3.5 : 2.5 },
+                coreSize: { value: this.options.isLightMode ? 0.4 : 0.3 }
             },
             vertexShader: fireflyVertexShader,
             fragmentShader: fireflyFragmentShader,

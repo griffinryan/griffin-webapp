@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import NavBar from '../navbar'
-import { Box, Container, useColorMode } from '@chakra-ui/react'
+import { Box, Container, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelLoader from '../voxel-loader'
 import SplashScreen from '../SplashScreen'
@@ -20,7 +20,7 @@ const Main = ({ children, router }) => {
   const { colorMode } = useColorMode()
   
   return (
-    <Box as="main" pb={8} position="relative">
+    <Box as="main" pb={8} position="relative" minH="100vh">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Griffin Ryan - Software Engineer & Electronic Artist" />
@@ -37,15 +37,18 @@ const Main = ({ children, router }) => {
       {/* Fireflies as background */}
       <LazyFireflies isLightMode={colorMode === 'light'} />
 
-      <NavBar path={router.asPath} />
+      {/* Content wrapper with higher z-index */}
+      <Box position="relative" zIndex={1}>
+        <NavBar path={router.asPath} />
 
-      <Container maxW="container.md" pt={14}>
-        <LazyVoxel />
+        <Container maxW="container.md" pt={14}>
+          <LazyVoxel />
 
-        {children}
+          {children}
 
-        <Footer />
-      </Container>
+          <Footer />
+        </Container>
+      </Box>
     </Box>
   )
 }

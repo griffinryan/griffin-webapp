@@ -1,0 +1,40 @@
+/* Global styles fallback for Chakra UI color modes */
+
+/* Default dark mode */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode (default) */
+html[data-theme="dark"] body,
+html:not([data-theme]) body,
+body {
+  background-color: #0a192f;
+  color: #fef3c7;
+}
+
+/* Light mode */
+html[data-theme="light"] body {
+  background-color: #f5e6d3;
+  color: #2d3748;
+}
+
+/* Chakra UI class-based color mode fallback */
+.chakra-ui-dark {
+  background-color: #0a192f !important;
+  color: #fef3c7 !important;
+}
+
+.chakra-ui-light {
+  background-color: #f5e6d3 !important;
+  color: #2d3748 !important;
+}
+
+/* Ensure full height */
+#__next {
+  min-height: 100vh;
+}

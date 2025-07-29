@@ -1,8 +1,10 @@
 import {
   ChakraProvider,
   cookieStorageManagerSSR,
-  localStorageManager
+  localStorageManager,
+  CSSReset
 } from '@chakra-ui/react'
+import { CacheProvider } from '@chakra-ui/next-js'
 import theme from '../lib/theme'
 
 export default function Chakra({ cookies, children }) {
@@ -12,9 +14,12 @@ export default function Chakra({ cookies, children }) {
       : localStorageManager
 
   return (
-    <ChakraProvider theme={theme} colorModeManager={colorModeManager}>
-      {children}
-    </ChakraProvider>
+    <CacheProvider>
+      <ChakraProvider theme={theme} colorModeManager={colorModeManager}>
+        <CSSReset />
+        {children}
+      </ChakraProvider>
+    </CacheProvider>
   )
 }
 
