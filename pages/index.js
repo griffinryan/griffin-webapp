@@ -27,6 +27,16 @@ import Paragraph from '../components/paragraph'
 import StylizedParagraph from '../components/stylized-paragraph'
 import { GlassPanel } from '../components/glass-panel'
 import { BioSection, BioYear } from '../components/bio'
+import dynamic from 'next/dynamic'
+
+// Dynamic imports to avoid SSR issues with canvas
+const ChalkDrawingText = dynamic(() => import('../components/ChalkDrawingText'), {
+  ssr: false
+})
+
+const ChalkDrawingFooter = dynamic(() => import('../components/ChalkDrawingFooter'), {
+  ssr: false
+})
 
 const MotionBox = motion(Box)
 const MotionText = motion(Text)
@@ -38,17 +48,9 @@ const ProfileImage = chakra(Image, {
 const Home = () => (
   <Layout>
     <Container>
-      <GlassPanel variant="default" delay={0} mb={6}>
-        <Text 
-          textAlign="center"
-          fontFamily="'Bebas Neue', sans-serif"
-          fontSize="xl"
-          letterSpacing="-0.02em"
-          fontWeight="500"
-        >
-          I'm a software engineer based in Seattle, Washington!
-        </Text>
-      </GlassPanel>
+      <Box mb={6}>
+        <ChalkDrawingText delay={0.2} />
+      </Box>
 
       <Box display={{ md: 'flex' }}>
         <Box flexGrow={1}>
@@ -219,16 +221,7 @@ const Home = () => (
 
       {/* Footer - Concert Poster Style */}
       <Box as="footer" textAlign="center" py={16}>
-        <Text
-          fontSize="sm"
-          fontStyle="italic"
-          letterSpacing="0.05em"
-          color="textSecondary"
-          fontFamily="'Space Grotesk', sans-serif"
-          fontWeight="300"
-        >
-          Not a one trick pony, but a full circus of creativity and code.
-        </Text>
+        <ChalkDrawingFooter delay={0.5} />
       </Box>
     </Container>
   </Layout>
