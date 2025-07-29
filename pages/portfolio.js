@@ -2,6 +2,7 @@ import { Container, Heading, VStack, Divider } from '@chakra-ui/react'
 import Layout from '../components/layouts/article'
 import { PortfolioItem } from '../components/portfolio-item'
 
+import thumbLakehouse from '/public/images/works/thumb_lakehouse.png'
 import thumbDoter from '/public/images/works/thumb_doter.png'
 import thumbHollowscape from '/public/images/works/thumb_hollowscape.png'
 import thumbCGI from '/public/images/works/thumb_cgi.png'
@@ -28,6 +29,26 @@ const Portfolio = () => (
       
       <VStack spacing={8} align="stretch">
         <PortfolioItem
+          id="lakehouse"
+          title="Lakehouse Seattle"
+          year="2025"
+          thumbnail={thumbLakehouse}
+          technologies={['Three.js', 'WebGL', 'GLSL', 'Vite', 'ES6']}
+          description="An immersive WebGL experience featuring GPU-accelerated firefly particles, Van Gogh-inspired shaders, and interactive concert poster design."
+          features={[
+            'GPU-accelerated firefly particle system with realistic glow effects',
+            'Van Gogh-inspired background with complex GLSL paint simulation',
+            'Interactive mouse/touch controls with physics-based attraction',
+            'Procedural tree generation using L-system algorithms',
+            'UI-aware particle positioning and responsive design'
+          ]}
+          links={[
+            { label: 'GitHub Repository', url: 'https://github.com/griffinryan/lakehouse' }
+          ]}
+          delay={0.1}
+        />
+
+        <PortfolioItem
           id="dreamrequiem"
           title="Dream Requiem"
           year="2024"
@@ -44,7 +65,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DreamRequiem' },
             { label: 'MonoGame Framework', url: 'https://github.com/MonoGame/MonoGame' }
           ]}
-          delay={0.1}
+          delay={0.2}
         />
 
         <PortfolioItem
@@ -63,7 +84,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Project', url: 'https://github.com/griffinryan/greenlightgo' }
           ]}
-          delay={0.2}
+          delay={0.3}
         />
 
         <PortfolioItem
@@ -82,7 +103,7 @@ const Portfolio = () => (
           links={[
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DoterEditor' }
           ]}
-          delay={0.3}
+          delay={0.4}
         />
 
         <PortfolioItem
@@ -102,7 +123,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/encryption-suite' },
             { label: 'NIST Documentation', url: 'https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf' }
           ]}
-          delay={0.4}
+          delay={0.5}
         />
 
         <PortfolioItem
@@ -121,7 +142,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Project', url: 'https://github.com/griffinryan/hollowscape' }
           ]}
-          delay={0.5}
+          delay={0.6}
         />
 
         <PortfolioItem
@@ -140,7 +161,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Study', url: 'https://github.com/griffinryan/cgi-study' }
           ]}
-          delay={0.6}
+          delay={0.7}
         />
 
         <PortfolioItem
@@ -159,7 +180,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Project', url: 'https://github.com/griffinryan/dungeon-adventure' }
           ]}
-          delay={0.7}
+          delay={0.8}
         />
 
         <PortfolioItem
@@ -178,7 +199,7 @@ const Portfolio = () => (
           links={[
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/macdot' }
           ]}
-          delay={0.8}
+          delay={0.9}
         />
 
         <PortfolioItem
@@ -197,7 +218,7 @@ const Portfolio = () => (
           links={[
             { label: 'Listen on SoundCloud', url: 'https://soundcloud.com/torpoise' }
           ]}
-          delay={0.9}
+          delay={1.0}
         />
       </VStack>
     </Container>
