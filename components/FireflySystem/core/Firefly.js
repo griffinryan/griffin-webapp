@@ -13,6 +13,8 @@ export class Firefly {
             floatRadius: 15,
             curiosity: 0.5,
             isLightMode: false,
+            pulseEnabled: false,
+            pulseSpeed: 0.5,
             ...options
         };
         
@@ -32,14 +34,16 @@ export class Firefly {
         // State
         this.originalPosition = this.options.position.clone();
         this.velocity = new THREE.Vector3(
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20
+            (Math.random() - 0.5) * 30,  // Increased initial velocity
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 30
         );
         this.time = Math.random() * Math.PI * 2;
         this.blinkIntensity = 1;
         this.isBlinking = true;
         this.targetIntensity = 1;
+        this.trail = []; // For particle trails
+        this.maxTrailLength = 10;
         
         // Create material with custom shaders
         this.material = new THREE.ShaderMaterial({
@@ -47,7 +51,7 @@ export class Firefly {
                 time: { value: 0 },
                 color: { value: this.options.color },
                 intensity: { value: 1 },
-                glowStrength: { value: this.options.isLightMode ? 1.0 : 2.5 },
+                glowStrength: { value: this.options.isLightMode ? 1.5 : 3.5 },
                 coreSize: { value: this.options.isLightMode ? 0.3 : 0.3 },
                 isLightMode: { value: this.options.isLightMode ? 1.0 : 0.0 }
             },
@@ -88,14 +92,27 @@ export class Firefly {
             this.updateMouseInteraction(deltaTime, mouseWorld, mouseRadius, mouseForce);
         }
         
+        // Store position for trails before moving
+        if (this.trail.length < this.maxTrailLength) {
+            this.trail.push(this.mesh.position.clone());
+        } else {
+            this.trail.shift();
+            this.trail.push(this.mesh.position.clone());
+        }
+        
         // Apply velocity with frame-independent movement
         this.mesh.position.add(this.velocity.clone().multiplyScalar(deltaTime));
         
         // Boundary wrapping
         this.wrapBoundaries();
         
-        // Update material intensity
-        this.material.uniforms.intensity.value = this.blinkIntensity;
+        // Update material intensity with pulse effect
+        let finalIntensity = this.blinkIntensity;
+        if (this.options.pulseEnabled) {
+            const pulseWave = Math.sin(this.time * this.options.pulseSpeed * 2) * 0.2 + 1;
+            finalIntensity *= pulseWave;
+        }
+        this.material.uniforms.intensity.value = finalIntensity;
     }
     
     updateFloatingBehavior(deltaTime) {

@@ -69,10 +69,18 @@ export const drawChalkStroke = (ctx, points, progress, strokeWidth = 5, colorVar
   // Calculate how many points to draw based on progress
   const pointsToDraw = Math.floor(points.length * progress);
   
-  // Draw multiple passes for texture
-  for (let pass = 0; pass < 3; pass++) {
-    ctx.globalAlpha = 0.3 + (pass * 0.2);
-    ctx.lineWidth = strokeWidth + (pass * 2);
+  // Draw multiple passes for enhanced texture with glow
+  for (let pass = 0; pass < 4; pass++) {
+    ctx.globalAlpha = 0.2 + (pass * 0.15);
+    ctx.lineWidth = strokeWidth + (pass * 3);
+    
+    // Add glow effect on first pass
+    if (pass === 0) {
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = themeColors[colorVariant] || themeColors.cream;
+    } else {
+      ctx.shadowBlur = 0;
+    }
     
     ctx.beginPath();
     ctx.moveTo(points[0].x, points[0].y);
@@ -115,31 +123,56 @@ export class ChalkDust {
   constructor(x, y, colorMode = 'dark') {
     this.x = x;
     this.y = y;
-    this.vx = (Math.random() - 0.5) * 0.5;
-    this.vy = Math.random() * 0.5 + 0.2;
+    this.vx = (Math.random() - 0.5) * 1.5;  // Increased velocity
+    this.vy = Math.random() * 1.0 + 0.3;
     this.life = 1.0;
-    this.decay = 0.01;
-    this.size = Math.random() * 3 + 1;
+    this.decay = 0.008;  // Slower decay for longer trails
+    this.size = Math.random() * 4 + 1;  // Larger particles
     this.colorMode = colorMode;
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotationSpeed = (Math.random() - 0.5) * 0.1;
   }
   
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.vy += 0.02; // gravity
+    this.vy += 0.03; // gravity
+    this.vx *= 0.99; // air resistance
     this.life -= this.decay;
+    this.rotation += this.rotationSpeed;
+    this.size *= 0.99; // shrink over time
     
     return this.life > 0;
   }
   
   draw(ctx) {
     ctx.save();
-    ctx.globalAlpha = this.life * 0.3;
-    // Use dark particles in light mode, light particles in dark mode
-    ctx.fillStyle = this.colorMode === 'light' ? '#1a1a1a' : '#fef3c7';
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    
+    // Enhanced particle with glow effect
+    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 2);
+    const baseColor = this.colorMode === 'light' ? '#1a1a1a' : '#fef3c7';
+    
+    gradient.addColorStop(0, baseColor + 'ff');
+    gradient.addColorStop(0.5, baseColor + '88');
+    gradient.addColorStop(1, baseColor + '00');
+    
+    ctx.globalAlpha = this.life * 0.5;
+    ctx.fillStyle = gradient;
+    
+    // Draw a soft star shape instead of circle
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    for (let i = 0; i < 5; i++) {
+      const angle = (i * Math.PI * 2) / 5;
+      const x = Math.cos(angle) * this.size;
+      const y = Math.sin(angle) * this.size;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
     ctx.fill();
+    
     ctx.restore();
   }
 }

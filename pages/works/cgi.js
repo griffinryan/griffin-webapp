@@ -10,6 +10,7 @@ import {
   ProjectLinks 
 } from '../../components/work-enhanced'
 
+import OptimizedImage from '../../components/OptimizedImage'
 const Work = () => (
     <Layout title='A CGI Study'>
         <Container>
@@ -26,7 +27,7 @@ const Work = () => (
                 </WorkDescription>
             </WorkSection>
 
-            <WorkHero src='/images/works/thumb_cgi.png' alt='CGI Study visualization' />
+            <OptimizedImage src="/images/works/thumb_cgi.png" alt="CGI Study visualization" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
 
             <WorkSection title="Research Topics" delay={0.4}>
                 <FeatureList features={[

@@ -1,0 +1,128 @@
+{
+  "/apple-touch-icon.png": {
+    "original": "/apple-touch-icon.png",
+    "webp": {
+      "original": "/apple-touch-icon.webp"
+    },
+    "dimensions": {
+      "width": 82,
+      "height": 81
+    }
+  },
+  "/images/links/torpoisekexp.png": {
+    "original": "/images/links/torpoisekexp.png",
+    "webp": {
+      "320w": "/images/links/torpoisekexp-320w.webp",
+      "640w": "/images/links/torpoisekexp-640w.webp",
+      "original": "/images/links/torpoisekexp.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/links/torpoisespotify.png": {
+    "original": "/images/links/torpoisespotify.png",
+    "webp": {
+      "320w": "/images/links/torpoisespotify-320w.webp",
+      "640w": "/images/links/torpoisespotify-640w.webp",
+      "original": "/images/links/torpoisespotify.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_cgi.png": {
+    "original": "/images/works/thumb_cgi.png",
+    "webp": {
+      "320w": "/images/works/thumb_cgi-320w.webp",
+      "640w": "/images/works/thumb_cgi-640w.webp",
+      "original": "/images/works/thumb_cgi.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_disco.png": {
+    "original": "/images/works/thumb_disco.png",
+    "webp": {
+      "320w": "/images/works/thumb_disco-320w.webp",
+      "640w": "/images/works/thumb_disco-640w.webp",
+      "original": "/images/works/thumb_disco.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_doter.png": {
+    "original": "/images/works/thumb_doter.png",
+    "webp": {
+      "320w": "/images/works/thumb_doter-320w.webp",
+      "640w": "/images/works/thumb_doter-640w.webp",
+      "1280w": "/images/works/thumb_doter-1280w.webp",
+      "original": "/images/works/thumb_doter.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_dreamrequiem.png": {
+    "original": "/images/works/thumb_dreamrequiem.png",
+    "webp": {
+      "320w": "/images/works/thumb_dreamrequiem-320w.webp",
+      "640w": "/images/works/thumb_dreamrequiem-640w.webp",
+      "1280w": "/images/works/thumb_dreamrequiem-1280w.webp",
+      "original": "/images/works/thumb_dreamrequiem.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_dungeon.png": {
+    "original": "/images/works/thumb_dungeon.png",
+    "webp": {
+      "320w": "/images/works/thumb_dungeon-320w.webp",
+      "original": "/images/works/thumb_dungeon.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_encryption.png": {
+    "original": "/images/works/thumb_encryption.png",
+    "webp": {
+      "320w": "/images/works/thumb_encryption-320w.webp",
+      "original": "/images/works/thumb_encryption.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_greenlightgo.png": {
+    "original": "/images/works/thumb_greenlightgo.png",
+    "webp": {
+      "320w": "/images/works/thumb_greenlightgo-320w.webp",
+      "640w": "/images/works/thumb_greenlightgo-640w.webp",
+      "1280w": "/images/works/thumb_greenlightgo-1280w.webp",
+      "original": "/images/works/thumb_greenlightgo.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_hollowscape.png": {
+    "original": "/images/works/thumb_hollowscape.png",
+    "webp": {
+      "320w": "/images/works/thumb_hollowscape-320w.webp",
+      "640w": "/images/works/thumb_hollowscape-640w.webp",
+      "original": "/images/works/thumb_hollowscape.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_lakehouse.png": {
+    "original": "/images/works/thumb_lakehouse.png",
+    "webp": {
+      "320w": "/images/works/thumb_lakehouse-320w.webp",
+      "original": "/images/works/thumb_lakehouse.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_macdot.png": {
+    "original": "/images/works/thumb_macdot.png",
+    "webp": {
+      "320w": "/images/works/thumb_macdot-320w.webp",
+      "640w": "/images/works/thumb_macdot-640w.webp",
+      "original": "/images/works/thumb_macdot.webp"
+    },
+    "dimensions": {}
+  },
+  "/images/works/thumb_torpoise.png": {
+    "original": "/images/works/thumb_torpoise.png",
+    "webp": {
+      "320w": "/images/works/thumb_torpoise-320w.webp",
+      "original": "/images/works/thumb_torpoise.webp"
+    },
+    "dimensions": {}
+  }
+}
