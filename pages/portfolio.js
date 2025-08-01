@@ -219,6 +219,29 @@ const Portfolio = () => (
           delay={1.0}
           colorVariant="coral"
         />
+
+        <PortfolioItem
+          id="streamtools"
+          title="StreamTools"
+          year="2025"
+          thumbnail="/images/works/thumb_streamtools.png"
+          technologies={['TypeScript', 'MediaPipe', 'TensorFlow.js', 'WebGL']}
+          description="Real-time ASL recognition system with clean architecture framework for browser-based hand tracking and sign language detection."
+          features={[
+            'Clean architecture framework with event-driven design',
+            'MediaPipe integration for 21 3D hand landmarks tracking',
+            'Multiple rendering modes with WebGL shaders',
+            'Type-safe event bus for component communication',
+            'Performance monitoring with adaptive quality settings',
+            'Extensible plugin architecture for custom processors'
+          ]}
+          links={[
+            { label: 'GitHub Repository', url: 'https://github.com/griffinryan/streamtools' },
+            { label: 'Live Demo', url: 'http://localhost:8080/demo/' }
+          ]}
+          delay={1.1}
+          colorVariant="cyan"
+        />
       </VStack>
     </Container>
   </Layout>
