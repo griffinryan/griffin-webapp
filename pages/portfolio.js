@@ -18,6 +18,29 @@ const Portfolio = () => (
       
       <VStack spacing={8} align="stretch">
         <PortfolioItem
+          id="streamtools"
+          title="StreamTools"
+          year="2025"
+          thumbnail="/images/works/thumb_streamtools.png"
+          technologies={['TypeScript', 'MediaPipe', 'TensorFlow.js', 'WebGL']}
+          description="Real-time ASL recognition system with clean architecture framework for browser-based hand tracking and sign language detection."
+          features={[
+            'Clean architecture framework with event-driven design',
+            'MediaPipe integration for 21 3D hand landmarks tracking',
+            'Multiple rendering modes with WebGL shaders',
+            'Type-safe event bus for component communication',
+            'Performance monitoring with adaptive quality settings',
+            'Extensible plugin architecture for custom processors'
+          ]}
+          links={[
+            { label: 'GitHub Repository', url: 'https://github.com/griffinryan/streamtools' },
+            { label: 'Live Demo', url: 'http://localhost:8080/demo/' }
+          ]}
+          delay={0.1}
+          colorVariant="cyan"
+        />
+
+        <PortfolioItem
           id="lakehouse"
           title="Lakehouse Seattle"
           year="2025"
@@ -34,7 +57,7 @@ const Portfolio = () => (
           links={[
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/lakehouse' }
           ]}
-          delay={0.1}
+          delay={0.2}
           colorVariant="firefly"
         />
 
@@ -55,7 +78,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DreamRequiem' },
             { label: 'MonoGame Framework', url: 'https://github.com/MonoGame/MonoGame' }
           ]}
-          delay={0.2}
+          delay={0.3}
           colorVariant="violet"
         />
 
@@ -75,7 +98,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Project', url: 'https://github.com/griffinryan/greenlightgo' }
           ]}
-          delay={0.3}
+          delay={0.4}
           colorVariant="emerald"
         />
 
@@ -95,7 +118,7 @@ const Portfolio = () => (
           links={[
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/DoterEditor' }
           ]}
-          delay={0.4}
+          delay={0.5}
           colorVariant="ocean"
         />
 
@@ -116,7 +139,7 @@ const Portfolio = () => (
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/encryption-suite' },
             { label: 'NIST Documentation', url: 'https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf' }
           ]}
-          delay={0.5}
+          delay={0.6}
           colorVariant="rose"
         />
 
@@ -136,7 +159,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Project', url: 'https://github.com/griffinryan/hollowscape' }
           ]}
-          delay={0.6}
+          delay={0.7}
           colorVariant="sunset"
         />
 
@@ -156,7 +179,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Study', url: 'https://github.com/griffinryan/cgi-study' }
           ]}
-          delay={0.7}
+          delay={0.8}
           colorVariant="indigo"
         />
 
@@ -176,7 +199,7 @@ const Portfolio = () => (
           links={[
             { label: 'View Project', url: 'https://github.com/griffinryan/dungeon-adventure' }
           ]}
-          delay={0.8}
+          delay={0.9}
           colorVariant="teal"
         />
 
@@ -196,7 +219,7 @@ const Portfolio = () => (
           links={[
             { label: 'GitHub Repository', url: 'https://github.com/griffinryan/macdot' }
           ]}
-          delay={0.9}
+          delay={1.0}
           colorVariant="amber"
         />
 
@@ -216,9 +239,10 @@ const Portfolio = () => (
           links={[
             { label: 'Listen on SoundCloud', url: 'https://soundcloud.com/torpoise' }
           ]}
-          delay={1.0}
+          delay={1.1}
           colorVariant="coral"
         />
+
       </VStack>
     </Container>
   </Layout>
