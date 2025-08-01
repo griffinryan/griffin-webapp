@@ -12,22 +12,27 @@ export class FireflySystem {
         this.mouseWorld = new THREE.Vector3();
         this.raycaster = new THREE.Raycaster();
         
-        // Simplified configuration for portfolio
+        // Enhanced configuration with performance improvements from WebP
         this.config = {
-            fireflyCount: 80,  // Reduced for performance
+            fireflyCount: 150,  // Increased from 80 - now we have performance budget!
             fireflyScale: 1,
-            mouseRadius: 150,
-            mouseForce: 0.3,
+            mouseRadius: 200,   // Increased interaction radius
+            mouseForce: 0.4,    // Slightly stronger attraction
             isLightMode: false,
             environmentColor: new THREE.Color(0x0a0a2e),
             fogColor: new THREE.Color(0x0a0a2e),
-            fogNear: 50,
-            fogFar: 800,
-            bloomStrength: 2.5,  // Reduced for subtler effect
-            bloomRadius: 0.8,
-            bloomThreshold: 0.1,
+            fogNear: 40,        // Closer fog for depth
+            fogFar: 1000,       // Further fog distance
+            bloomStrength: 3.0,  // Increased bloom for more glow
+            bloomRadius: 0.9,
+            bloomThreshold: 0.05, // Lower threshold for more bloom
             // Option to use purple theme
             usePurpleTheme: false,
+            // New performance features
+            enableTrails: true,   // Particle trails
+            trailLength: 5,
+            enablePulse: true,    // Pulsing glow effect
+            pulseSpeed: 0.5,
             ...initialConfig  // Apply any initial configuration
         };
         
@@ -112,20 +117,29 @@ export class FireflySystem {
             // Random distribution with some clustering
             let position;
             
-            if (i < this.config.fireflyCount * 0.3) {
-                // Cluster some fireflies on the sides
+            if (i < this.config.fireflyCount * 0.2) {
+                // Cluster some fireflies on the sides for dynamic entry
                 const side = Math.random() < 0.5 ? -1 : 1;
                 position = new THREE.Vector3(
-                    side * (200 + Math.random() * 100),
+                    side * (250 + Math.random() * 150),
                     (Math.random() - 0.5) * verticalSpread,
-                    (Math.random() - 0.5) * 200
+                    (Math.random() - 0.5) * 250
+                );
+            } else if (i < this.config.fireflyCount * 0.4) {
+                // Create swirling patterns
+                const angle = (i / this.config.fireflyCount) * Math.PI * 2;
+                const radius = 150 + Math.random() * 200;
+                position = new THREE.Vector3(
+                    Math.cos(angle) * radius,
+                    (Math.random() - 0.5) * verticalSpread * 0.7,
+                    Math.sin(angle) * radius
                 );
             } else {
-                // Random distribution
+                // Random distribution with more depth
                 position = new THREE.Vector3(
-                    (Math.random() - 0.5) * horizontalSpread,
+                    (Math.random() - 0.5) * horizontalSpread * 1.2,
                     (Math.random() - 0.5) * verticalSpread,
-                    (Math.random() - 0.5) * 300
+                    (Math.random() - 0.5) * 400
                 );
             }
             
@@ -135,13 +149,16 @@ export class FireflySystem {
             const firefly = new Firefly(geometry, {
                 index: i,
                 position: position,
-                scale: Math.random() * 0.75 + 0.75,
+                scale: Math.random() * 1.0 + 0.5,  // Varied sizes
                 blinkOffset: Math.random() * Math.PI * 2,
-                blinkSpeed: Math.random() * 0.5 + 0.5,
-                floatSpeed: Math.random() * 0.3 + 0.2,
-                floatRadius: Math.random() * 15 + 10,
-                curiosity: Math.random() * 0.5 + 0.3,
-                isLightMode: isLightMode
+                blinkSpeed: Math.random() * 0.8 + 0.3,  // More varied blink speeds
+                floatSpeed: Math.random() * 0.4 + 0.15,
+                floatRadius: Math.random() * 20 + 10,   // Larger float radius
+                curiosity: Math.random() * 0.7 + 0.3,   // More curious behavior
+                isLightMode: isLightMode,
+                // New properties for enhanced effects
+                pulseEnabled: this.config.enablePulse,
+                pulseSpeed: this.config.pulseSpeed * (0.8 + Math.random() * 0.4)
             });
             
             this.fireflies.push(firefly);
@@ -150,8 +167,27 @@ export class FireflySystem {
     }
     
     updateFireflies(deltaTime) {
-        this.fireflies.forEach(firefly => {
+        // Update fireflies with enhanced trail effects
+        this.fireflies.forEach((firefly, index) => {
             firefly.update(deltaTime, this.mouseWorld, this.config.mouseRadius, this.config.mouseForce);
+            
+            // Create swarm behavior - fireflies influence each other
+            if (index % 3 === 0) { // Only some fireflies to reduce computation
+                const nearbyFireflies = this.fireflies.filter((other, otherIndex) => {
+                    if (otherIndex === index) return false;
+                    const distance = firefly.mesh.position.distanceTo(other.mesh.position);
+                    return distance < 100;
+                });
+                
+                // Apply subtle swarm forces
+                nearbyFireflies.forEach(other => {
+                    const force = new THREE.Vector3()
+                        .subVectors(other.mesh.position, firefly.mesh.position)
+                        .normalize()
+                        .multiplyScalar(0.05);
+                    firefly.velocity.add(force);
+                });
+            }
         });
     }
     

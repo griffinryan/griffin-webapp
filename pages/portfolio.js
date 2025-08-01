@@ -2,17 +2,6 @@ import { Container, Heading, VStack, Divider } from '@chakra-ui/react'
 import Layout from '../components/layouts/article'
 import { PortfolioItem } from '../components/portfolio-item'
 
-import thumbLakehouse from '/public/images/works/thumb_lakehouse.png'
-import thumbDoter from '/public/images/works/thumb_doter.png'
-import thumbHollowscape from '/public/images/works/thumb_hollowscape.png'
-import thumbCGI from '/public/images/works/thumb_cgi.png'
-import thumbDungeon from '/public/images/works/thumb_dungeon.png'
-import thumbEncryption from '/public/images/works/thumb_encryption.png'
-import thumbMacdot from '/public/images/works/thumb_macdot.png'
-import thumbTorpoise from '/public/images/works/thumb_torpoise.png'
-import thumbGreenlightgo from '/public/images/works/thumb_greenlightgo.png'
-import thumbDreamRequiem from '/public/images/works/thumb_dreamrequiem.png'
-
 const Portfolio = () => (
   <Layout title="Portfolio">
     <Container>
@@ -32,7 +21,7 @@ const Portfolio = () => (
           id="lakehouse"
           title="Lakehouse Seattle"
           year="2025"
-          thumbnail={thumbLakehouse}
+          thumbnail="/images/works/thumb_lakehouse.png"
           technologies={['Three.js', 'WebGL', 'GLSL', 'Vite', 'ES6']}
           description="An immersive WebGL experience featuring GPU-accelerated firefly particles, Van Gogh-inspired shaders, and interactive concert poster design."
           features={[
@@ -53,7 +42,7 @@ const Portfolio = () => (
           id="dreamrequiem"
           title="Dream Requiem"
           year="2024"
-          thumbnail={thumbDreamRequiem}
+          thumbnail="/images/works/thumb_dreamrequiem.png"
           technologies={['C#', 'MonoGame', 'OpenGL', 'GLFW']}
           description="A custom-built game engine leveraging MonoGame framework for pseudo-3D game development."
           features={[
@@ -74,7 +63,7 @@ const Portfolio = () => (
           id="greenlightgo"
           title="GreenLightGo"
           year="2024"
-          thumbnail={thumbGreenlightgo}
+          thumbnail="/images/works/thumb_greenlightgo.png"
           technologies={['Go', 'OpenGL', 'GLFW']}
           description="An OpenGL game engine built with Go, focusing on simplicity and performance."
           features={[
@@ -94,7 +83,7 @@ const Portfolio = () => (
           id="doter"
           title="Doter Editor"
           year="2024"
-          thumbnail={thumbDoter}
+          thumbnail="/images/works/thumb_doter.png"
           technologies={['Electron', 'JavaScript', 'Node.js']}
           description="A modern code editor supporting 50+ programming languages with syntax highlighting and advanced features."
           features={[
@@ -114,7 +103,7 @@ const Portfolio = () => (
           id="encryption"
           title="Encryption Suite"
           year="2024"
-          thumbnail={thumbEncryption}
+          thumbnail="/images/works/thumb_encryption.png"
           technologies={['Java', 'Cryptography', 'SHA-256', 'KMAC']}
           description="A comprehensive Java cryptography suite implementing advanced encryption algorithms and file security features."
           features={[
@@ -135,7 +124,7 @@ const Portfolio = () => (
           id="hollowscape"
           title="Hollowscape"
           year="2022"
-          thumbnail={thumbHollowscape}
+          thumbnail="/images/works/thumb_hollowscape.png"
           technologies={['JavaScript', 'Canvas API', 'Game Engine']}
           description="A vanilla JavaScript game engine designed for 2D game development."
           features={[
@@ -155,7 +144,7 @@ const Portfolio = () => (
           id="cgi"
           title="A CGI Study"
           year="2020"
-          thumbnail={thumbCGI}
+          thumbnail="/images/works/thumb_cgi.png"
           technologies={['Linear Algebra', '3D Graphics', 'Mathematics']}
           description="An academic exploration of modern 3D rendering mathematics and computer-generated imagery fundamentals."
           features={[
@@ -175,7 +164,7 @@ const Portfolio = () => (
           id="dungeonadventure"
           title="Dungeon Adventure"
           year="2021"
-          thumbnail={thumbDungeon}
+          thumbnail="/images/works/thumb_dungeon.png"
           technologies={['Java', 'JavaFX', 'SQLite', 'JDK 13']}
           description="A roguelike dungeon crawler featuring procedural generation and persistent game state."
           features={[
@@ -195,7 +184,7 @@ const Portfolio = () => (
           id="macdot"
           title="Macdot"
           year="2019"
-          thumbnail={thumbMacdot}
+          thumbnail="/images/works/thumb_macdot.png"
           technologies={['Bash', 'Shell', 'macOS', 'Arch Linux']}
           description="A dotfile management CLI tool for seamless system configuration across macOS and Arch Linux."
           features={[
@@ -215,7 +204,7 @@ const Portfolio = () => (
           id="torpoise"
           title="Torpoise"
           year="2016"
-          thumbnail={thumbTorpoise}
+          thumbnail="/images/works/thumb_torpoise.png"
           technologies={['Music Production', 'Electronic', 'Audio Engineering']}
           description="Electronic music project showcasing experimental soundscapes and production techniques."
           features={[

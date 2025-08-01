@@ -10,6 +10,7 @@ import {
   ProjectLinks 
 } from '../../components/work-enhanced'
 
+import OptimizedImage from '../../components/OptimizedImage'
 const Work = () => (
     <Layout title='Macdot'>
         <Container>
@@ -26,7 +27,7 @@ const Work = () => (
                 </WorkDescription>
             </WorkSection>
 
-            <WorkHero src='/images/works/thumb_macdot.png' alt='Macdot CLI tool' />
+            <OptimizedImage src="/images/works/thumb_macdot.png" alt="Macdot CLI tool" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
 
             <WorkSection title="Key Features" delay={0.4}>
                 <FeatureList features={[

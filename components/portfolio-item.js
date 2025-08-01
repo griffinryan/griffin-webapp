@@ -10,13 +10,13 @@ import {
   ListIcon,
   useColorModeValue,
   Link,
-  Image,
   Flex
 } from '@chakra-ui/react'
 import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { DynamicGlassContainer, AnimatedSection } from './dynamic-glass-container'
 import StylizedParagraph from './stylized-paragraph'
+import OptimizedImage from './OptimizedImage'
 
 const BulletPoint = ({ children, id }) => (
   <ListItem display="flex" alignItems="flex-start">
@@ -140,19 +140,21 @@ export const PortfolioItem = ({
                 w={{ base: 'full', md: '200px' }}
                 _hover={{ textDecoration: 'none' }}
               >
-                <Image
+                <OptimizedImage
                   src={thumbnail.src || thumbnail}
                   alt={title}
-                  borderRadius="md"
-                  w="full"
-                  h="auto"
-                  objectFit="cover"
-                  transition="all 0.3s ease"
-                  _hover={{
-                    transform: 'scale(1.05)',
-                    boxShadow: 'lg'
+                  width={400}
+                  height={300}
+                  style={{
+                    borderRadius: '0.375rem',
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'cover',
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer'
                   }}
-                  cursor="pointer"
+                  className="portfolio-thumbnail"
+                  sizes="(max-width: 768px) 100vw, 200px"
                 />
               </Link>
             )}

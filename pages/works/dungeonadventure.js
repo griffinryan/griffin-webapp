@@ -10,6 +10,7 @@ import {
   ProjectLinks 
 } from '../../components/work-enhanced'
 
+import OptimizedImage from '../../components/OptimizedImage'
 const Work = () => (
     <Layout title='Dungeon Adventure'>
         <Container>
@@ -27,7 +28,7 @@ const Work = () => (
                 </WorkDescription>
             </WorkSection>
 
-            <WorkHero src='/images/works/thumb_dungeon.png' alt='Dungeon Adventure gameplay' />
+            <OptimizedImage src="/images/works/thumb_dungeon.png" alt="Dungeon Adventure gameplay" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
 
             <WorkSection title="Key Features" delay={0.4}>
                 <FeatureList features={[
