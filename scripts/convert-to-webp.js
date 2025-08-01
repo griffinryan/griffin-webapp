@@ -16,6 +16,22 @@ const SIZES = {
   original: null
 };
 
+async function generateBlurDataURL(inputPath) {
+  try {
+    const buffer = await sharp(inputPath)
+      .resize(10, 10, { fit: 'inside' })
+      .blur()
+      .toBuffer();
+    
+    const base64 = buffer.toString('base64');
+    const mimeType = inputPath.endsWith('.png') ? 'image/png' : 'image/jpeg';
+    return `data:${mimeType};base64,${base64}`;
+  } catch (error) {
+    console.error(`❌ Error generating blur data URL for ${inputPath}:`, error.message);
+    return null;
+  }
+}
+
 async function convertToWebP(inputPath, outputPath, quality = QUALITY_LEVELS.high) {
   try {
     const metadata = await sharp(inputPath).metadata();
@@ -34,6 +50,12 @@ async function convertToWebP(inputPath, outputPath, quality = QUALITY_LEVELS.hig
     console.log(`   WebP: ${(outputStats.size / 1024).toFixed(1)}KB`);
     console.log(`   Savings: ${savings}%`);
     
+    // Generate blur data URL
+    const blurDataURL = await generateBlurDataURL(inputPath);
+    if (blurDataURL) {
+      console.log(`   🌫️  Generated blur placeholder`);
+    }
+    
     return {
       original: inputPath,
       webp: outputPath,
@@ -43,7 +65,8 @@ async function convertToWebP(inputPath, outputPath, quality = QUALITY_LEVELS.hig
       dimensions: {
         width: metadata.width,
         height: metadata.height
-      }
+      },
+      blurDataURL
     };
   } catch (error) {
     console.error(`❌ Error converting ${inputPath}:`, error.message);
@@ -151,12 +174,17 @@ async function generateImageManifest(results) {
       manifest[pngPath] = {
         original: pngPath,
         webp: {},
-        dimensions: result.dimensions || {}
+        dimensions: result.dimensions || {},
+        blurDataURL: null
       };
     }
     
     if (result.sizeName === 'original') {
       manifest[pngPath].webp.original = result.webp.replace(/^.*\/public\//, '/');
+      // Store blur data URL from the original conversion
+      if (result.blurDataURL) {
+        manifest[pngPath].blurDataURL = result.blurDataURL;
+      }
     } else if (result.width) {
       manifest[pngPath].webp[`${result.width}w`] = result.webp.replace(/^.*\/public\//, '/');
     }

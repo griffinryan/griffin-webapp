@@ -12,7 +12,7 @@ const OptimizedImage = ({
   fill,
   width,
   height,
-  placeholder = 'blur',
+  placeholder,
   blurDataURL,
   loading,
   onLoad,
@@ -40,7 +40,8 @@ const OptimizedImage = ({
     if (src.endsWith('.webp')) {
       return {
         src: src,
-        srcSet: null
+        srcSet: null,
+        manifestBlurDataURL: null
       };
     }
     
@@ -50,7 +51,8 @@ const OptimizedImage = ({
     if (!manifestEntry || !supportsWebP) {
       return {
         src: src,
-        srcSet: null
+        srcSet: null,
+        manifestBlurDataURL: manifestEntry?.blurDataURL || null
       };
     }
     
@@ -79,11 +81,16 @@ const OptimizedImage = ({
     
     return {
       src: webpSrc,
-      srcSet
+      srcSet,
+      manifestBlurDataURL: manifestEntry.blurDataURL || null
     };
   };
   
-  const { src: optimizedSrc, srcSet } = getOptimizedSrc();
+  const { src: optimizedSrc, srcSet, manifestBlurDataURL } = getOptimizedSrc();
+  
+  // Determine blur placeholder settings
+  const finalBlurDataURL = blurDataURL || manifestBlurDataURL;
+  const finalPlaceholder = finalBlurDataURL ? (placeholder || 'blur') : 'empty';
   
   // Handle image loading errors (fallback to PNG)
   const handleError = () => {
@@ -103,8 +110,8 @@ const OptimizedImage = ({
         fill
         sizes={sizes}
         priority={priority}
-        placeholder={placeholder}
-        blurDataURL={blurDataURL}
+        placeholder={finalPlaceholder}
+        blurDataURL={finalBlurDataURL}
         style={style}
         onError={handleError}
         onLoad={onLoad}
@@ -123,8 +130,8 @@ const OptimizedImage = ({
       className={className}
       sizes={sizes}
       priority={priority}
-      placeholder={placeholder}
-      blurDataURL={blurDataURL}
+      placeholder={finalPlaceholder}
+      blurDataURL={finalBlurDataURL}
       loading={loading}
       style={style}
       onError={handleError}
