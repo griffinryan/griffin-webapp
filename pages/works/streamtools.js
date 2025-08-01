@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react"
+import { Container, Box } from "@chakra-ui/react"
 import Layout from '../../components/layouts/article'
 import { 
   WorkTitle, 
@@ -31,6 +31,20 @@ const Work = () => (
             </WorkSection>
 
             <OptimizedImage src="/images/works/thumb_streamtools.png" alt="StreamTools ASL Recognition" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
+
+            <WorkSection title="Demo Video" delay={0.35}>
+                <Box 
+                    as="video" 
+                    controls 
+                    width="100%" 
+                    borderRadius="0.375rem" 
+                    mb={4}
+                    src="/images/works/video_streamtools.mov"
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                >
+                    Your browser does not support the video tag.
+                </Box>
+            </WorkSection>
 
             <WorkSection title="Core Features" delay={0.4}>
                 <FeatureList features={[
