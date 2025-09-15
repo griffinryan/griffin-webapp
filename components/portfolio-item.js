@@ -16,7 +16,7 @@ import { ChevronRightIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { DynamicGlassContainer, AnimatedSection } from './dynamic-glass-container'
 import StylizedParagraph from './stylized-paragraph'
-import OptimizedImage from './OptimizedImage'
+import Image from 'next/image'
 
 const BulletPoint = ({ children, id }) => (
   <ListItem display="flex" alignItems="flex-start">
@@ -140,7 +140,7 @@ export const PortfolioItem = ({
                 w={{ base: 'full', md: '200px' }}
                 _hover={{ textDecoration: 'none' }}
               >
-                <OptimizedImage
+                <Image
                   src={thumbnail.src || thumbnail}
                   alt={title}
                   width={400}

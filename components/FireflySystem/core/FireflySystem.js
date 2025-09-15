@@ -12,9 +12,9 @@ export class FireflySystem {
         this.mouseWorld = new THREE.Vector3();
         this.raycaster = new THREE.Raycaster();
         
-        // Enhanced configuration with performance improvements from WebP
+        // Enhanced configuration
         this.config = {
-            fireflyCount: 150,  // Increased from 80 - now we have performance budget!
+            fireflyCount: 150,
             fireflyScale: 1,
             mouseRadius: 200,   // Increased interaction radius
             mouseForce: 0.4,    // Slightly stronger attraction

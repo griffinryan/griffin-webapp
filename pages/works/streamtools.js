@@ -10,7 +10,7 @@ import {
   ProjectLinks 
 } from '../../components/work-enhanced'
 
-import OptimizedImage from '../../components/OptimizedImage'
+import Image from 'next/image'
 
 const Work = () => (
     <Layout title="StreamTools">
@@ -30,7 +30,7 @@ const Work = () => (
                 </WorkDescription>
             </WorkSection>
 
-            <OptimizedImage src="/images/works/thumb_streamtools.png" alt="StreamTools ASL Recognition" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
+            <Image src="/images/works/thumb_streamtools.png" alt="StreamTools ASL Recognition" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
 
             <WorkSection title="Demo Video" delay={0.35}>
                 <Box 

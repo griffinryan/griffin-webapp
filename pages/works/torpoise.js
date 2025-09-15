@@ -11,7 +11,7 @@ import {
 } from '../../components/work-enhanced'
 import { GlassContainer } from '../../components/glass-container'
 
-import OptimizedImage from '../../components/OptimizedImage'
+import Image from 'next/image'
 const Work = () => (
     <Layout title='Torpoise'>
         <Container>
@@ -29,7 +29,7 @@ const Work = () => (
                 </WorkDescription>
             </WorkSection>
 
-            <OptimizedImage src="/images/works/thumb_torpoise.png" alt="Torpoise live performance" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
+            <Image src="/images/works/thumb_torpoise.png" alt="Torpoise live performance" width={1280} height={720} priority sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '0.375rem', marginBottom: '1rem' }} />
 
             <WorkSection title="Live Performances" delay={0.4}>
                 <GlassContainer mb={4}>
